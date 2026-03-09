@@ -3,155 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mikey Metrics | Premium Digital Transformation</title>
     
-    <meta name="google-site-verification" content="pcHkSZJyG2oW0sjLSalrJnhG-fRtl7DVQvGjvrgCi9A" />
-
-    <title>Mikey Metrics | Best Digital QR Menu & Social Media Handler in Ranchi</title>
-    <meta name="description" content="Mikey Metrics - Jharkhand's top Digital Marketing agency by Mikey. We provide QR Menus, GMB Ranking, and Social Media Handling for Cafes in Ranchi and Pan India.">
-    <meta name="keywords" content="Mikey Metrics, MikeyMetrics, Mikey Ranchi, Digital Menu Ranchi, QR Code Menu Jharkhand, Social Media Handler Ranchi, Social Media Marketing Jharkhand, Quick Menu Ranchi, Mikeymetrics.github.io, Mikey Digital Marketing, Instagram Handler Ranchi, Digital Marketing Agency Ranchi, Mikey Marketing Expert">
-    <meta name="author" content="Mikey (Pankaj Kumar)">
-
     <style>
-        * { box-sizing: border-box; transition: all 0.3s ease; }
+        :root { --neon: #00f2ff; --bg: #050505; --glass: rgba(255, 255, 255, 0.05); }
+        * { box-sizing: border-box; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        
         body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            margin: 0; padding: 0; 
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), 
-                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1500&q=80');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            color: #fff; text-align: center; overflow-x: hidden;
+            font-family: 'Inter', 'Segoe UI', sans-serif; 
+            margin: 0; background: var(--bg); color: #fff; 
+            overflow-x: hidden;
         }
 
-        header { padding: 80px 20px; }
-        .brand-wrapper {
-            background: #000;
-            border: 3px solid #00f2ff;
-            display: inline-block;
-            padding: 20px 40px;
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+        /* --- ENTRY SPLASH SCREEN --- */
+        #splash {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 10000;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column;
         }
-        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); color: #00f2ff; margin: 0; letter-spacing: 5px; text-shadow: 0 0 10px rgba(0,242,255,0.7); }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-        
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 20px; margin-top: 40px; 
+        .splash-text {
+            font-size: 3rem; font-weight: 900; color: var(--neon);
+            letter-spacing: 15px; text-transform: uppercase;
+            animation: glow-pulse 2s infinite alternate, fade-out 1s forwards 2.5s;
+            text-shadow: 0 0 20px var(--neon);
         }
-        
-        .card-btn { 
-            background: rgba(10, 10, 10, 0.9); 
-            padding: 30px; border: 1px solid #333; cursor: pointer;
-            text-align: left; position: relative; overflow: hidden;
+        @keyframes glow-pulse {
+            from { text-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon); transform: scale(0.95); }
+            to { text-shadow: 0 0 30px var(--neon), 0 0 50px var(--neon); transform: scale(1); }
         }
-        .card-btn:hover { border-color: #00f2ff; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,242,255,0.2); }
-        .card-btn h3 { color: #00f2ff; margin-bottom: 10px; text-transform: uppercase; font-size: 1.2rem; }
-        
-        .info-text { display: none; margin-top: 15px; color: #bbb; font-size: 0.9rem; border-top: 1px solid #222; padding-top: 10px; }
-
-        .btn-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 50px; }
-        .main-btn { 
-            padding: 15px 35px; font-weight: bold; text-decoration: none; 
-            text-transform: uppercase; cursor: pointer; border-radius: 4px;
-        }
-        .blue-btn { background: #00f2ff; color: #000; border: none; }
-        .white-btn { background: #fff; color: #000; border: none; }
-
-        #about-page { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #ffffff; color: #000000; z-index: 1000; padding: 50px 20px; 
-            overflow-y: auto; text-align: left;
-        }
-        .about-content { max-width: 800px; margin: 0 auto; }
-        .about-content h2 { font-size: 2.5rem; border-bottom: 4px solid #00f2ff; display: inline-block; margin-bottom: 30px; }
-        
-        .contact-links { display: flex; flex-direction: column; gap: 15px; }
-        .contact-item { 
-            padding: 15px; background: #f4f4f4; border-radius: 8px; text-decoration: none; 
-            color: #000; font-weight: bold; border-left: 5px solid #00f2ff;
+        @keyframes fade-out {
+            to { opacity: 0; visibility: hidden; }
         }
 
-        footer { padding: 40px; color: #444; font-size: 0.8rem; }
+        /* --- MAIN CONTENT --- */
+        #main-content { opacity: 0; animation: fade-in 1s forwards 3s; }
+        @keyframes fade-in { to { opacity: 1; } }
+
+        header { padding: 120px 20px; text-align: center; }
+        .hero-glow {
+            display: inline-block; padding: 25px 50px;
+            border: 2px solid var(--neon); border-radius: 15px;
+            background: rgba(0, 242, 255, 0.03);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+        h1 { font-size: clamp(2.5rem, 8vw, 5rem); margin: 0; letter-spacing: 10px; color: var(--neon); text-transform: uppercase; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 50px 20px; }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .glass-card { 
+            background: var(--glass); backdrop-filter: blur(10px);
+            padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .glass-card:hover { border-color: var(--neon); transform: translateY(-10px); }
+        .glass-card h3 { color: var(--neon); font-size: 1.6rem; }
+
+        .contact-box { 
+            margin-top: 100px; background: #0a0a0a; padding: 60px; border-radius: 30px; 
+            border: 1px dashed #333; text-align: left;
+        }
+        .input-field { 
+            width: 100%; padding: 15px; background: #000; border: 1px solid #222; 
+            border-radius: 10px; color: #fff; margin-bottom: 20px; outline: none;
+        }
+        .glow-btn { 
+            width: 100%; padding: 18px; background: var(--neon); color: #000; 
+            font-weight: 900; border: none; border-radius: 10px; cursor: pointer;
+        }
+
+        footer { padding: 60px; opacity: 0.5; font-size: 0.8rem; letter-spacing: 2px; text-align: center; }
     </style>
 </head>
 <body>
 
-<div id="home-view">
-    <header>
-        <div class="brand-wrapper">
-            <h1>MIKEY METRICS</h1>
-        </div>
-        <p style="color:#888; letter-spacing: 3px; margin-top: 15px;">NO. 1 DIGITAL AGENCY IN RANCHI</p>
-    </header>
-
-    <div class="container">
-        <div class="grid">
-            <div class="card-btn" onclick="toggleInfo('info1')">
-                <h3>QR Menu Solutions</h3>
-                <p>Digital menus for Ranchi Cafes.</p>
-                <div id="info1" class="info-text">Ab Ranchi ke har cafe mein hoga digital QR menu. High sales aur premium look ke liye aaj hi Mikey Metrics se judein.</div>
-            </div>
-            <div class="card-btn" onclick="toggleInfo('info2')">
-                <h3>GMB Ranking Ranchi</h3>
-                <p>Rule local searches.</p>
-                <div id="info2" class="info-text">Hum aapke business ko Ranchi ke Google Maps mein top par layenge. Local customers ab seedha aapke paas aayenge.</div>
-            </div>
-            <div class="card-btn" onclick="toggleInfo('info3')">
-                <h3>Marketing in Jharkhand</h3>
-                <p>Growth without limits.</p>
-                <div id="info3" class="info-text">Social Media Handling aur Paid Ads ke zariye hum Ranchi ke har business ko brand banate hain.</div>
-            </div>
-            <div class="card-btn" onclick="toggleInfo('info4')">
-                <h3>Mikey Digital Strategy</h3>
-                <p>Expert Handling.</p>
-                <div id="info4" class="info-text">Mikey provides the best content strategy and business growth hacks for startups in Ranchi and beyond.</div>
-            </div>
-        </div>
-
-        <div class="btn-group">
-            <a href="https://wa.me/919341344821" class="main-btn blue-btn">Contact Mikey on WhatsApp</a>
-            <button onclick="openAbout()" class="main-btn white-btn">About Mikey Metrics</button>
-        </div>
+    <div id="splash">
+        <div class="splash-text">MIKEY METRICS</div>
+        <p style="color: #444; letter-spacing: 5px; margin-top: 20px;">LOADING DIGITAL TRANSFORMATION...</p>
     </div>
-</div>
 
-<div id="about-page">
-    <div class="about-content">
-        <h2>MIKEY METRICS BY MIKEY</h2>
-        <div class="about-text">
-            <p>Main <b>Mikey</b> hoon, Ranchi ka digital marketing expert. Mikey Metrics ek aisi agency hai jo Jharkhand ke businesses ko modern banane ka kaam karti hai.</p>
-            <p>Hum Ranchi ke cafes (Lalpur, Kanke, Doranda) ke liye smart <b>Digital QR Menus</b> banate hain aur unke Social Media ko handle karte hain taaki unka profit 2x ho sake.</p>
+    <div id="main-content">
+        <header>
+            <div class="hero-glow">
+                <h1>MIKEY METRICS</h1>
+            </div>
+            <p style="margin-top: 30px; color: #888; font-size: 1.2rem;">DIGITAL ARCHITECTS | RANCHI | JHARKHAND</p>
+        </header>
+
+        <div class="container">
+            <div class="services-grid">
+                <div class="glass-card">
+                    <h3>01. Local Dominance</h3>
+                    <p>Google Maps aur Search Engine par No.1 ranking. Hum aapko wahan dikhate hain jahan aapke customers dhund rahe hain.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>02. Social Authority</h3>
+                    <p>Instagram Reels aur Content strategy jo viral ho. Hum sirf followers nahi, loyal customers banate hain.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>03. Automation Tech</h3>
+                    <p>Digital QR Menus, AI Chatbots, aur Automated Workflows. Business ko auto-pilot mode par set kijiye.</p>
+                </div>
+            </div>
+
+            <div class="contact-box">
+                <h2 style="font-size: 2.5rem; margin-bottom: 10px; color: var(--neon);">CONNECT WITH MIKEY</h2>
+                <form action="https://formspree.io/f/mqaejovz" method="POST">
+                    <input type="text" name="name" class="input-field" placeholder="Full Name" required>
+                    <input type="text" name="business" class="input-field" placeholder="Business Name" required>
+                    <input type="tel" name="phone" class="input-field" placeholder="WhatsApp Number" required>
+                    <button type="submit" class="glow-btn">INITIATE GROWTH</button>
+                </form>
+            </div>
         </div>
 
-        <h3>GET IN TOUCH - RANCHI OFFICE</h3>
-        <div class="contact-links">
-            <a href="https://instagram.com/your__ri0" class="contact-item">Instagram: @your__ri0</a>
-            <a href="mailto:arjundancer47@gmail.com" class="contact-item">Email: arjundancer47@gmail.com</a>
-            <div class="contact-item">Location: Ranchi, Jharkhand, India</div>
-        </div>
-
-        <button onclick="closeAbout()" class="main-btn blue-btn" style="margin-top: 40px; width: 100%;">Back to Home</button>
+        <footer>
+            &copy; 2026 MIKEY METRICS | TRUTH IN NUMBERS | RANCHI
+        </footer>
     </div>
-</div>
 
-<footer>&copy; 2026 MIKEY METRICS | BEST SEO AGENCY IN RANCHI | TRUTH IN NUMBERS</footer>
-
-<script>
-    function toggleInfo(id) {
-        var x = document.getElementById(id);
-        x.style.display = (x.style.display === "block") ? "none" : "block";
-    }
-    function openAbout() {
-        document.getElementById('home-view').style.display = 'none';
-        document.getElementById('about-page').style.display = 'block';
-        window.scrollTo(0,0);
-    }
-    function closeAbout() {
-        document.getElementById('home-view').style.display = 'block';
-        document.getElementById('about-page').style.display = 'none';
-    }
-</script>
+    <script>
+        // Splash screen ko 3 second baad hatane ka script
+        setTimeout(() => {
+            document.getElementById('splash').style.display = 'none';
+        }, 3500);
+    </script>
 
 </body>
 </html>
