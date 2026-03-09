@@ -3,167 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikey Metrics | Digital Dominance Ranchi</title>
-    
+    <title>Mikey Metrics | Ranchi's Premier Digital Agency</title>
     <style>
-        :root { --neon: #00f2ff; --bg: #050505; --glass: rgba(255, 255, 255, 0.05); }
-        * { box-sizing: border-box; margin: 0; padding: 0; transition: 0.3s ease; }
+        :root { 
+            --neon: #00f2ff; 
+            --accent: #7000ff;
+            --bg: #050505; 
+            --glass: rgba(255, 255, 255, 0.03); 
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
         
         body { 
-            font-family: 'Inter', sans-serif; 
+            font-family: 'Inter', -apple-system, sans-serif; 
             background: var(--bg); color: #fff; 
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* --- 1. PRELOADER / SPLASH SCREEN --- */
+        /* --- PRELOADER --- */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 9999;
+            background: #000; z-index: 10000;
             display: flex; align-items: center; justify-content: center;
             flex-direction: column;
         }
-        .loader-text {
-            font-size: 3rem; font-weight: 900; color: var(--neon);
-            letter-spacing: 10px; text-transform: uppercase;
-            animation: pulse 1.5s infinite;
-            text-shadow: 0 0 20px var(--neon);
+        .loader-logo {
+            font-size: 3.5rem; font-weight: 900; 
+            background: linear-gradient(90deg, var(--neon), var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            letter-spacing: 12px; animation: pulse 1.5s infinite;
         }
-        @keyframes pulse {
-            0% { transform: scale(0.9); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        @keyframes pulse { 0% { opacity: 0.4; transform: scale(0.95); } 100% { opacity: 1; transform: scale(1); } }
 
-        /* --- 2. MAIN LAYOUT --- */
-        #main-site { visibility: hidden; opacity: 0; transition: opacity 1s ease; }
+        /* --- MAIN SITE --- */
+        #main-site { opacity: 0; transition: opacity 1.5s ease; }
 
-        header { padding: 100px 20px; text-align: center; }
-        .hero-box {
-            border: 2px solid var(--neon); display: inline-block;
-            padding: 20px 40px; border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        /* Navigation Bar */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px;
+            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-between; align-items: center;
         }
-        h1 { font-size: clamp(2rem, 8vw, 4rem); color: var(--neon); letter-spacing: 5px; }
+        .nav-logo { font-weight: 900; color: var(--neon); letter-spacing: 2px; }
+
+        header { 
+            padding: 180px 20px 100px; text-align: center;
+            background: radial-gradient(circle at top, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 10vw, 5.5rem); font-weight: 900;
+            background: linear-gradient(to right, #fff, var(--neon));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
 
         /* Services Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { 
-            background: var(--glass); padding: 30px; border-radius: 15px; 
-            border: 1px solid rgba(255,255,255,0.1); text-align: left;
+        .grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; margin-top: 60px; 
         }
-        .card:hover { border-color: var(--neon); transform: translateY(-10px); }
-        .card h3 { color: var(--neon); margin-bottom: 15px; }
+        .card { 
+            background: var(--glass); padding: 40px; border-radius: 24px; 
+            border: 1px solid rgba(255,255,255,0.08); position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--neon), transparent);
+            opacity: 0; transition: 0.5s;
+        }
+        .card:hover { 
+            background: rgba(255,255,255,0.06); transform: translateY(-10px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .card:hover::before { opacity: 1; }
+        .card h3 { color: var(--neon); margin-bottom: 15px; font-size: 1.5rem; }
+        .card p { color: #aaa; font-size: 0.95rem; }
 
-        /* Buttons */
-        .btn-flex { display: flex; justify-content: center; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
-        .btn { padding: 15px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; text-decoration: none; text-transform: uppercase; border: none; }
-        .btn-blue { background: var(--neon); color: #000; }
-        .btn-outline { background: none; color: #fff; border: 1px solid #fff; }
+        /* Floating Contacts */
+        .floating-social {
+            position: fixed; bottom: 30px; right: 30px; z-index: 2000;
+            display: flex; flex-direction: column; gap: 15px;
+        }
+        .social-circle {
+            width: 55px; height: 55px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; font-weight: bold; color: #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .wa { background: #25D366; }
+        .ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+        /* Contact Section */
+        .contact-form { 
+            background: #0a0a0a; padding: 60px 40px; border-radius: 30px; 
+            margin-top: 100px; border: 1px solid #1a1a1a;
+        }
+        input, select { 
+            width: 100%; padding: 18px; margin-bottom: 20px; 
+            background: #000; border: 1px solid #222; color: #fff; 
+            border-radius: 12px; font-size: 1rem;
+        }
+        input:focus { border-color: var(--neon); outline: none; }
+        .btn-submit { 
+            width: 100%; padding: 18px; background: var(--neon); color: #000; 
+            font-weight: 900; border: none; border-radius: 12px; cursor: pointer;
+            letter-spacing: 2px; text-transform: uppercase;
+        }
+        .btn-submit:hover { transform: scale(1.02); box-shadow: 0 0 30px rgba(0, 242, 255, 0.4); }
 
         /* About Modal */
-        #about-page { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #fff; color: #000; z-index: 10000; padding: 40px 20px; overflow-y: auto;
+        #about-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #fff; color: #000; z-index: 11000; padding: 60px 20px;
         }
+        .about-content { max-width: 800px; margin: 0 auto; }
 
-        /* Contact Form */
-        .form-container { 
-            background: #0a0a0a; padding: 40px; border-radius: 20px; 
-            border: 1px solid #222; margin-top: 60px; text-align: left;
-        }
-        input, select { width: 100%; padding: 12px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: #fff; border-radius: 5px; }
-        .submit-btn { width: 100%; padding: 15px; background: var(--neon); color: #000; font-weight: 900; border: none; cursor: pointer; border-radius: 5px; }
-
-        footer { padding: 40px; text-align: center; opacity: 0.4; font-size: 0.8rem; }
+        footer { padding: 80px 20px; text-align: center; color: #444; border-top: 1px solid #111; }
     </style>
 </head>
 <body>
 
     <div id="loader">
-        <div class="loader-text">MIKEY METRICS</div>
-        <p style="color: #555; letter-spacing: 3px; margin-top: 10px;">INITIALIZING DIGITAL FLOW...</p>
+        <div class="loader-logo">MIKEY METRICS</div>
+        <p style="color: #444; letter-spacing: 6px; margin-top: 15px;">PREPARING YOUR GROWTH</p>
     </div>
+
+    <nav>
+        <div class="nav-logo">MIKEY METRICS</div>
+        <button onclick="openAbout()" style="background:none; border: 1px solid var(--neon); color: var(--neon); padding: 8px 15px; border-radius: 5px; cursor:pointer;">About</button>
+    </nav>
 
     <div id="main-site">
         <header>
-            <div class="hero-box">
-                <h1>MIKEY METRICS</h1>
-            </div>
-            <p style="margin-top: 20px; color: #888;">STRATEGIC DIGITAL GROWTH | RANCHI</p>
-            
-            <div class="btn-flex">
-                <button onclick="showAbout()" class="btn btn-outline">About Mikey</button>
-                <a href="https://wa.me/919341344821" class="btn btn-blue">WhatsApp Support</a>
-            </div>
+            <h1 class="hero-title">Elevate Your<br>Business Digitally</h1>
+            <p style="color: #888; font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
+                Hum sirf website nahi banate, hum Ranchi ke businesses ko internet ka king banate hain.
+            </p>
         </header>
 
         <div class="container">
             <div class="grid">
                 <div class="card">
-                    <h3>GMB & Local SEO</h3>
-                    <p>Ranchi ke local search results mein sabse upar aaiye. Hum aapke business ko Maps par rank karwaate hain.</p>
+                    <h3>📍 Local SEO</h3>
+                    <p>Ranchi ke Google Maps par No. 1 ranking. Jab log search karein, aap hi dikhein.</p>
                 </div>
                 <div class="card">
-                    <h3>Social Authority</h3>
-                    <p>Instagram aur Facebook branding. High-quality content jo followers ko customers mein badle.</p>
+                    <h3>📱 Social Mastery</h3>
+                    <p>Instagram Dominance. Viral reels aur content jo aapke brand ko Ranchi ka star bana de.</p>
                 </div>
                 <div class="card">
-                    <h3>Operational Tech</h3>
-                    <p>Digital QR Menus aur Business Automation systems jo aapke kaam ko fast aur modern banayein.</p>
+                    <h3>⚡ Business Tech</h3>
+                    <p>Digital QR Menus aur Smart Automation. Kaam fast karo, paise zyada kamao.</p>
                 </div>
                 <div class="card">
-                    <h3>Performance Ads</h3>
-                    <p>Sales-focused Google aur Meta ads jo har paise ka sahi ROI (Return on Investment) dein.</p>
+                    <h3>🚀 Performance Ads</h3>
+                    <p>Targeted Ads jo seedha aapke WhatsApp par naye customers lekar aate hain.</p>
                 </div>
             </div>
 
-            <div class="form-container">
-                <h2 style="color: var(--neon); margin-bottom: 20px;">GET A FREE CONSULTATION</h2>
+            <div class="contact-form" id="contact">
+                <h2 style="font-size: 2.5rem; color: var(--neon); margin-bottom: 10px;">Ready to Start?</h2>
+                <p style="color: #666; margin-bottom: 40px;">Apni details niche bhariye, Mikey aapse jald contact karega.</p>
+                
                 <form action="https://formspree.io/f/mqaejovz" method="POST">
                     <input type="text" name="name" placeholder="Full Name" required>
-                    <input type="text" name="business" placeholder="Business Type (e.g. Gym, Cafe)" required>
+                    <input type="text" name="business" placeholder="Business Name (e.g. Cafe, Gym, Shop)" required>
                     <input type="tel" name="phone" placeholder="WhatsApp Number" required>
                     <select name="service">
-                        <option value="digital_growth">Full Digital Transformation</option>
+                        <option value="all">Full Digital Transformation</option>
                         <option value="seo">Local SEO / Maps Ranking</option>
-                        <option value="social">Social Media Management</option>
+                        <option value="social">Social Media Handling</option>
                     </select>
-                    <button type="submit" class="submit-btn">SEND REQUEST</button>
+                    <button type="submit" class="btn-submit">Initialize Growth</button>
                 </form>
             </div>
         </div>
 
-        <footer>&copy; 2026 MIKEY METRICS | RANCHI, JHARKHAND</footer>
+        <footer>
+            <p>&copy; 2026 MIKEY METRICS | TRUTH IN NUMBERS</p>
+            <p style="margin-top: 10px;">RANCHI, JHARKHAND</p>
+        </footer>
     </div>
 
-    <div id="about-page">
-        <div style="max-width: 600px; margin: 0 auto; text-align: left;">
-            <h1 style="border-bottom: 4px solid var(--neon); display: inline-block;">WHO IS MIKEY?</h1>
-            <p style="margin-top: 20px; font-size: 1.1rem; line-height: 1.6;">
-                Main <b>Mikey</b> hoon, ek Digital Architect jo Ranchi ke local businesses ko global standard tak le jaane ka kaam karta hoon. 
-                Mikey Metrics ke zariye main har business ko digital tools aur marketing ki power deta hoon.
+    <div class="floating-social">
+        <a href="https://wa.me/919341344821" class="social-circle wa" title="WhatsApp">W</a>
+        <a href="https://instagram.com/your__ri0" class="social-circle ig" title="Instagram">I</a>
+    </div>
+
+    <div id="about-modal">
+        <div class="about-content">
+            <h1 style="font-size: 3rem; margin-bottom: 20px; border-bottom: 8px solid var(--neon); display: inline-block;">Who is Mikey?</h1>
+            <p style="font-size: 1.3rem; margin-top: 30px;">
+                Main <b>Mikey</b> hoon, Ranchi ka ek digital strategist jo traditional businesses ko digital machines mein badalne ka junoon rakhta hoon. 
+                Mikey Metrics ek aisi agency hai jo result par bharosa rakhti hai, baaton par nahi.
             </p>
-            <p style="margin-top: 10px;"><b>Email:</b> Kumararjun22778@gmail.com</p>
-            <p><b>Location:</b> Ranchi, Jharkhand</p>
-            <button onclick="hideAbout()" class="btn btn-blue" style="margin-top: 30px; width: 100%;">BACK TO HOME</button>
+            <p style="margin-top: 20px; font-weight: bold;">Location: Ranchi, Jharkhand</p>
+            <p>Email: Kumararjun22778@gmail.com</p>
+            <button onclick="closeAbout()" style="margin-top: 50px; padding: 20px 40px; background: #000; color: #fff; border: none; border-radius: 12px; cursor: pointer; font-weight: 900;">BACK TO SITE</button>
         </div>
     </div>
 
     <script>
-        // Splash Screen Timer Logic
+        // Splash Screen Logic
         window.addEventListener('load', function() {
             setTimeout(function() {
                 document.getElementById('loader').style.display = 'none';
-                document.getElementById('main-site').style.visibility = 'visible';
                 document.getElementById('main-site').style.opacity = '1';
-            }, 2500); // 2.5 seconds baad site dikhegi
+            }, 2500);
         });
 
         // About Modal Logic
-        function showAbout() { document.getElementById('about-page').style.display = 'block'; }
-        function hideAbout() { document.getElementById('about-page').style.display = 'none'; }
+        function openAbout() { document.getElementById('about-modal').style.display = 'block'; }
+        function closeAbout() { document.getElementById('about-modal').style.display = 'none'; }
     </script>
 
 </body>
-</html>
+    </html>
+                        
