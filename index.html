@@ -3,76 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikey Metrics | Future of Ranchi</title>
+    
+    <title>Mikey Metrics Digital Marketing | Expert Ranchi</title>
+    <meta name="description" content="Mikey Metrics Digital Marketing - Ranchi's leading expert in Social Media Management, Local SEO, and Lead Generation.">
+
     <style>
         :root { --neon: #00f2ff; --bg: #020202; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; scroll-behavior: smooth; }
         body { background: var(--bg); color: #fff; overflow-x: hidden; }
-        #loader { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+        /* Matrix Loader */
+        #loader { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; align-items: center; justify-content: center; }
         .scan-line { width: 200px; height: 2px; background: var(--neon); box-shadow: 0 0 15px var(--neon); animation: scan 1.5s infinite; }
-        @keyframes scan { 0%, 100% { transform: translateY(-30px); } 50% { transform: translateY(30px); } }
-        #canvas-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.2; }
-        nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; padding: 15px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 50px; display: flex; justify-content: space-between; z-index: 1000; border: 1px solid rgba(255,255,255,0.1); }
+        @keyframes scan { 0%, 100% { transform: translateY(-20px); } 50% { transform: translateY(20px); } }
+
+        #canvas-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
+
+        nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; padding: 15px 25px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 50px; display: flex; justify-content: space-between; z-index: 1000; border: 1px solid rgba(255,255,255,0.1); }
+        
         header { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        .glitch { font-size: 4rem; font-weight: 900; color: var(--neon); text-transform: uppercase; letter-spacing: 5px; }
+        .hero-name { font-size: 3.2rem; font-weight: 900; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
+        .hero-sub { color: var(--neon); font-size: 1.1rem; letter-spacing: 4px; margin-top: 10px; }
+
         .container { max-width: 1100px; margin: 0 auto; padding: 50px 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .cyber-card { background: rgba(255,255,255,0.03); padding: 40px; border-radius: 20px; border: 1px solid #222; transition: 0.3s; cursor: pointer; text-decoration: none; display: block; color: #fff; }
-        .cyber-card:hover { border-color: var(--neon); transform: translateY(-10px); background: rgba(0, 242, 255, 0.05); }
-        .contact-box { margin-top: 80px; background: #0a0a0a; padding: 40px; border-radius: 20px; border: 1px solid #222; }
-        input { width: 100%; padding: 15px; margin-bottom: 20px; background: #000; border: none; border-bottom: 1px solid #333; color: #fff; }
-        .btn { width: 100%; padding: 15px; background: var(--neon); color: #000; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 40px; }
+        
+        .service-card { background: rgba(255,255,255,0.03); padding: 40px; border-radius: 20px; border: 1px solid #222; transition: 0.3s; cursor: pointer; text-decoration: none; display: block; color: #fff; text-align: center; }
+        .service-card:hover { border-color: var(--neon); transform: translateY(-10px); background: rgba(0, 242, 255, 0.08); }
+        
+        .contact-box { margin-top: 100px; background: #0a0a0a; padding: 50px 40px; border-radius: 30px; border: 1px solid #1a1a1a; }
+        input { width: 100%; padding: 18px; margin-bottom: 20px; background: transparent; border: none; border-bottom: 2px solid #222; color: #fff; font-size: 1rem; }
+        input:focus { outline: none; border-bottom-color: var(--neon); }
+        .btn-send { width: 100%; padding: 20px; background: var(--neon); color: #000; font-weight: 900; border: none; border-radius: 10px; cursor: pointer; letter-spacing: 2px; }
+
+        footer { text-align: center; padding: 60px; color: #333; font-size: 0.8rem; letter-spacing: 5px; }
     </style>
 </head>
 <body>
     <div id="loader"><div class="scan-line"></div></div>
     <canvas id="canvas-bg"></canvas>
-    <nav><div style="font-weight:900; color:var(--neon)">MIKEY METRICS</div><a href="#contact" style="color:#fff; text-decoration:none; font-size:0.8rem">CONTACT</a></nav>
+
+    <nav>
+        <div style="font-weight:900; color:var(--neon)">MIKEY METRICS</div>
+        <a href="#contact" style="color:#fff; text-decoration:none; font-size:0.8rem; border: 1px solid var(--neon); padding: 5px 15px; border-radius: 20px;">WORK WITH ME</a>
+    </nav>
+
     <header>
-        <h1 class="glitch">MIKEY METRICS</h1>
-        <p style="color:#666; margin-top:10px;">RANCHI'S NEXT-GEN DIGITAL AGENCY</p>
+        <h1 class="hero-name">MIKEY METRICS</h1>
+        <p class="hero-sub">Digital Marketing Expert</p>
     </header>
+
     <div class="container">
         <div class="grid">
-            <a href="seo.html" class="cyber-card">
-                <h3 style="color:var(--neon)">01. NEURAL SEO</h3>
-                <p style="color:#888; margin-top:10px;">Google Maps par No. 1 kaise banein? Details ke liye touch karein.</p>
+            <a href="seo.html" class="service-card">
+                <h3>LOCAL SEO</h3>
+                <p style="color:#888; margin-top:10px">Google Maps ranking se business grow karein.</p>
             </a>
-            <a href="social.html" class="cyber-card">
-                <h3 style="color:var(--neon)">02. SOCIAL SYNDICATE</h3>
-                <p style="color:#888; margin-top:10px;">Instagram Reels se grahak kaise layein? Yahan dekhein.</p>
+            <a href="social.html" class="service-card">
+                <h3>SOCIAL MEDIA MANAGEMENT</h3>
+                <p style="color:#888; margin-top:10px">Instagram & Facebook growth ki poori zimmedari.</p>
             </a>
-            <a href="tech.html" class="cyber-card">
-                <h3 style="color:var(--neon)">03. QUANTUM TECH</h3>
-                <p style="color:#888; margin-top:10px;">Digital QR aur Automation se business fast karein.</p>
+            <a href="tech.html" class="service-card">
+                <h3>LEAD GENERATION & ADS</h3>
+                <p style="color:#888; margin-top:10px">Targeted ads se roz naye customers payein.</p>
             </a>
         </div>
+
         <div class="contact-box" id="contact">
-            <h2 style="margin-bottom:20px">INITIATE GROWTH</h2>
+            <h2>Let's Talk Business</h2>
             <form action="https://formspree.io/f/mqaejovz" method="POST">
-                <input type="text" name="name" placeholder="YOUR NAME" required>
-                <input type="tel" name="phone" placeholder="WHATSAPP NUMBER" required>
-                <button type="submit" class="btn">EXECUTE</button>
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="text" name="business" placeholder="Business Name">
+                <input type="tel" name="phone" placeholder="WhatsApp Number" required>
+                <button type="submit" class="btn-send">EXECUTE GROWTH</button>
             </form>
         </div>
     </div>
+
+    <footer>&copy; 2026 MIKEY METRICS DIGITAL MARKETING | RANCHI</footer>
+
     <script>
         window.onload = () => setTimeout(() => document.getElementById('loader').style.display='none', 2000);
-        const canvas = document.getElementById('canvas-bg');
-        const ctx = canvas.getContext('2d');
+        const canvas = document.getElementById('canvas-bg'); const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         const drops = Array(Math.floor(canvas.width/10)).fill(1);
         function draw() {
             ctx.fillStyle = 'rgba(0,0,0,0.05)'; ctx.fillRect(0,0,canvas.width,canvas.height);
             ctx.fillStyle = '#00f2ff'; ctx.font = '10px monospace';
-            drops.forEach((y, i) => {
-                ctx.fillText(Math.floor(Math.random()*2), i*10, y*10);
-                if (y*10 > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            });
+            drops.forEach((y, i) => { ctx.fillText(Math.floor(Math.random()*2), i*10, y*10); if (y*10 > canvas.height && Math.random() > 0.975) drops[i] = 0; drops[i]++; });
         }
         setInterval(draw, 33);
     </script>
 </body>
-                </html>
-                
+</html>
