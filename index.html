@@ -1,72 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikey Metrics Digital Marketing | Expert Ranchi</title>
-    <meta name="description" content="Mikey Metrics (Arjun) - Ranchi's Digital Marketing & Growth Specialist.">
+    <title>Cuku Cafe | Mikey Metrics Pro</title>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --neon: #00f2ff; --bg: #020202; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        body { background: var(--bg); color: #fff; overflow-x: hidden; }
-        #loader { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; align-items: center; justify-content: center; }
-        .scan-line { width: 100%; height: 2px; background: var(--neon); box-shadow: 0 0 20px var(--neon); position: absolute; animation: scan 1.0s infinite ease-in-out; }
-        @keyframes scan { 0% { top: 0%; opacity: 0; } 50% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
-        #canvas-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.12; }
-        nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; padding: 15px 25px; background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border-radius: 50px; display: flex; justify-content: center; z-index: 1000; border: 1px solid rgba(255,255,255,0.1); }
-        header { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
-        .hero-name { font-size: clamp(2.2rem, 10vw, 4rem); font-weight: 900; color: #fff; letter-spacing: 3px; margin-bottom: 5px; }
-        .hero-sub { color: var(--neon); font-size: 1.1rem; letter-spacing: 6px; margin-bottom: 35px; text-transform: uppercase; }
-        .btn-main { padding: 16px 45px; background: var(--neon); color: #000; font-weight: 900; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; letter-spacing: 2px; transition: 0.4s; text-transform: uppercase; font-size: 0.9rem; }
-        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 15px 30px var(--neon); }
-        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
-        .about-box { background: rgba(255,255,255,0.03); padding: 40px; border-radius: 20px; border: 1px solid #1a1a1a; margin-bottom: 60px; text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .service-card { background: #080808; padding: 40px; border-radius: 15px; border: 1px solid #151515; transition: 0.3s; text-decoration: none; color: #fff; text-align: center; }
-        .service-card:hover { border-color: var(--neon); transform: translateY(-5px); }
-        .contact-box { background: #050505; padding: 50px 30px; border-radius: 20px; border: 1px solid #111; margin-top: 60px; }
-        input { width: 100%; padding: 18px; margin-bottom: 20px; background: #111; border: 1px solid #222; border-radius: 8px; color: #fff; font-size: 1rem; }
-        .btn-send { width: 100%; padding: 18px; background: var(--neon); color: #000; font-weight: 900; border: none; border-radius: 8px; cursor: pointer; }
-        footer { text-align: center; padding: 50px; color: #444; font-size: 0.75rem; letter-spacing: 4px; border-top: 1px solid #111; margin-top: 40px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        html, body { background: #0a0a0a; color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* Header / Nav */
+        nav { position: fixed; top: 0; width: 100%; padding: 20px; display: flex; justify-content: space-around; background: rgba(10,10,10,0.8); backdrop-filter: blur(10px); z-index: 1000; }
+        nav a { color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Hero Section */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+        .hero h1 { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; background: linear-gradient(to right, #fff, #e67e22); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.1rem; opacity: 0.6; letter-spacing: 4px; margin-top: 10px; }
+
+        /* Sections Styling */
+        section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; text-align: center; }
+        .glass-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 30px; margin-bottom: 40px; }
+
+        /* Menu Grid */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
+        .menu-item { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 25px; transition: 0.4s; }
+        .menu-item:hover { transform: translateY(-10px); background: rgba(255,255,255,0.08); border: 1px solid #e67e22; }
+        .menu-img { width: 100%; height: 200px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; }
+        .price { color: #e67e22; font-weight: 900; font-size: 1.3rem; margin-top: 10px; display: block; }
+
+        /* Buttons */
+        .btn-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 30px; }
+        .btn { padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: 0.3s; display: inline-block; border: none; cursor: pointer; }
+        .btn-primary { background: #e67e22; color: #000; }
+        .btn-insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; }
+        .btn:hover { transform: scale(1.05); filter: brightness(1.2); }
+
+        /* Map Fix */
+        .map-box { width: 100%; border-radius: 30px; overflow: hidden; margin-top: 30px; border: 1px solid #333; height: 350px; }
+        iframe { width: 100%; height: 100%; border: none; filter: grayscale(1) invert(0.9); }
     </style>
 </head>
 <body>
-    <div id="loader"><div class="scan-line"></div></div>
-    <canvas id="canvas-bg"></canvas>
-    <nav><div style="font-weight:900; color:var(--neon); letter-spacing:2px;">MIKEY METRICS</div></nav>
-    <header>
-        <h1 class="hero-name">MIKEY METRICS</h1>
-        <p class="hero-sub">Digital Marketing Expert</p>
-        <a href="#contact" class="btn-main">CONTACT ME</a>
-    </header>
-    <div class="container">
-        <section class="about-box">
-            <h2>About Mikey (Arjun)</h2>
-            <p style="color:#ccc; line-height:1.8;">Main ek dedicated Digital Marketing specialist hoon jo Ranchi ke businesses ko online dominate karne mein madad karta hoon. Mikey Metrics ka maksad sirf clicks lana nahi, balki sales growth dena hai.</p>
-        </section>
-        <div class="grid">
-            <a href="seo.html" class="service-card"><h3>LOCAL SEO</h3><p style="color:#777;">Google Maps ranking specialist.</p></a>
-            <a href="social.html" class="service-card"><h3>SOCIAL MANAGEMENT</h3><p style="color:#777;">Growth strategy for Instagram & Facebook.</p></a>
-            <a href="tech.html" class="service-card"><h3>LEAD GENERATION</h3><p style="color:#777;">Targeted ad campaigns for direct sales.</p></a>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1 data-aos="zoom-in">CUKU CAFE.</h1>
+        <p data-aos="fade-up" data-aos-delay="300">RANCHI'S FINEST HANGOUT</p>
+        <div class="btn-group" data-aos="fade-up" data-aos-delay="500">
+            <a href="#menu" class="btn btn-primary">Check Menu</a>
+            <a href="#contact" class="btn" style="border: 1px solid #fff; color: #fff;">Get Direction</a>
         </div>
-        <div class="contact-box" id="contact">
-            <h2>Start Your Growth</h2>
-            <form action="https://formspree.io/f/xaqpeype" method="POST">
-                <input type="text" name="name" placeholder="Full Name" required>
-                <input type="text" name="business" placeholder="Business Type">
-                <input type="tel" name="phone" placeholder="WhatsApp Number" required>
-                <button type="submit" class="btn-send">SEND MESSAGE</button>
-            </form>
+    </section>
+
+    <section id="about">
+        <div class="glass-card" data-aos="fade-up">
+            <h2 style="color: #e67e22; font-size: 2.5rem; margin-bottom: 20px;">The Vibe Check</h2>
+            <p style="font-size: 1.2rem; line-height: 1.8; opacity: 0.8;">
+                Peace Road, Lalpur mein ek aisa corner jahan waqt ruk jata hai. <br>
+                <b>Cuku Cafe</b> sirf snacks ke liye nahi, balki doston ke saath sukoon bhari baaton ke liye bana hai.
+                <br><br>
+                <i>"Coffee ka swad aur doston ka saath—Ranchi mein isse behtar kuch nahi."</i>
+            </p>
         </div>
-    </div>
-    <footer>&copy; 2026 MIKEY METRICS | DIGITAL GROWTH BY ARJUN</footer>
+    </section>
+
+    <section id="menu">
+        <h2 style="font-size: 3rem; margin-bottom: 10px;">Must Try</h2>
+        <p style="opacity: 0.5;">Freshly Prepared for You</p>
+        
+        <div class="menu-grid">
+            <div class="menu-item" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?w=500" class="menu-img">
+                <h3>Caramel Macchiato</h3>
+                <span class="price">₹159</span>
+            </div>
+            <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500" class="menu-img">
+                <h3>Signature Pizza</h3>
+                <span class="price">₹260</span>
+            </div>
+            <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                <img src="https://images.unsplash.com/photo-1610614819513-58e34989848b?w=500" class="menu-img">
+                <h3>Peri Peri Burger</h3>
+                <span class="price">₹185</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="glass-card" data-aos="zoom-in">
+            <h2 style="margin-bottom: 20px;">Let's Connect</h2>
+            <p style="opacity: 0.7;">Peace Road, Lalpur, Ranchi</p>
+            
+            <div class="map-box">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3662.333333333333!2d85.3333333!3d23.3666667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e1e78fcfef8d%3A0xeb6dc84ba1a13b51!2sThe%20Artist%20Block%20Cafe!5e0!3m2!1sen!2sin!4v1625000000000"></iframe>
+            </div>
+
+            <div class="btn-group">
+                <a href="tel:9341344821" class="btn btn-primary">📞 9341344821</a>
+                <a href="https://www.instagram.com/your__ri0" target="_blank" class="btn btn-insta">Follow @your__ri0</a>
+            </div>
+        </div>
+        <p style="margin-top: 40px; opacity: 0.3; font-size: 0.8rem;">© 2026 Mikey Metrics Agency | Built for Cuku Cafe</p>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        window.onload = () => { setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 800); };
-        const canvas = document.getElementById('canvas-bg'); const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const drops = Array(Math.floor(canvas.width/10)).fill(1);
-        function draw() { ctx.fillStyle = 'rgba(0,0,0,0.05)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.fillStyle = '#00f2ff'; ctx.font = '10px monospace'; drops.forEach((y, i) => { ctx.fillText(Math.floor(Math.random()*2), i*10, y*10); if (y*10 > canvas.height && Math.random() > 0.975) drops[i] = 0; drops[i]++; }); }
-        setInterval(draw, 33);
+        AOS.init({ duration: 1000, once: true });
     </script>
 </body>
 </html>
