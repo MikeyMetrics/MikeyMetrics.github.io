@@ -3,97 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikey ❤️ Sally | Special Surprise</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;600;900&display=swap" rel="stylesheet">
+    <title>Sally | Mikey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,900&family=Outfit:wght@100;900&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #000; font-family: 'Outfit', sans-serif; color: #fff; overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body { background: #050505; color: #fff; font-family: 'Outfit', sans-serif; overflow: hidden; height: 100vh; }
 
-        /* --- Welcome Splash --- */
-        #loader {
-            position: fixed; inset: 0; background: #e67e22; z-index: 10000;
-            display: flex; justify-content: center; align-items: center;
-            transition: 1.5s cubic-bezier(0.85, 0, 0.15, 1);
+        /* --- Custom Cursor --- */
+        #cursor { width: 20px; height: 20px; background: #e67e22; border-radius: 50%; position: fixed; pointer-events: none; z-index: 99999; transition: transform 0.1s; mix-blend-mode: difference; }
+
+        /* --- Cinematic Sections --- */
+        .section { 
+            position: absolute; inset: 0; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; text-align: center;
+            opacity: 0; transform: scale(1.1); filter: blur(20px);
+            transition: 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+            pointer-events: none;
         }
-        #loader.hide { transform: translateY(-100%); }
-        .welcome-text { color: #000; font-family: 'Dancing Script', cursive; font-size: 4rem; text-align: center; }
+        .section.active { opacity: 1; transform: scale(1); filter: blur(0); pointer-events: all; }
 
-        /* --- Pages --- */
-        .page { min-height: 100vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px; position: relative; }
-        .title { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 10vw, 5rem); color: #e67e22; margin-bottom: 20px; text-shadow: 0 0 20px rgba(230,126,34,0.4); }
-        .article-box { max-width: 800px; line-height: 1.8; font-size: 1.15rem; opacity: 0.9; text-align: justify; background: rgba(255,255,255,0.03); padding: 40px; border-radius: 30px; border: 1px solid rgba(230,126,34,0.2); }
-        
-        /* --- Buttons --- */
-        .magic-btn { margin-top: 40px; padding: 18px 45px; background: transparent; border: 2px solid #e67e22; color: #e67e22; font-weight: 900; border-radius: 100px; cursor: pointer; transition: 0.5s; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; }
-        .magic-btn:hover { background: #e67e22; color: #000; box-shadow: 0 0 40px #e67e22; transform: scale(1.05); }
+        /* --- Typography --- */
+        h1 { font-size: 15vw; font-weight: 900; line-height: 0.8; letter-spacing: -8px; text-transform: uppercase; }
+        .italic { font-family: 'Bodoni Moda', serif; font-style: italic; color: #e67e22; text-transform: lowercase; letter-spacing: 0; }
+        p { font-size: 1rem; letter-spacing: 5px; opacity: 0.4; margin-bottom: 20px; }
 
-        /* --- Magic Orb --- */
-        .magic-orb { width: 120px; height: 120px; background: #e67e22; border-radius: 50%; margin: 30px auto; filter: blur(30px); cursor: pointer; animation: breathe 3s infinite; }
-        @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.4); opacity: 0.9; } }
-        
-        .heart { position: absolute; color: #e67e22; pointer-events: none; animation: fly 3s linear forwards; z-index: 100; }
-        @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
+        /* --- Ghost Text Background --- */
+        .ghost { position: absolute; font-size: 30vw; font-weight: 900; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; }
 
-        #weplay-section { display: none; }
-        #music-badge { position: fixed; top: 20px; right: 20px; background: rgba(230,126,34,0.1); padding: 8px 15px; border-radius: 20px; font-size: 0.7rem; display: none; border: 1px solid #e67e22; color: #e67e22; }
+        /* --- Minimal Navigation --- */
+        .nav-btn {
+            margin-top: 50px; padding: 15px 40px; background: transparent; border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; font-weight: 900; border-radius: 100px; transition: 0.5s; text-transform: uppercase; letter-spacing: 3px;
+        }
+        .nav-btn:hover { background: #fff; color: #000; border-color: #fff; }
+
+        /* --- Magic Particles --- */
+        .heart { position: absolute; pointer-events: none; animation: fly 4s forwards; font-size: 24px; }
+        @keyframes fly { to { transform: translateY(-100vh) scale(2); opacity: 0; } }
     </style>
 </head>
 <body>
 
+    <div id="cursor"></div>
     <audio id="bgMusic" loop>
         <source src="https://www.pagalworld.com.sb/files/download/id/2311" type="audio/mpeg">
     </audio>
 
-    <div id="music-badge">🎵 Now Playing: Bahon Mein Chale Aao</div>
-
-    <div id="loader">
-        <div class="welcome-text">Welcome Sally... ❤️</div>
+    <div class="section active" id="s1">
+        <div class="ghost">SALLY</div>
+        <p>A Digital Experience</p>
+        <h1>HELLO<br><span class="italic">sally.</span></h1>
+        <button class="nav-btn" onclick="show(2)">Unlock Vibe</button>
     </div>
 
-    <div class="page" id="romantic-page">
-        <h1 class="title">My Dearest Sally</h1>
-        <div class="article-box">
-            Bhai, Ranchi ki thandi hawaon mein jo ek ajeeb sa sukoon hai, waisa hi sukoon mujhe tumse baat karke milta hai. Maine kabhi nahi socha tha ki digital duniya ke uss paar koi itna asli aur pyara mil sakta hai. Tum sirf ek naam nahi, meri ek pyaari aadat ho jo mujhe har roz behtar banane ki umeed deti hai. Tumhari tareef mein bas itna kahunga ki tum uss dhun ki tarah ho jo dil se kabhi nahi nikalti.
-        </div>
-        <button class="magic-btn" onclick="startExperience()">Our WePlay World ✨</button>
+    <div class="section" id="s2">
+        <div class="ghost">SOUL</div>
+        <p>Pure Emotions</p>
+        <h1>YOU ARE<br><span class="italic">magic.</span></h1>
+        <h3 style="max-width: 600px; font-weight: 100; opacity: 0.7; margin-top: 20px;">Ranchi ki thandi hawaon mein jo sukoon hai, waisa hi tumse baat karke milta hai.</h3>
+        <button class="nav-btn" onclick="show(3); startMusic();">Our Story</button>
     </div>
 
-    <div class="page" id="weplay-section">
-        <h1 class="title">The WePlay Magic</h1>
-        <div class="article-box">
-            Kaun kehta hai ki gaming sirf waqt bitane ka zariya hai? Mere liye toh WePlay woh raasta tha jisne mujhe tum tak pahunchaya. Wahan voice rooms ki wo shor-gul mein tumhari awaaz ka sabse alag sunai dena... wahan se shuru hua hamara silsila. <br><br>
-            Hamara woh **Jackaroo** khelna—woh cards ki strategies, woh ek-dusre ko harane ki koshish... woh lamhe mere liye kisi khazane se kam nahi hain. Aur woh der raat tak **Voice Room** mein baithna, duniya se bekhabar hokar hamara woh romance, woh dhero baatein... Sally, tum meri life ki sabse badi win ho. <br><br>
-            (Niche diye huye magic orb ko touch karke hold karo...)
+    <div class="section" id="s3">
+        <div class="ghost">PLAY</div>
+        <p>Beyond The Screen</p>
+        <h1>WEPLAY<br><span class="italic">memories.</span></h1>
+        <h3 style="max-width: 600px; font-weight: 100; opacity: 0.7; margin-top: 20px;">Jackaroo ki strategies aur voice rooms ka wo romance... sab mere dil mein basa hai.</h3>
+        <button class="nav-btn" onclick="show(4)">Feel the Magic</button>
+    </div>
+
+    <div class="section" id="s4">
+        <div class="ghost">HEART</div>
+        <h1>ALWAYS<br><span class="italic">mikey.</span></h1>
+        <p>Hold screen for hearts</p>
+        <div onmousedown="rain()" ontouchstart="rain()" style="width: 200px; height: 200px; border: 1px solid #e67e22; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+            TAP
         </div>
-        <div class="magic-orb" onmousedown="spawnHearts()" ontouchstart="spawnHearts()"></div>
-        <a href="menu.html" class="magic-btn" style="text-decoration: none;">VISIT MY CAFE ☕</a>
+        <a href="menu.html" class="nav-btn" style="text-decoration: none; margin-top: 40px; border-color: #e67e22; color: #e67e22;">Final Destination</a>
     </div>
 
     <script>
-        const music = document.getElementById('bgMusic');
-        
-        window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('loader').classList.add('hide'); }, 2500);
+        // Smooth Cursor
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
         });
 
-        function startExperience() {
-            music.play();
-            document.getElementById('music-badge').style.display = 'block';
-            document.getElementById('romantic-page').style.display = 'none';
-            document.getElementById('weplay-section').style.display = 'flex';
-            window.scrollTo(0,0);
+        // Section Navigation
+        function show(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            setTimeout(() => {
+                document.getElementById('s' + id).classList.add('active');
+            }, 100);
         }
 
-        function spawnHearts() {
-            for(let i=0; i<15; i++) {
-                const h = document.createElement('div');
-                h.className = 'heart';
-                h.innerHTML = '❤️';
-                h.style.left = Math.random() * 100 + 'vw';
-                h.style.top = '100vh';
-                h.style.fontSize = (Math.random() * 20 + 20) + 'px';
-                document.body.appendChild(h);
-                setTimeout(() => h.remove(), 3000);
+        function startMusic() {
+            document.getElementById('bgMusic').play();
+        }
+
+        function rain() {
+            for(let i=0; i<20; i++) {
+                setTimeout(() => {
+                    const h = document.createElement('div');
+                    h.className = 'heart';
+                    h.innerHTML = '❤️';
+                    h.style.left = Math.random() * 100 + 'vw';
+                    h.style.top = '100vh';
+                    document.body.appendChild(h);
+                    setTimeout(() => h.remove(), 4000);
+                }, i * 150);
             }
         }
     </script>
