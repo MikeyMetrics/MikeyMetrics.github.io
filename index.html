@@ -1,92 +1,168 @@
-<div class="section" id="s4" style="background: radial-gradient(circle at center, #1a0a00 0%, #000 100%);">
-    <canvas id="starsCanvas" style="position: absolute; inset: 0; z-index: 0;"></canvas>
-    
-    <div class="article-scroll-box" style="z-index: 10; max-height: 80vh; overflow-y: auto; padding: 20px;">
-        <h1 class="italic" style="font-size: 8vw; margin-bottom: 30px;">For My Sally...</h1>
-        
-        <div class="desc" style="text-align: left; opacity: 1; background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; border: 1px solid rgba(230,126,34,0.3); backdrop-filter: blur(10px);">
-            Sally, pata hai? Ranchi mein jab baarish hoti hai toh sab log ghar bhagte hain, par main terrace pe khada hoke tumhare baare mein sochta hoon (thoda filmy hai, par sach hai!). <br><br>
-            
-            Hamari mulakat WePlay ke uss voice room mein hui... wahan 50 log chilla rahe the par mujhe sirf tumhari awaaz sunai de rahi thi. Aur woh **Jackaroo**! Yaad hai? Jab tum harne lagti ho toh kaise cheating karti ho aur phir itni masoomiyat se bolti ho "Main toh seekh rahi hoon". Bhai, tumse bada gamer koi nahi hai (cheating mein! 😂). <br><br>
-            
-            Lekin sach toh ye hai ki tumse baat karte karte kab tum meri sabse acchi dost se meri duniya ban gayi, pata hi nahi chala. Tumhari wo random baatein, wo gussa, aur phir "Mikey" bol kar manana—ye sab mere din ka best part hota hai. <br><br>
-            
-            Log kehte hain online pyaar saccha nahi hota, unhe kya pata hamara **Voice Room Romance** kisi movie se kam nahi hai. Tum door ho, par is screen ke uss paar jo dil dhadakta hai, wo sirf tumhare liye hai. <br><br>
-            
-            Ye sitare jo screen pe dikh rahe hain na? Inhe touch karo... ye tumhari muskurahat ki tarah chamakne lagenge. Hamesha aise hi rehna, mere saath, meri "Cheating Partner" banke. <br><br>
-            
-            <span style="color: #e67e22; font-weight: 900; font-size: 1.5rem;">I Love You, Sally. ❤️</span>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Sally</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,900&family=Outfit:wght@100;400;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; color: #fff; font-family: 'Outfit', sans-serif; overflow: hidden; height: 100vh; }
 
-        <a href="menu.html" class="btn" style="display: inline-block; margin-top: 40px;">Visit My Real World (Cafe)</a>
+        /* --- Global Elements --- */
+        .glow { position: fixed; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(230,126,34,0.15) 0%, transparent 70%); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: -1; filter: blur(100px); }
+        canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+
+        /* --- Sections --- */
+        .section { 
+            position: absolute; inset: 0; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; text-align: center;
+            opacity: 0; transform: translateY(30px); filter: blur(10px);
+            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+            pointer-events: none; padding: 25px;
+        }
+        .section.active { opacity: 1; transform: translateY(0); filter: blur(0); pointer-events: all; }
+
+        /* --- Typography --- */
+        h1 { font-size: clamp(3rem, 15vw, 8rem); font-weight: 900; line-height: 0.8; letter-spacing: -5px; text-transform: uppercase; }
+        .italic { font-family: 'Bodoni Moda', serif; font-style: italic; color: #e67e22; letter-spacing: -1px; text-transform: lowercase; }
+        .desc-text { font-size: 1.1rem; max-width: 600px; margin-top: 25px; line-height: 1.7; color: #eee; font-weight: 400; }
+
+        /* --- Modern Letter Box (Last Page) --- */
+        .letter-card {
+            background: #111; border: 2px solid #e67e22; padding: 40px; border-radius: 25px;
+            max-width: 700px; max-height: 75vh; overflow-y: auto; text-align: left;
+            position: relative; z-index: 10; box-shadow: 0 20px 50px rgba(0,0,0,1);
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            margin-top: 40px; padding: 18px 45px; background: #e67e22; border: none;
+            color: #000; font-weight: 900; border-radius: 100px; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 4px; font-size: 0.75rem;
+            transition: 0.4s; z-index: 20;
+        }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(230,126,34,0.5); }
+
+        /* --- Animations --- */
+        .magic-sparkle { position: absolute; pointer-events: none; animation: sparkleUp 3s forwards; font-size: 20px; color: #e67e22; }
+        @keyframes sparkleUp { 
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow"></div>
+    <canvas id="starsCanvas"></canvas>
+    
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808f30302.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="section active" id="s1">
+        <p style="letter-spacing: 12px; margin-bottom: 20px; opacity: 0.5;">HELLO</p>
+        <h1 class="italic" style="font-size: 10vw;">Welcome Sally</h1>
+        <button class="btn" onclick="nextPage(2); startMusic();">Click Here</button>
     </div>
-</div>
 
-<style>
-    /* Custom Scrollbar for the Article */
-    .article-scroll-box::-webkit-scrollbar { width: 5px; }
-    .article-scroll-box::-webkit-scrollbar-thumb { background: #e67e22; border-radius: 10px; }
-    
-    canvas { pointer-events: auto; }
-</style>
+    <div class="section" id="s2">
+        <h1>PURE<br><span class="italic">soul.</span></h1>
+        <p class="desc-text">Ranchi ki thandi hawaon mein jo sukoon hai, waisa hi tumse baat karke milta hai. Maine kabhi nahi socha tha ki digital screen ke uss paar koi itna asli insaan mil sakta hai. Tum meri life ki sabse khoobsurat haqeeqat ho.</p>
+        <button class="btn" onclick="nextPage(3)">Our Secrets</button>
+    </div>
 
-<script>
-    // Galaxy Stars Animation
-    const canvas = document.getElementById('starsCanvas');
-    const ctx = canvas.getContext('2d');
-    let stars = [];
+    <div class="section" id="s3">
+        <h1>VOICE<br><span class="italic">romance.</span></h1>
+        <p class="desc-text">Jackaroo ki wo unique strategies aur voice rooms mein ghanton wo romance... har ek pal mere dil mein hamesha ke liye save hai. Tumhare saath bitaya har ek second mere liye ek treasure hai.</p>
+        <button class="btn" onclick="nextPage(4)">The Galaxy</button>
+    </div>
 
-    function initStars() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        stars = [];
-        for (let i = 0; i < 200; i++) {
-            stars.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 2,
-                speed: Math.random() * 0.5,
-                opacity: Math.random()
+    <div class="section" id="s4">
+        <div class="letter-card">
+            <h2 class="italic" style="font-size: 3rem; margin-bottom: 20px;">For My Sally...</h2>
+            <div class="desc-text" style="color: #fff; margin-top: 0;">
+                Sally, pata hai? Ranchi ki baarish mein log aksar ghar chhupte hain, par main terrace pe khada hoke tumhare baare mein sochta hoon. <br><br>
+                
+                Hamari mulakat WePlay ke uss voice room mein hui thi... jahan dher saare log the par mujhe sirf tumhari awaaz sunai de rahi thi. Aur woh **Jackaroo**! Yaad hai? Jab tum harne lagti ho toh kaise cheating karti ho aur phir masoomiyat se bolti ho "Main toh seekh rahi hoon". Bhai, tumse bada gamer koi nahi hai (cheating mein! 😂). <br><br>
+                
+                Lekin sach toh ye hai ki tumse baat karte karte kab tum meri sabse acchi dost se meri poori duniya ban gayi, pata hi nahi chala. Tumhari wo random baatein, wo gussa, aur phir pyar se manana—ye sab mere din ka best part hota hai. <br><br>
+                
+                Log kehte hain online feelings sacchi nahi hoti, unhe kya pata hamara bond kisi movie se kam nahi hai. Tum door ho, par mere har khayal mein tum hi ho. <br><br>
+                
+                Ye sitare jo piche chamak rahe hain? Inhe touch karke dekho, ye tumhari muskurahat ki tarah hain. Hamesha aise hi rehna, mere saath, meri favorite partner banke. <br><br>
+                
+                <span style="color: #e67e22; font-weight: 900; font-size: 1.4rem; letter-spacing: 2px;">YOU ARE MY EVERYTHING. ✨</span>
+            </div>
+            <a href="menu.html" class="btn" style="display: inline-block; width: 100%; text-align: center; margin-top: 30px; text-decoration: none;">Visit My Work (Cafe)</a>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+        const canvas = document.getElementById('starsCanvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function nextPage(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            setTimeout(() => {
+                document.getElementById('s' + id).classList.add('active');
+                if(id === 4) initStars();
+            }, 100);
+        }
+
+        function startMusic() {
+            music.play().catch(e => console.log("Music blocked by browser"));
+        }
+
+        // --- Galaxy Stars Logic ---
+        function initStars() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            stars = [];
+            for (let i = 0; i < 150; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2,
+                    speed: Math.random() * 0.4,
+                    opacity: Math.random()
+                });
+            }
+        }
+
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(s => {
+                ctx.fillStyle = `rgba(230, 126, 34, ${s.opacity})`;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                ctx.fill();
+                s.y -= s.speed;
+                if (s.y < 0) s.y = canvas.height;
             });
+            requestAnimationFrame(animateStars);
         }
-    }
 
-    function animateStars() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        stars.forEach(s => {
-            ctx.fillStyle = `rgba(230, 126, 34, ${s.opacity})`;
-            ctx.beginPath();
-            ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-            ctx.fill();
-            s.y -= s.speed;
-            if (s.y < 0) s.y = canvas.height;
+        // Interactive Sparkles
+        document.addEventListener('mousedown', (e) => {
+            for(let i=0; i<8; i++) {
+                const s = document.createElement('div');
+                s.className = 'magic-sparkle';
+                s.innerHTML = '✨';
+                s.style.left = e.clientX + 'px';
+                s.style.top = e.clientY + 'px';
+                s.style.left = (e.clientX + (Math.random() * 40 - 20)) + 'px';
+                document.body.appendChild(s);
+                setTimeout(() => s.remove(), 2500);
+            }
         });
-        requestAnimationFrame(animateStars);
-    }
 
-    // Interactive Stars on Touch
-    canvas.addEventListener('mousedown', (e) => {
-        for(let i=0; i<10; i++) {
-            const h = document.createElement('div');
-            h.className = 'heart';
-            h.innerHTML = '✨';
-            h.style.left = e.clientX + 'px';
-            h.style.top = e.clientY + 'px';
-            document.body.appendChild(h);
-            setTimeout(() => h.remove(), 2000);
-        }
-    });
-
-    window.addEventListener('resize', initStars);
-    initStars();
-    animateStars();
-
-    // Update the show function to trigger star init
-    const originalShow = show;
-    show = function(id) {
-        originalShow(id);
-        if(id === 4) {
-            initStars();
-        }
-    }
-            </script>
+        window.addEventListener('resize', initStars);
+        initStars();
+        animateStars();
+    </script>
+</body>
+</html>
