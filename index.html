@@ -3,166 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Sally</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,900&family=Outfit:wght@100;400;900&display=swap" rel="stylesheet">
+    <title>Soso ❤️ Mikey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,900&family=Outfit:wght@100;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #000; color: #fff; font-family: 'Outfit', sans-serif; overflow: hidden; height: 100vh; }
+        body { background: #000; color: #fff; font-family: 'Outfit', sans-serif; overflow: hidden; height: 100vh; perspective: 1000px; }
 
-        /* --- Global Elements --- */
-        .glow { position: fixed; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(230,126,34,0.15) 0%, transparent 70%); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: -1; filter: blur(100px); }
-        canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+        /* --- 3D Particle Space --- */
+        #canvas-bg { position: fixed; inset: 0; z-index: -1; filter: blur(1px); }
 
-        /* --- Sections --- */
-        .section { 
-            position: absolute; inset: 0; display: flex; flex-direction: column; 
+        /* --- 3D Welcome Animation --- */
+        #preloader {
+            position: fixed; inset: 0; background: #000; z-index: 1000;
+            display: flex; justify-content: center; align-items: center;
+            animation: initialScale 3s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+        .preloader-text {
+            font-size: 6vw; font-weight: 100; letter-spacing: 20px; text-transform: uppercase;
+            animation: textGlow 2s ease-in-out infinite alternate;
+            font-family: 'Bodoni Moda', serif;
+        }
+        @keyframes textGlow { from { text-shadow: 0 0 10px #e67e22; opacity: 0.5; } to { text-shadow: 0 0 40px #e67e22; opacity: 1; } }
+        @keyframes initialScale { 85% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(4); visibility: hidden; } }
+
+        /* --- 3D Slide System --- */
+        .slide {
+            position: absolute; inset: 0; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
-            opacity: 0; transform: translateY(30px); filter: blur(10px);
-            transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-            pointer-events: none; padding: 25px;
+            opacity: 0; transform: translateZ(-600px) rotateX(15deg);
+            transition: 2s cubic-bezier(0.19, 1, 0.22, 1);
+            pointer-events: none; padding: 40px;
         }
-        .section.active { opacity: 1; transform: translateY(0); filter: blur(0); pointer-events: all; }
+        .slide.active { opacity: 1; transform: translateZ(0) rotateX(0); pointer-events: all; }
 
-        /* --- Typography --- */
-        h1 { font-size: clamp(3rem, 15vw, 8rem); font-weight: 900; line-height: 0.8; letter-spacing: -5px; text-transform: uppercase; }
-        .italic { font-family: 'Bodoni Moda', serif; font-style: italic; color: #e67e22; letter-spacing: -1px; text-transform: lowercase; }
-        .desc-text { font-size: 1.1rem; max-width: 600px; margin-top: 25px; line-height: 1.7; color: #eee; font-weight: 400; }
-
-        /* --- Modern Letter Box (Last Page) --- */
-        .letter-card {
-            background: #111; border: 2px solid #e67e22; padding: 40px; border-radius: 25px;
-            max-width: 700px; max-height: 75vh; overflow-y: auto; text-align: left;
-            position: relative; z-index: 10; box-shadow: 0 20px 50px rgba(0,0,0,1);
+        /* --- Floating Typography --- */
+        h1 { font-size: clamp(4rem, 15vw, 10rem); font-weight: 900; line-height: 0.8; letter-spacing: -10px; }
+        .italic { font-family: 'Bodoni Moda', serif; font-style: italic; color: #e67e22; text-transform: lowercase; letter-spacing: -2px; }
+        
+        .content-card {
+            max-width: 650px; background: rgba(255,255,255,0.03); padding: 45px;
+            border-radius: 40px; border: 1px solid rgba(230,126,34,0.15);
+            backdrop-filter: blur(25px); transform: translateZ(50px);
+            margin-top: 35px; box-shadow: 0 40px 100px rgba(0,0,0,0.6);
         }
 
-        /* --- Buttons --- */
-        .btn {
-            margin-top: 40px; padding: 18px 45px; background: #e67e22; border: none;
-            color: #000; font-weight: 900; border-radius: 100px; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 4px; font-size: 0.75rem;
-            transition: 0.4s; z-index: 20;
+        /* --- Glass Navigation --- */
+        .glass-btn {
+            margin-top: 50px; padding: 22px 55px; background: transparent;
+            border: 1px solid #e67e22; color: #e67e22; font-weight: 900;
+            border-radius: 100px; cursor: pointer; text-transform: uppercase;
+            letter-spacing: 6px; font-size: 0.7rem; transition: 0.5s;
         }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(230,126,34,0.5); }
+        .glass-btn:hover { background: #e67e22; color: #000; box-shadow: 0 0 40px #e67e22; transform: translateY(-5px); }
 
-        /* --- Animations --- */
-        .magic-sparkle { position: absolute; pointer-events: none; animation: sparkleUp 3s forwards; font-size: 20px; color: #e67e22; }
-        @keyframes sparkleUp { 
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(2); opacity: 0; }
+        /* --- 3D Floating Elements --- */
+        .floating-heart {
+            position: absolute; pointer-events: none;
+            animation: float3D 4s ease-out forwards;
+            font-size: 35px; filter: drop-shadow(0 0 10px #e67e22);
+        }
+        @keyframes float3D {
+            0% { transform: translateZ(-800px) scale(0); opacity: 0; }
+            40% { opacity: 1; }
+            100% { transform: translateZ(600px) translateY(-150vh) scale(2.5); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="glow"></div>
-    <canvas id="starsCanvas"></canvas>
-    
+    <div id="preloader"><div class="preloader-text">Welcome Soso</div></div>
+    <canvas id="canvas-bg"></canvas>
+
     <audio id="bgMusic" loop>
         <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808f30302.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="section active" id="s1">
-        <p style="letter-spacing: 12px; margin-bottom: 20px; opacity: 0.5;">HELLO</p>
-        <h1 class="italic" style="font-size: 10vw;">Welcome Sally</h1>
-        <button class="btn" onclick="nextPage(2); startMusic();">Click Here</button>
+    <div class="slide active" id="s1">
+        <p style="letter-spacing: 12px; opacity: 0.4; margin-bottom: 20px;">ESTABLISHED 2026</p>
+        <h1>ONLY<br><span class="italic">soso.</span></h1>
+        <button class="glass-btn" onclick="nextSlide(2); startMusic();">Enter My World</button>
     </div>
 
-    <div class="section" id="s2">
-        <h1>PURE<br><span class="italic">soul.</span></h1>
-        <p class="desc-text">Ranchi ki thandi hawaon mein jo sukoon hai, waisa hi tumse baat karke milta hai. Maine kabhi nahi socha tha ki digital screen ke uss paar koi itna asli insaan mil sakta hai. Tum meri life ki sabse khoobsurat haqeeqat ho.</p>
-        <button class="btn" onclick="nextPage(3)">Our Secrets</button>
-    </div>
-
-    <div class="section" id="s3">
-        <h1>VOICE<br><span class="italic">romance.</span></h1>
-        <p class="desc-text">Jackaroo ki wo unique strategies aur voice rooms mein ghanton wo romance... har ek pal mere dil mein hamesha ke liye save hai. Tumhare saath bitaya har ek second mere liye ek treasure hai.</p>
-        <button class="btn" onclick="nextPage(4)">The Galaxy</button>
-    </div>
-
-    <div class="section" id="s4">
-        <div class="letter-card">
-            <h2 class="italic" style="font-size: 3rem; margin-bottom: 20px;">For My Sally...</h2>
-            <div class="desc-text" style="color: #fff; margin-top: 0;">
-                Sally, pata hai? Ranchi ki baarish mein log aksar ghar chhupte hain, par main terrace pe khada hoke tumhare baare mein sochta hoon. <br><br>
-                
-                Hamari mulakat WePlay ke uss voice room mein hui thi... jahan dher saare log the par mujhe sirf tumhari awaaz sunai de rahi thi. Aur woh **Jackaroo**! Yaad hai? Jab tum harne lagti ho toh kaise cheating karti ho aur phir masoomiyat se bolti ho "Main toh seekh rahi hoon". Bhai, tumse bada gamer koi nahi hai (cheating mein! 😂). <br><br>
-                
-                Lekin sach toh ye hai ki tumse baat karte karte kab tum meri sabse acchi dost se meri poori duniya ban gayi, pata hi nahi chala. Tumhari wo random baatein, wo gussa, aur phir pyar se manana—ye sab mere din ka best part hota hai. <br><br>
-                
-                Log kehte hain online feelings sacchi nahi hoti, unhe kya pata hamara bond kisi movie se kam nahi hai. Tum door ho, par mere har khayal mein tum hi ho. <br><br>
-                
-                Ye sitare jo piche chamak rahe hain? Inhe touch karke dekho, ye tumhari muskurahat ki tarah hain. Hamesha aise hi rehna, mere saath, meri favorite partner banke. <br><br>
-                
-                <span style="color: #e67e22; font-weight: 900; font-size: 1.4rem; letter-spacing: 2px;">YOU ARE MY EVERYTHING. ✨</span>
-            </div>
-            <a href="menu.html" class="btn" style="display: inline-block; width: 100%; text-align: center; margin-top: 30px; text-decoration: none;">Visit My Work (Cafe)</a>
+    <div class="slide" id="s2">
+        <p style="letter-spacing: 8px; opacity: 0.4;">PURE EMOTIONS</p>
+        <h1>MY<br><span class="italic">sukoon.</span></h1>
+        <div class="content-card">
+            Ranchi ki thandi hawaon mein jo sukoon hai, waisa hi tumse baat karke milta hai. Soso, tum meri life ki sabse khoobsurat haqeeqat ho.
         </div>
+        <button class="glass-btn" onclick="nextSlide(3)">Memories</button>
     </div>
 
-    <script>
-        const music = document.getElementById('bgMusic');
-        const canvas = document.getElementById('starsCanvas');
-        const ctx = canvas.getContext('2d');
-        let stars = [];
+    <div class="slide" id="s3">
+        <h1>VOICE<br><span class="italic">romance.</span></h1>
+        <div class="content-card">
+            Hamara woh Jackaroo khelna, voice rooms ki woh der raat waali baatein... woh sab mere liye kisi khazane se kam nahi hain.
+        </div>
+        <button class="glass-btn" onclick="nextSlide(4)">The Final Gift</button>
+    </div>
 
-        function nextPage(id) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            setTimeout(() => {
-                document.getElementById('s' + id).classList.add('active');
-                if(id === 4) initStars();
-            }, 100);
-        }
-
-        function startMusic() {
-            music.play().catch(e => console.log("Music blocked by browser"));
-        }
-
-        // --- Galaxy Stars Logic ---
-        function initStars() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            stars = [];
-            for (let i = 0; i < 150; i++) {
-                stars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2,
-                    speed: Math.random() * 0.4,
-                    opacity: Math.random()
-                });
-            }
-        }
-
-        function animateStars() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            stars.forEach(s => {
-                ctx.fillStyle = `rgba(230, 126, 34, ${s.opacity})`;
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-                ctx.fill();
-                s.y -= s.speed;
-                if (s.y < 0) s.y = canvas.height;
-            });
-            requestAnimationFrame(animateStars);
-        }
-
-        // Interactive Sparkles
-        document.addEventListener('mousedown', (e) => {
-            for(let i=0; i<8; i++) {
-                const s = document.createElement('div');
-                s.className = 'magic-sparkle';
-                s.innerHTML = '✨';
-                s.style.left = e.clientX + 'px';
-                s.style.top = e.clientY + 'px';
-                s.style.left = (e.clientX + (Math.random() * 40 - 20)) + 'px';
-                document.body.appendChild(s);
-                setTimeout(() => s.remove(), 2500);
-            }
-        });
-
-        window.addEventListener('resize', initStars);
-        initStars();
-        animateStars();
-    </script>
-</body>
-</html>
+    <div class="slide" id="s4">
+        <h1>ALWAYS<br><span class="italic">mikey.</span></h1>
+        <div class="content-card" style="text-align: left; line-height: 1.8;">
+            Soso, tumse baat karte karte kab tum meri ban gyi pata nhi chala 
