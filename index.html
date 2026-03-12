@@ -3,191 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Soso ❤️ Mikey</title>
+    <title>For Sally | Mikey</title>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,900&family=Outfit:wght@100;400;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: #000; color: #fff; font-family: 'Outfit', sans-serif; overflow: hidden; height: 100vh; width: 100vw; perspective: 1500px; }
-
-        /* --- 3D Background --- */
         #canvas-bg { position: fixed; inset: 0; z-index: 1; }
-
-        /* --- Welcome Intro --- */
         #preloader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 1.2s ease; }
         .preloader-text { font-size: 10vw; letter-spacing: 12px; font-family: 'Bodoni Moda', serif; color: #e67e22; animation: neon 1.5s infinite alternate; text-transform: uppercase; }
         @keyframes neon { from { text-shadow: 0 0 10px #e67e22; opacity: 0.5; } to { text-shadow: 0 0 30px #e67e22, 0 0 50px #fff; opacity: 1; } }
 
-        /* --- Slide Engine --- */
         .slide-container { position: relative; width: 100%; height: 100%; z-index: 10; }
         .slide {
             position: absolute; inset: 0; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
             padding: 20px; opacity: 0; visibility: hidden;
             transform: translateZ(-1000px) rotateY(30deg);
-            transition: 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
         .slide.active { opacity: 1; visibility: visible; transform: translateZ(0) rotateY(0); }
 
-        /* --- 3D Cyber Cards --- */
         .cyber-card {
             width: 92%; max-width: 450px; background: rgba(230, 126, 34, 0.04); 
             padding: 30px; border-radius: 35px; border: 1px solid rgba(230, 126, 34, 0.3);
             backdrop-filter: blur(25px); position: relative; overflow-y: auto; max-height: 75vh;
             box-shadow: 0 25px 60px rgba(0,0,0,0.8); text-align: left;
         }
-        .cyber-card::before { content: "LIVE_STREAM: SOSO_HEART"; position: absolute; top: 12px; right: 20px; font-size: 0.5rem; color: #e67e22; opacity: 0.6; font-weight: 900; letter-spacing: 1px; }
 
-        /* --- Typography --- */
-        h1 { font-size: 15vw; font-weight: 900; line-height: 0.8; letter-spacing: -6px; margin-bottom: 15px; }
-        .italic { font-family: 'Bodoni Moda', serif; font-style: italic; color: #e67e22; text-transform: lowercase; }
-        .shayari { font-style: italic; border-left: 4px solid #e67e22; padding-left: 15px; margin: 25px 0; color: #ffb366; line-height: 1.5; font-size: 1.1rem; }
-
-        /* --- 3D Glow Buttons --- */
         .next-btn {
             margin-top: 25px; width: 100%; padding: 20px; background: transparent;
             border: 1px solid #e67e22; color: #e67e22; font-weight: 900;
             border-radius: 100px; text-transform: uppercase; letter-spacing: 5px;
             font-size: 0.75rem; cursor: pointer; transition: 0.4s;
-            box-shadow: 0 0 20px rgba(230,126,34,0.1);
         }
         .next-btn:active { background: #e67e22; color: #000; transform: scale(0.92); }
-
-        /* --- Interaction --- */
+        .music-wrapper { width: 100%; border-radius: 20px; overflow: hidden; margin-top: 20px; border: 1px solid #e67e22; }
         .pop { position: absolute; pointer-events: none; animation: popUp 2.8s forwards; font-size: 25px; z-index: 100; }
         @keyframes popUp { 0% { transform: translateY(0) scale(0.5); opacity: 1; } 100% { transform: translateY(-90vh) scale(3) rotate(20deg); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <div id="preloader"><div class="preloader-text">SOSO</div></div>
-    
+    <div id="preloader"><div class="preloader-text">SALLY</div></div>
     <canvas id="canvas-bg"></canvas>
 
-    <audio id="bgMusic" loop>
-        <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808f30302.mp3" type="audio/mpeg">
-    </audio>
-
     <div class="slide-container">
-        
         <div class="slide active" id="s1">
-            <p style="letter-spacing: 15px; opacity: 0.4; font-size: 0.6rem; margin-bottom: 20px;">KEY_05072006</p>
-            <h1>ACCESSING<br><span class="italic">soso.</span></h1>
-            <button class="next-btn" style="width: auto; padding: 22px 65px;" onclick="nextSlide(2); startMusic();">Decrypt Feelings</button>
+            <p style="letter-spacing: 15px; opacity: 0.4; font-size: 0.6rem; margin-bottom: 20px;">RECALLING MEMORIES</p>
+            <h1>FOR YOU<br><span style="font-family:'Bodoni Moda'; font-style:italic; color:#e67e22;">sally.</span></h1>
+            <button class="next-btn" style="width: auto; padding: 22px 65px;" onclick="nextSlide(2)">Look Back</button>
         </div>
 
         <div class="slide" id="s2">
             <div class="cyber-card">
-                <h2 class="italic" style="font-size: 2.8rem; margin-bottom: 15px;">Sukoon.exe</h2>
-                <p style="font-size: 1rem; line-height: 1.7; opacity: 0.9;">
-                    Soso, Ranchi ki thandi hawaon mein jo sukoon hai, waisa hi tumse baat karke milta hai. Par sach toh ye hai ki tum thandi hawa nahi, garam chai jaisi ho—sirf sukoon nahi, meri neend bhi uda deti ho! <br><br>
-                    Is digital bheed mein tumhari baatein ekdum 'Error-Free' lagti hain. Kabhi lagta hai tum koi AI ho jo sirf mujhe khush karne ke liye bani hai, par phir tumhara gussa yaad aata hai aur bhram toot jata hai! 😂
+                <h2 style="font-family:'Bodoni Moda'; font-style:italic; color:#e67e22; font-size:2.8rem;">Purana Sukoon</h2>
+                <p style="font-size:1rem; line-height:1.7; margin-top:10px;">
+                    Sally, yaad hai wo waqt jab Ranchi ki thandi hawaon mein hum ghanton baatein karte the? Wo sukoon sirf un hawaon mein nahi, tumhari baaton mein tha. Tum tab bhi mere liye garam chai jaisi thi—jo sukoon bhi deti thi aur meri neend bhi uda deti thi.
                 </p>
-
-                <div class="shayari">
-                    "Phoolon ki khushbu, chand ki chandni,<br>
-                    Tum meri life ki sabse pyaari raagini...<br><br>
-                    Par zyada mat itraana Soso,<br>
-                    Kyunki shakal tumhari lagti hai ekdum 'Bandarni'!" 🐒
+                <div style="border-left:4px solid #e67e22; padding-left:15px; margin:20px 0; color:#ffb366; font-style:italic;">
+                    "Tab tum itraati bahut thi, Sally...<br>
+                    Waise shakal se tab bhi tum 'Bandarni' hi lagti thi!" 🐒
                 </div>
-
-                <p style="font-size: 0.85rem; opacity: 0.7; border-top: 1px solid rgba(230,126,34,0.2); pt: 15px; margin-top: 15px;">
-                    Tumse milna meri life ka sabse best 'Unexpected Error' tha jise main kabhi fix nahi karna chahta.
-                </p>
-
-                <button class="next-btn" onclick="nextSlide(3)">Loading Memories...</button>
+                <button class="next-btn" onclick="nextSlide(3)">The Gaming Nights...</button>
             </div>
         </div>
 
         <div class="slide" id="s3">
-            <h1 style="font-size: 12vw;">GAMER<br><span class="italic">romance.</span></h1>
+            <h1 style="font-size: 12vw;">VOICE<br><span style="color:#e67e22; font-style:italic;">rooms.</span></h1>
             <div class="cyber-card" style="text-align: center;">
-                <p style="font-size: 1.1rem; line-height: 1.8;">
-                    Soso, tum duniya ki pehli aisi gamer ho jo **Jackaroo** mein harne lagti hai toh game ke rules hi badal deti hai! <br><br>
-                    Wo "Main toh seekh rahi hoon" wala bahana ab purana ho gaya hai. 😂 <br><br>
-                    Par sach bolun? Meri sabse badi 'Win' wahi hai jab tum cheating karke hasti ho. Voice rooms ki wo raatein mere liye treasure hain.
-                </p>
-                <button class="next-btn" onclick="nextSlide(4)">The Last Surprise</button>
-            </div>
-        </div>
-
-        <div class="slide" id="s4">
-            <h1 style="font-size: 14vw;">ALWAYS<br><span class="italic">mikey.</span></h1>
-            <div class="cyber-card" style="border: 2px solid #e67e22; box-shadow: 0 0 40px rgba(230,126,34,0.2);">
-                <p style="font-size: 1.2rem; text-align: center; line-height: 1.8;">
-                    Soso, doori kitni bhi ho, ye 3D stars gawaah hain ki tum mere dil ke sabse kareeb ho. <br><br>
-                    Hamesha aise hi rehna, meri favorite **'Bandarni'** banke. <br><br>
-                    <span style="color: #e67e22; font-weight: 900; font-size: 1.5rem;">YOU ARE MY EVERYTHING. ❤️</span>
-                </p>
-            </div>
-            <p style="margin-top: 40px; font-weight: 900; color: #e67e22; letter-spacing: 8px; font-size: 0.7rem; animation: textGlow 1s infinite alternate;">TAP SCREEN FOR MAGIC</p>
-        </div>
-    </div>
-
-    <script>
-        // Preloader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const pre = document.getElementById('preloader');
-                pre.style.opacity = '0';
-                setTimeout(() => pre.style.display = 'none', 1200);
-            }, 2500);
-        });
-
-        // 3D Particles Engine
-        const canvas = document.getElementById('canvas-bg');
-        const ctx = canvas.getContext('2d');
-        let ps = [];
-
-        function init() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            ps = []; for(let i=0; i<120; i++) ps.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, z: Math.random()*canvas.width});
-        }
-
-        function draw() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            ps.forEach(p => {
-                let scale = 400 / (400 + p.z);
-                let x2d = (p.x - canvas.width/2) * scale + canvas.width/2;
-                let y2d = (p.y - canvas.height/2) * scale + canvas.height/2;
-                ctx.fillStyle = `rgba(230, 126, 34, ${scale * 0.9})`;
-                ctx.beginPath(); ctx.arc(x2d, y2d, 3 * scale * 5, 0, Math.PI*2); ctx.fill();
-                p.z -= 1.8; if(p.z < -400) p.z = canvas.width;
-            });
-            requestAnimationFrame(draw);
-        }
-
-        // Navigation with 3D Slide
-        function nextSlide(id) {
-            const current = document.querySelector('.slide.active');
-            current.style.transform = "translateZ(800px) rotateY(-40deg)";
-            current.style.opacity = "0";
-            
-            setTimeout(() => {
-                current.classList.remove('active');
-                current.style.visibility = "hidden";
-                const next = document.getElementById('s' + id);
-                next.style.visibility = "visible";
-                next.classList.add('active');
-            }, 600);
-        }
-
-        function startMusic() { document.getElementById('bgMusic').play().catch(() => {}); }
-
-        // Touch Interaction
-        document.addEventListener('touchstart', (e) => {
-            const touch = e.touches[0];
-            const items = ['❤️', '✨', '🎲', '🐒'];
-            for(let i=0; i<6; i++) {
-                const p = document.createElement('div');
-                p.className = 'pop'; p.innerHTML = items[Math.floor(Math.random()*items.length)];
-                p.style.left = touch.clientX + 'px'; p.style.top = touch.clientY + 'px';
-                document.body.appendChild(p);
-                setTimeout(() => p.remove(), 2800);
-            }
-        });
-
-        init(); draw();
-        window.addEventListener('resize', init);
-    </script>
-</body>
-</html>
+                <p>Wo WePlay ka Jackaro 
