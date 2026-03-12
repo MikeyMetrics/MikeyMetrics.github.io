@@ -11,82 +11,163 @@
         
         #canvas-bg { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
         
-        /* --- Preloader --- */
-        #preloader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 1s ease-in-out; }
-        .preloader-text { font-size: 10vw; letter-spacing: 12px; font-family: 'Bodoni Moda', serif; color: #e67e22; animation: neon 1.5s infinite alternate; text-transform: uppercase; }
-        @keyframes neon { from { text-shadow: 0 0 10px #e67e22; opacity: 0.5; } to { text-shadow: 0 0 30px #e67e22, 0 0 50px #fff; opacity: 1; } }
+        /* --- Smooth Welcome Animation --- */
+        #preloader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1); }
+        .welcome-text { font-size: 8vw; letter-spacing: 5px; font-family: 'Bodoni Moda', serif; color: #e67e22; animation: welcomePulse 2s infinite ease-in-out; text-align: center; }
+        @keyframes welcomePulse { 0%, 100% { transform: scale(1); opacity: 0.7; text-shadow: 0 0 20px #e67e22; } 50% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 40px #fff; } }
 
-        /* --- Slide Engine (Fixed) --- */
+        /* --- Slide Engine --- */
         .slide-container { position: relative; width: 100%; height: 100%; z-index: 10; }
         .slide {
-            position: absolute; inset: 0; display: flex; flex-direction: column;
+            position: absolute; inset: 0; display: none; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
-            padding: 20px; opacity: 0; visibility: hidden; pointer-events: none;
-            transform: translateZ(-800px) rotateY(30deg);
-            transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+            padding: 20px; opacity: 0;
+            transform: translateZ(-500px);
+            transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        .slide.active { opacity: 1; visibility: visible; pointer-events: auto; transform: translateZ(0) rotateY(0); }
+        .slide.active { display: flex; opacity: 1; transform: translateZ(0); }
 
-        /* --- UI Elements --- */
+        /* --- Stylish Cards --- */
         .cyber-card {
-            width: 92%; max-width: 450px; background: rgba(230, 126, 34, 0.05); 
-            padding: 30px; border-radius: 35px; border: 1px solid rgba(230, 126, 34, 0.3);
-            backdrop-filter: blur(20px); position: relative; overflow-y: auto; max-height: 75vh;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8); text-align: left;
+            width: 90%; max-width: 420px; background: rgba(230, 126, 34, 0.05); 
+            padding: 30px; border-radius: 40px; border: 1px solid rgba(230, 126, 34, 0.2);
+            backdrop-filter: blur(25px); box-shadow: 0 20px 60px rgba(0,0,0,0.8); text-align: left;
         }
 
-        h1 { font-size: 15vw; font-weight: 900; line-height: 0.8; letter-spacing: -6px; margin-bottom: 15px; }
+        h1 { font-size: 14vw; font-weight: 900; line-height: 0.9; letter-spacing: -4px; margin-bottom: 10px; text-transform: uppercase; }
+        .highlight { font-family: 'Bodoni Moda', serif; font-style: italic; color: #e67e22; text-transform: lowercase; }
         
         .next-btn {
-            margin-top: 25px; width: 100%; padding: 20px; background: rgba(0,0,0,0.5);
-            border: 1px solid #e67e22; color: #e67e22; font-weight: 900;
-            border-radius: 100px; text-transform: uppercase; letter-spacing: 5px;
-            font-size: 0.75rem; cursor: pointer; transition: 0.3s;
+            margin-top: 25px; width: 100%; padding: 20px; background: #e67e22;
+            border: none; color: #000; font-weight: 900;
+            border-radius: 100px; text-transform: uppercase; letter-spacing: 4px;
+            font-size: 0.75rem; cursor: pointer; transition: 0.4s;
+            box-shadow: 0 10px 30px rgba(230,126,34,0.3);
         }
-        .next-btn:active { background: #e67e22; color: #000; transform: scale(0.95); }
+        .next-btn:active { background: #fff; transform: scale(0.95); }
         
-        .music-wrapper { width: 100%; border-radius: 20px; overflow: hidden; margin-top: 20px; border: 1px solid #e67e22; }
-        
-        /* --- Touch Particles --- */
-        .pop { position: absolute; pointer-events: none; animation: popUp 2.5s forwards; font-size: 25px; z-index: 100; }
-        @keyframes popUp { 0% { transform: translateY(0) scale(0.5); opacity: 1; } 100% { transform: translateY(-90vh) scale(3) rotate(20deg); opacity: 0; } }
+        .shayari { font-style: italic; border-left: 4px solid #e67e22; padding-left: 15px; margin: 25px 0; color: #ffb366; line-height: 1.6; font-size: 1.1rem; }
+
+        .pop { position: absolute; pointer-events: none; animation: popUp 2.8s forwards; font-size: 25px; z-index: 1000; }
+        @keyframes popUp { 0% { transform: translateY(0) scale(0.5); opacity: 1; } 100% { transform: translateY(-80vh) scale(3) rotate(25deg); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <div id="preloader"><div class="preloader-text">SALLY</div></div>
-    
+    <div id="preloader"><div class="welcome-text">WELCOME SALLY</div></div>
     <canvas id="canvas-bg"></canvas>
 
     <div class="slide-container">
         
         <div class="slide active" id="s1">
-            <p style="letter-spacing: 15px; opacity: 0.4; font-size: 0.6rem; margin-bottom: 20px;">RECALLING MEMORIES</p>
-            <h1>FOR YOU<br><span style="font-family:'Bodoni Moda'; font-style:italic; color:#e67e22;">sally.</span></h1>
-            <button class="next-btn" style="width: auto; padding: 22px 65px;" onclick="nextSlide(2)">Look Back</button>
+            <p style="letter-spacing: 12px; opacity: 0.4; font-size: 0.6rem; margin-bottom: 20px;">MEMORIES FOR YOU</p>
+            <h1>WELCOME<br><span class="highlight">sally.</span></h1>
+            <button class="next-btn" style="width: 250px;" onclick="changeSlide(2)">Yaadon Ka Safar</button>
         </div>
 
         <div class="slide" id="s2">
             <div class="cyber-card">
-                <h2 style="font-family:'Bodoni Moda'; font-style:italic; color:#e67e22; font-size:2.8rem; margin-bottom: 15px;">Purana Sukoon</h2>
-                <p style="font-size:1rem; line-height:1.7; opacity: 0.9;">
-                    Sally, yaad hai wo waqt jab Ranchi ki thandi hawaon mein hum ghanton baatein karte the? Wo sukoon sirf un hawaon mein nahi, tumhari baaton mein tha. Tum tab bhi mere liye garam chai jaisi thi—jo sukoon bhi deti thi aur meri neend bhi uda deti thi.
+                <h2 class="highlight" style="font-size: 2.8rem; margin-bottom: 15px;">Pehli Mulaqat</h2>
+                <p style="font-size: 1rem; line-height: 1.7; opacity: 0.9;">
+                    Sally, yaad hai wo waqt jab hum pehli baar WePlay par mile the? Hamari online dosti ne kab din aur raaton ko badal diya, pata hi nahi chala. Tum tab bhi mere liye garam chai jaisi thi—jo sukoon bhi deti thi aur meri neend bhi uda deti thi!
                 </p>
-                <div style="border-left:4px solid #e67e22; padding-left:15px; margin:25px 0; color:#ffb366; font-style:italic; font-size: 1.1rem; line-height: 1.5;">
-                    "Tab tum itraati bahut thi, Sally...<br>
+                <div class="shayari">
+                    "Tab tum itraati bahut thi Sally...<br>
                     Waise shakal se tab bhi tum 'Bandarni' hi lagti thi!" 🐒
                 </div>
-                <button class="next-btn" onclick="nextSlide(3)">The Gaming Nights...</button>
+                <button class="next-btn" onclick="changeSlide(3)">Gaming Nights</button>
             </div>
         </div>
 
         <div class="slide" id="s3">
-            <h1 style="font-size: 12vw;">VOICE<br><span style="color:#e67e22; font-style:italic;">rooms.</span></h1>
+            <h1 style="font-size: 11vw;">CHEATING<br><span class="highlight">partner.</span></h1>
             <div class="cyber-card" style="text-align: center;">
                 <p style="font-size: 1.1rem; line-height: 1.8;">
-                    Wo WePlay ka Jackaroo aur tumhara harne par rules badal dena... Wo sab raatein ab sirf ek khoobsurat yaad ban gayi hain. <br><br>
-                    Bhale hi ab hum utni baat nahi karte, par wo tumhari cheating wali hansi aaj bhi mere kaano mein gunjti hai.
+                    Wo Jackaroo aur tumhara harne par rules badal dena... <br><br>
+                    Tum duniya ki pehli gamer ho Sally, jo cheating karke jeetne ke baad bhi itni masoomiyat se hasti thi. 😂 <br><br>
+                    Bhale hi ab hum utni baat nahi karte, par wo hansi aaj bhi mere dil mein hai.
                 </p>
-                <button class="next-btn" onclick="nextSlide(4)">A Song For Us</button>
+                <button class="next-btn" onclick="changeSlide(4)">Ek Aakhiri Baat</button>
             </div>
         </div>
+
+        <div class="slide" id="s4">
+            <h1 style="font-size: 14vw;">ALWAYS<br><span class="highlight">mikey.</span></h1>
+            <div class="cyber-card" style="border: 2px solid #e67e22; text-align: center;">
+                <p style="font-size: 1.2rem; text-align: center; line-height: 1.8;">
+                    Sally, waqt chahe kitna bhi badal jaye aur guftagu chahe kitni bhi kam ho jaye... <br><br>
+                    Tum mere dil ke hamesha sabse kareeb rahogi. <br><br>
+                    <span style="color: #e67e22; font-weight: 900; font-size: 1.5rem;">YOU ARE SPECIAL. ❤️</span>
+                </p>
+            </div>
+            <p style="margin-top: 40px; font-weight: 900; color: #e67e22; letter-spacing: 5px; font-size: 0.65rem; animation: welcomePulse 1s infinite alternate;">TAP SCREEN FOR MAGIC</p>
+        </div>
+
+    </div>
+
+    <script>
+        window.onload = () => {
+            setTimeout(() => {
+                const pre = document.getElementById('preloader');
+                pre.style.opacity = '0';
+                setTimeout(() => pre.style.display = 'none', 1000);
+            }, 3000);
+        };
+
+        function changeSlide(id) {
+            const current = document.querySelector('.slide.active');
+            const next = document.getElementById('s' + id);
+            if(next) {
+                current.style.opacity = '0';
+                current.style.transform = 'translateZ(500px)';
+                setTimeout(() => {
+                    current.classList.remove('active');
+                    current.style.display = 'none';
+                    next.style.display = 'flex';
+                    next.offsetHeight; 
+                    next.classList.add('active');
+                    next.style.opacity = '1';
+                    next.style.transform = 'translateZ(0)';
+                }, 400);
+            }
+        }
+
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function init() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            stars = []; for(let i=0; i<120; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, z: Math.random()*canvas.width});
+        }
+
+        function draw() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            stars.forEach(s => {
+                let scale = 300 / (300 + s.z);
+                let x = (s.x - canvas.width/2) * scale + canvas.width/2;
+                let y = (s.y - canvas.height/2) * scale + canvas.height/2;
+                ctx.fillStyle = `rgba(230, 126, 34, ${scale})`;
+                ctx.beginPath(); ctx.arc(x, y, 2.5 * scale * 5, 0, Math.PI*2); ctx.fill();
+                s.z -= 1.5; if(s.z < -300) s.z = canvas.width;
+            });
+            requestAnimationFrame(draw);
+        }
+
+        document.addEventListener('touchstart', (e) => {
+            const t = e.touches[0];
+            const items = ['❤️', '✨', '🎲', '🐒'];
+            for(let i=0; i<5; i++) {
+                const p = document.createElement('div');
+                p.className = 'pop'; p.innerHTML = items[Math.floor(Math.random()*items.length)];
+                p.style.left = t.clientX + 'px'; p.style.top = t.clientY + 'px';
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 2500);
+            }
+        });
+
+        init(); draw();
+        window.onresize = init;
+    </script>
+</body>
+</html>
