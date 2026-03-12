@@ -8,46 +8,58 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: #000; color: #fff; font-family: 'Outfit', sans-serif; overflow: hidden; height: 100vh; width: 100vw; perspective: 1500px; }
-        #canvas-bg { position: fixed; inset: 0; z-index: 1; }
-        #preloader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 1.2s ease; }
+        
+        #canvas-bg { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+        
+        /* --- Preloader --- */
+        #preloader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 1s ease-in-out; }
         .preloader-text { font-size: 10vw; letter-spacing: 12px; font-family: 'Bodoni Moda', serif; color: #e67e22; animation: neon 1.5s infinite alternate; text-transform: uppercase; }
         @keyframes neon { from { text-shadow: 0 0 10px #e67e22; opacity: 0.5; } to { text-shadow: 0 0 30px #e67e22, 0 0 50px #fff; opacity: 1; } }
 
+        /* --- Slide Engine (Fixed) --- */
         .slide-container { position: relative; width: 100%; height: 100%; z-index: 10; }
         .slide {
             position: absolute; inset: 0; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
-            padding: 20px; opacity: 0; visibility: hidden;
-            transform: translateZ(-1000px) rotateY(30deg);
-            transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+            padding: 20px; opacity: 0; visibility: hidden; pointer-events: none;
+            transform: translateZ(-800px) rotateY(30deg);
+            transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        .slide.active { opacity: 1; visibility: visible; transform: translateZ(0) rotateY(0); }
+        .slide.active { opacity: 1; visibility: visible; pointer-events: auto; transform: translateZ(0) rotateY(0); }
 
+        /* --- UI Elements --- */
         .cyber-card {
-            width: 92%; max-width: 450px; background: rgba(230, 126, 34, 0.04); 
+            width: 92%; max-width: 450px; background: rgba(230, 126, 34, 0.05); 
             padding: 30px; border-radius: 35px; border: 1px solid rgba(230, 126, 34, 0.3);
-            backdrop-filter: blur(25px); position: relative; overflow-y: auto; max-height: 75vh;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.8); text-align: left;
+            backdrop-filter: blur(20px); position: relative; overflow-y: auto; max-height: 75vh;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8); text-align: left;
         }
 
+        h1 { font-size: 15vw; font-weight: 900; line-height: 0.8; letter-spacing: -6px; margin-bottom: 15px; }
+        
         .next-btn {
-            margin-top: 25px; width: 100%; padding: 20px; background: transparent;
+            margin-top: 25px; width: 100%; padding: 20px; background: rgba(0,0,0,0.5);
             border: 1px solid #e67e22; color: #e67e22; font-weight: 900;
             border-radius: 100px; text-transform: uppercase; letter-spacing: 5px;
-            font-size: 0.75rem; cursor: pointer; transition: 0.4s;
+            font-size: 0.75rem; cursor: pointer; transition: 0.3s;
         }
-        .next-btn:active { background: #e67e22; color: #000; transform: scale(0.92); }
+        .next-btn:active { background: #e67e22; color: #000; transform: scale(0.95); }
+        
         .music-wrapper { width: 100%; border-radius: 20px; overflow: hidden; margin-top: 20px; border: 1px solid #e67e22; }
-        .pop { position: absolute; pointer-events: none; animation: popUp 2.8s forwards; font-size: 25px; z-index: 100; }
+        
+        /* --- Touch Particles --- */
+        .pop { position: absolute; pointer-events: none; animation: popUp 2.5s forwards; font-size: 25px; z-index: 100; }
         @keyframes popUp { 0% { transform: translateY(0) scale(0.5); opacity: 1; } 100% { transform: translateY(-90vh) scale(3) rotate(20deg); opacity: 0; } }
     </style>
 </head>
 <body>
 
     <div id="preloader"><div class="preloader-text">SALLY</div></div>
+    
     <canvas id="canvas-bg"></canvas>
 
     <div class="slide-container">
+        
         <div class="slide active" id="s1">
             <p style="letter-spacing: 15px; opacity: 0.4; font-size: 0.6rem; margin-bottom: 20px;">RECALLING MEMORIES</p>
             <h1>FOR YOU<br><span style="font-family:'Bodoni Moda'; font-style:italic; color:#e67e22;">sally.</span></h1>
@@ -56,11 +68,11 @@
 
         <div class="slide" id="s2">
             <div class="cyber-card">
-                <h2 style="font-family:'Bodoni Moda'; font-style:italic; color:#e67e22; font-size:2.8rem;">Purana Sukoon</h2>
-                <p style="font-size:1rem; line-height:1.7; margin-top:10px;">
+                <h2 style="font-family:'Bodoni Moda'; font-style:italic; color:#e67e22; font-size:2.8rem; margin-bottom: 15px;">Purana Sukoon</h2>
+                <p style="font-size:1rem; line-height:1.7; opacity: 0.9;">
                     Sally, yaad hai wo waqt jab Ranchi ki thandi hawaon mein hum ghanton baatein karte the? Wo sukoon sirf un hawaon mein nahi, tumhari baaton mein tha. Tum tab bhi mere liye garam chai jaisi thi—jo sukoon bhi deti thi aur meri neend bhi uda deti thi.
                 </p>
-                <div style="border-left:4px solid #e67e22; padding-left:15px; margin:20px 0; color:#ffb366; font-style:italic;">
+                <div style="border-left:4px solid #e67e22; padding-left:15px; margin:25px 0; color:#ffb366; font-style:italic; font-size: 1.1rem; line-height: 1.5;">
                     "Tab tum itraati bahut thi, Sally...<br>
                     Waise shakal se tab bhi tum 'Bandarni' hi lagti thi!" 🐒
                 </div>
@@ -71,4 +83,10 @@
         <div class="slide" id="s3">
             <h1 style="font-size: 12vw;">VOICE<br><span style="color:#e67e22; font-style:italic;">rooms.</span></h1>
             <div class="cyber-card" style="text-align: center;">
-                <p>Wo WePlay ka Jackaro 
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    Wo WePlay ka Jackaroo aur tumhara harne par rules badal dena... Wo sab raatein ab sirf ek khoobsurat yaad ban gayi hain. <br><br>
+                    Bhale hi ab hum utni baat nahi karte, par wo tumhari cheating wali hansi aaj bhi mere kaano mein gunjti hai.
+                </p>
+                <button class="next-btn" onclick="nextSlide(4)">A Song For Us</button>
+            </div>
+        </div>
