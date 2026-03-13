@@ -2,90 +2,173 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikey Metrics | Coming Soon</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Infinity | Ridhima ✨</title>
     <style>
-        :root {
-            --bg: #0a0a0c;
-            --primary: #007aff;
-            --accent: #5856d6;
-            --text: #ffffff;
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;900&family=Great+Vibes&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: #05050a; color: #fff; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; width: 100vw; }
+
+        .bg { position: fixed; inset: 0; background: radial-gradient(circle at center, #1a0033 0%, #05050a 100%); z-index: -1; }
+        .stars { position: fixed; inset: 0; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.2; z-index: -1; }
+
+        section { display: none; position: absolute; inset: 0; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px; width: 100%; }
+        .active { display: flex !important; animation: fadeIn 0.8s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 35px; width: 100%; max-width: 400px; }
+        
+        h1 { font-family: 'Cinzel', serif; font-size: 1.8rem; color: #ff0055; text-shadow: 0 0 15px #ff0055; }
+        .script { font-family: 'Great Vibes', cursive; font-size: 3.2rem; color: #fff; margin: 10px 0; }
+        
+        .btn { padding: 15px 35px; border-radius: 100px; border: none; background: #ff0055; color: #fff; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; box-shadow: 0 10px 25px rgba(255,0,85,0.4); transition: 0.2s; }
+
+        /* PASSWORD HIDDEN */
+        input[type="password"] { background: none; border: none; border-bottom: 3px solid #ff0055; color: #ff0055; font-size: 2rem; text-align: center; width: 200px; outline: none; font-family: 'Cinzel'; margin: 20px 0; letter-spacing: 5px; }
+
+        #timer { font-size: 4.5rem; font-family: 'Cinzel'; font-weight: 900; color: #ff0055; text-shadow: 0 0 25px #ff0055; }
+        
+        .name-tag { position: fixed; font-family: 'Cinzel'; font-size: 2rem; color: #ff0055; top: 50%; transform: translateY(-50%); transition: 1.2s ease-in-out; z-index: 100; opacity: 0; pointer-events: none; }
+        #arjun-tag { left: -200px; } #ridhima-tag { right: -200px; }
+        #final-tulip { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); font-size: 7rem; transition: 1s; z-index: 101; pointer-events: none; }
+
+        /* NO BUTTON PROPER FIX */
+        .btn-container { position: relative; width: 100%; height: 200px; margin-top: 30px; }
+        #n-btn { position: absolute; transition: all 0.3s ease; white-space: nowrap; font-size: 0.8rem; padding: 12px 25px; background: none; border: 1px solid #fff; }
+
+        .about-btn { position: fixed; top: 20px; right: 20px; font-size: 0.6rem; color: #ff0055; border: 1px solid #ff0055; padding: 6px 12px; border-radius: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="bg"></div>
+    <div class="stars"></div>
+
+    <section id="p1" class="active">
+        <h1 style="font-size: 0.8rem; opacity: 0.6; letter-spacing: 3px;">ENCRYPTED ACCESS</h1>
+        <input type="password" id="pass" placeholder="•••••">
+        <br><button class="btn" onclick="check()">Enter</button>
+    </section>
+
+    <section id="p2">
+        <p style="letter-spacing: 5px;">HELLO</p>
+        <h1 class="script">Ridhima</h1>
+    </section>
+
+    <section id="p3">
+        <h1 style="font-size: 1.2rem; letter-spacing: 5px;">WELCOME TO MY WORLD</h1>
+        <p class="script">Where you are the Queen.</p>
+    </section>
+
+    <section id="p4">
+        <div class="glass">
+            <h1 style="font-size: 1.1rem;">Ridhima...</h1>
+            <p style="margin: 15px 0; line-height: 1.6; font-size: 0.85rem; text-align: justify;">
+                Ranchi ki thand aur tumhari baatein... dono hi dil ko chhu jati hain. Main chahta hoon ki hum Ranchi ki har gali mein **Icecream** khayenge aur dher saare **Pink Tulips** tumhare liye launga. 🌷🍦
+            </p>
+            <button class="btn" onclick="go(5); startTimer();">Ek Surprise Hai</button>
+        </div>
+    </section>
+
+    <section id="p5">
+        <p style="letter-spacing: 3px; color: #ff0055;">WAITING FOR THE MOMENT...</p>
+        <div id="timer">60</div>
+    </section>
+
+    <section id="p6">
+        <div class="glass">
+            <h1 class="script" style="font-size: 2.8rem;">Beautiful You</h1>
+            <p style="margin: 15px 0; line-height: 1.6; font-size: 0.9rem; font-style: italic;">
+                "Tumhari smile Tagore Hill ki dhoop jaisi hai,<br>
+                Ranchi ki shaam se bhi pyari hai teri aankhein.<br>
+                Ab toh bina baat kiye din hi nahi kat-ta." 🌷
+            </p>
+            <button class="btn" onclick="go(7)">Aage Dekho</button>
+        </div>
+    </section>
+
+    <section id="p7">
+        <button class="about-btn" onclick="toggleAbout()">About Arjun</button>
+        <h1 class="script" style="font-size: 2.8rem;">Will You Be Mine?</h1>
+        <div class="btn-container">
+            <button id="y-btn" class="btn" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 200px; z-index: 10;" onclick="matchNames()">HAAN! 😍</button>
+            <button id="n-btn" class="btn" style="top: 100px; left: 50%; transform: translateX(-50%);" onmouseover="runAway()" onclick="runAway()">NAHI 😜</button>
+        </div>
+    </section>
+
+    <section id="p8">
+        <h1 class="script" style="font-size: 5rem;">Forever ❤️</h1>
+        <button class="btn" style="background: linear-gradient(45deg, #f09433, #bc1888);" onclick="window.open('https://instagram.com/your__ri0', '_blank')">Follow @your__ri0</button>
+    </section>
+
+    <div id="arjun-tag" class="name-tag">ARJUN</div>
+    <div id="ridhima-tag" class="name-tag">RIDHIMA</div>
+    <div id="final-tulip">🌷</div>
+
+    <div id="about-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:200; align-items:center; justify-content:center; padding:30px;">
+        <div class="glass">
+            <h1>MAIN HOON ARJUN</h1>
+            <p style="margin: 15px 0; font-size: 0.85rem;">Ranchi ka ladka, thoda mysterious par dil se saccha. Mere world mein hamesha Icecream aur Tulips tumhare liye rahenge! 🍦🌷</p>
+            <button class="btn" onclick="toggleAbout()">Wapas</button>
+        </div>
+    </div>
+
+    <script>
+        let count = 0;
+        function go(n) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.getElementById('p' + n).classList.add('active');
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
+        function check() {
+            // Password logic
+            if(document.getElementById('pass').value.toLowerCase() === 'arjun') {
+                go(2); setTimeout(() => go(3), 2000); setTimeout(() => go(4), 4000);
+            } else { alert("Arre! Password toh galat hai!"); }
         }
 
-        .container {
-            text-align: center;
-            perspective: 1000px; /* Essential for 3D depth */
+        function startTimer() {
+            let s = 60;
+            const t = document.getElementById('timer');
+            const intrvl = setInterval(() => {
+                s--; t.innerText = s;
+                if(s <= 0) { clearInterval(intrvl); go(6); }
+            }, 1000);
         }
 
-        /* 3D Typography Effect */
-        .logo-3d {
-            font-size: 5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-            position: relative;
-            display: inline-block;
-            transform: rotateX(10deg) rotateY(-10deg);
-            text-shadow: 
-                1px 1px 0px #333,
-                2px 2px 0px #333,
-                3px 3px 0px #222,
-                4px 4px 0px #222,
-                5px 5px 15px rgba(0,0,0,0.5);
-            animation: float 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes float {
-            from { transform: rotateX(10deg) rotateY(-15deg) translateY(0); }
-            to { transform: rotateX(15deg) rotateY(15deg) translateY(-20px); }
-        }
-
-        .sub-text {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.6);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-top: 20px;
-        }
-
-        /* Glassmorphism Badge */
-        .badge {
-            display: inline-block;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            font-size: 0.8rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Background Glow */
-        .glow {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--primary), transparent 70%);
-            filter: blur(80px);
-            opacity: 0.15;
-            z-index: -1;
-            top:
+        // NO BUTTON SMOOTH RUN LOGIC
+        function runAway() {
+            if(count < 4) {
+                const btn = document.getElementById('n-btn');
+                const container = document.querySelector('.btn-container');
+                const maxX = container.clientWidth - btn.clientWidth;
+                const maxY = container.clientHeight - btn.clientHeight;
                 
+                btn.style.left = Math.random() * maxX + 'px';
+                btn.style.top = Math.random() * maxY + 'px';
+                btn.style.transform = 'none'; // Remove centering
+                
+                btn.innerText = ["Pakad ke dikhao!", "Koshish karo!", "Piche dekho!", "Almost there!"][count];
+                count++;
+            } else {
+                document.getElementById('n-btn').innerText = "Theek hai, YES hi dabati hoon!";
+                document.getElementById('n-btn').onclick = () => matchNames();
+            }
+        }
+
+        function matchNames() {
+            const a = document.getElementById('arjun-tag'), r = document.getElementById('ridhima-tag'), t = document.getElementById('final-tulip');
+            a.style.opacity = '1'; r.style.opacity = '1';
+            setTimeout(() => { a.style.left = "calc(50% - 120px)"; r.style.right = "calc(50% - 130px)"; }, 100);
+            setTimeout(() => { a.style.opacity = '0'; r.style.opacity = '0'; t.style.transform = "translate(-50%, -50%) scale(1.5)"; }, 1500);
+            setTimeout(() => { go(8); t.style.display = 'none'; }, 3500);
+        }
+
+        function toggleAbout() {
+            const el = document.getElementById('about-overlay');
+            el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>
