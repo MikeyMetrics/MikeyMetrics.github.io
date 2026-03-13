@@ -2,222 +2,145 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikey Metrics | Coming Soon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Infinity | Ridhima ✨</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Outfit:wght@100;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@200;400;900&family=Great+Vibes&display=swap');
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; touch-action: none; }
+        body { background: #05050a; color: #fff; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; }
 
-        body {
-            background: #000;
-            color: #00ffcc; /* Neon Cyan Color */
-            font-family: 'Orbitron', sans-serif;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-        }
+        /* Premium Background */
+        .bg-gradient { position: fixed; inset: 0; background: radial-gradient(circle at 50% 50%, #20002c, #05050a); z-index: -1; }
+        .stars { position: fixed; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.3; }
 
-        /* MATRIX DATA RAIN BACKGROUND */
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            opacity: 0.3;
-        }
+        /* Animation Controller */
+        section { height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px; }
+        .active { display: flex; animation: smoothEntry 1.2s ease-out forwards; }
+        @keyframes smoothEntry { from { opacity: 0; transform: translateY(30px); filter: blur(10px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
 
-        /* 3D HOLOGRAPHIC CONTAINER */
-        .container {
-            text-align: center;
-            padding: 40px;
-            border: 2px solid rgba(0, 255, 204, 0.2);
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            transform: rotateX(10deg);
-            box-shadow: 0 0 50px rgba(0, 255, 204, 0.2), inset 0 0 20px rgba(0, 255, 204, 0.1);
-            max-width: 90%;
-        }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 35px; border-radius: 30px; width: 100%; max-width: 550px; }
 
-        /* GLITCH TITLE */
-        h1 {
-            font-size: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            margin-bottom: 10px;
-            color: #fff;
-            text-shadow: 2px 2px #ff0055, -2px -2px #00ffcc;
-            animation: glitch 1s infinite;
-        }
-
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-3px, 3px); }
-            40% { transform: translate(-3px, -3px); }
-            60% { transform: translate(3px, 3px); }
-            80% { transform: translate(3px, -3px); }
-            100% { transform: translate(0); }
-        }
-
-        .status {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 100;
-            letter-spacing: 5px;
-            margin-bottom: 30px;
-            opacity: 0.8;
-            color: #00ffcc;
-        }
-
-        /* COUNTDOWN TIMER */
-        .timer {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .box {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 10px;
-            min-width: 80px;
-            border: 1px solid rgba(0, 255, 204, 0.3);
-        }
-
-        .box span {
-            display: block;
-            font-size: 1.5rem;
-            font-weight: 900;
-        }
-
-        .box label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            opacity: 0.5;
-        }
-
-        /* LOADING BAR */
-        .progress-container {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            margin-top: 40px;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            width: 65%; /* Change this to update progress */
-            height: 100%;
-            background: #00ffcc;
-            box-shadow: 0 0 15px #00ffcc;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        footer {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            opacity: 0.4;
-            font-family: 'Outfit', sans-serif;
-        }
+        h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #ff0055; text-shadow: 0 0 15px #ff0055; letter-spacing: 5px; margin-bottom: 10px; }
+        .script { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #fff; margin-bottom: 20px; }
+        
+        .btn-luxe { padding: 16px 45px; border-radius: 50px; border: 1px solid #ff0055; background: none; color: #fff; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 4px; transition: 0.4s; margin-top: 20px; pointer-events: all; }
+        .btn-luxe:hover { background: #ff0055; box-shadow: 0 0 40px #ff0055; transform: scale(1.05); }
+        
+        #timer { font-size: 5.5rem; font-family: 'Cinzel'; color: #ff0055; font-weight: 900; text-shadow: 0 0 25px #ff0055; }
+        .insta-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border: none; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <canvas id="matrix"></canvas>
+    <div class="bg-gradient"></div>
+    <div class="stars"></div>
 
-    <div class="container">
-        <div class="status">SYSTEM INITIALIZING</div>
-        <h1>MIKEY METRICS</h1>
-        <p class="status" style="font-size: 0.7rem;">DEPLOYMENT IN PROGRESS</p>
+    <section id="s1" class="active">
+        <h1>WELCOME</h1>
+        <p style="letter-spacing: 8px; opacity: 0.6;">TO THE MAGIC</p>
+        <button class="btn-luxe" onclick="next(2)">Enter Her World</button>
+    </section>
 
-        <div class="timer">
-            <div class="box">
-                <span id="days">00</span>
-                <label>Days</label>
-            </div>
-            <div class="box">
-                <span id="hours">00</span>
-                <label>Hours</label>
-            </div>
-            <div class="box">
-                <span id="mins">00</span>
-                <label>Mins</label>
-            </div>
+    <section id="s2">
+        <h2 style="letter-spacing: 12px; font-weight: 200;">IT'S MY WORLD</h2>
+        <p class="script">And you are the heartbeat.</p>
+        <button class="btn-luxe" onclick="next(3)">Our Story</button>
+    </section>
+
+    <section id="s3">
+        <div class="glass">
+            <h2 style="font-family:'Cinzel'; color:#ff0055; margin-bottom: 20px;">FOR RIDHIMA</h2>
+            <p style="line-height: 1.8; font-weight: 300; font-size: 1rem; text-align: justify;">
+                Ranchi ki thandi hawaon mein bhi ek aisi garmi hai jo sirf tumhare hone se milti hai. 
+                Pata hai? Jab hum pehli baar online mile, mujhe laga tha bas ek aur player hai... 
+                par tumhari baaton ne bataya ki tum sabse alag ho. Tumhari saadgi, tumhara baat karne ka 
+                andaaz, aur wo pyari si "Ranchi wali" vibe—sab kuch mere dil ko chhoo gaya. 
+                Tum sirf ek dost nahi, tum mere gaming world ki sabse keemti 'Victory' ho. ❤️
+            </p>
+            <button class="btn-luxe" onclick="next(4)">The Secret</button>
         </div>
+    </section>
 
-        <div class="progress-container">
-            <div class="progress-bar"></div>
+    <section id="s4">
+        <h2 style="letter-spacing: 6px; margin-bottom: 25px;">KNOW THE CODE?</h2>
+        <input type="password" id="pass" maxlength="4" style="background:none; border:none; border-bottom:3px solid #ff0055; color:#fff; font-size:4rem; text-align:center; width:180px; outline:none; font-family:'Cinzel';" placeholder="••••">
+        <br><button class="btn-luxe" onclick="check()">Unlock</button>
+    </section>
+
+    <section id="s5">
+        <p style="letter-spacing: 5px; margin-bottom: 15px; color: #ff0055;">PREPARING FOR ETERNITY...</p>
+        <div id="timer">60:00</div>
+        <p style="opacity: 0.4; max-width: 350px; margin: 0 auto;">Har khubsurat lamhe ke liye intezaar karna padta hai. Ye 60 minute sirf ek countdown nahi, hamari nayi shuruat ki tayari hai.</p>
+    </section>
+
+    <section id="s6">
+        <p class="script">Ridhima,</p>
+        <h1 style="font-size: 3.5rem;">Will You Be Mine?</h1>
+        <p style="margin: 25px 0; font-weight: 300; opacity: 0.9;">
+            "Game toh hum roz hi khelte hain,<br>
+            Kyun na aaj ek nayi zindagi shuru karein?"
+        </p>
+        <button class="btn-luxe" onclick="next(7)">YES! ❤️</button>
+    </section>
+
+    <section id="s7">
+        <h1 class="script" style="font-size: 6.5rem; color:#ff0055;">Forever.</h1>
+        <div class="glass" style="border:none;">
+            <p style="font-style: italic; margin-bottom: 20px; font-size: 1.1rem;">
+                "Ranchi ke sitare gawah hain,<br>
+                Tumhare bina har jeet adhuri hai."
+            </p>
+            <p style="font-weight: 900; letter-spacing: 12px; font-size: 1.2rem;">ARJUN ❤️ RIDHIMA</p>
+            <button class="btn-luxe insta-btn" onclick="window.open('https://instagram.com/your__ri0', '_blank')">FOLLOW ME @your__ri0</button>
         </div>
-
-        <footer>© 2026 Mikey Metrics Terminal v1.0.4</footer>
-    </div>
+    </section>
 
     <script>
-        // MATRIX BACKGROUND EFFECT
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const characters = "0123456789ABCDEFHIJKLMNOPQRSTUVWXYZ@#$%&";
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-
-        for (let i = 0; i < columns; i++) {
-            drops[i] = 1;
+        // Smooth Navigation
+        function next(n) {
+            const current = document.querySelector('section.active');
+            if (current) current.classList.remove('active');
+            
+            const target = document.getElementById('s' + n);
+            target.style.display = 'flex'; // Ensure display is flex before adding active
+            setTimeout(() => target.classList.add('active'), 50);
         }
 
-        function drawMatrix() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = "#00ffcc";
-            ctx.font = fontSize + "px monospace";
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
+        // Password Logic
+        function check() {
+            const val = document.getElementById('pass').value;
+            if(val === "143") {
+                next(5);
+                startTimer();
+            } else {
+                alert("Galat Code! Sochiye wo kaunsa number hai jo pyaar jatata hai?");
             }
         }
 
-        setInterval(drawMatrix, 50);
-
-        // SIMPLE TIMER LOGIC (Change date here)
-        const targetDate = new Date();
-        targetDate.setDate(targetDate.getDate() + 10); // 10 days from now
-
-        function updateTimer() {
-            const now = new Date();
-            const diff = targetDate - now;
-
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
-            document.getElementById('days').innerText = d < 10 ? '0' + d : d;
-            document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
-            document.getElementById('mins').innerText = m < 10 ? '0' + m : m;
+        // 60 Minutes Timer (Real Time)
+        function startTimer() {
+            let time = 60 * 60; // 3600 seconds
+            const display = document.getElementById('timer');
+            
+            const countdown = setInterval(() => {
+                let mins = Math.floor(time / 60);
+                let secs = time % 60;
+                
+                display.innerHTML = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+                
+                if (time <= 0) {
+                    clearInterval(countdown);
+                    next(6);
+                }
+                time--;
+            }, 1000);
         }
 
-        setInterval(updateTimer, 1000);
+        // Fix for first load visibility
+        window.onload = () => {
+            document.getElementById('s1').classList.add('active');
+        };
     </script>
 </body>
 </html>
