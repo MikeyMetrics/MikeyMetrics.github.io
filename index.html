@@ -7,28 +7,55 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@200;400;900&family=Great+Vibes&display=swap');
 
+        /* Reset & Base */
         * { margin: 0; padding: 0; box-sizing: border-box; touch-action: none; }
-        body { background: #05050a; color: #fff; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; }
+        body { background: #05050a; color: #fff; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; width: 100vw; }
 
-        /* Premium Background */
-        .bg-gradient { position: fixed; inset: 0; background: radial-gradient(circle at 50% 50%, #20002c, #05050a); z-index: -1; }
-        .stars { position: fixed; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.3; }
+        /* Cinematic Background */
+        .bg-gradient { position: fixed; inset: 0; background: radial-gradient(circle at 50% 50%, #1a0033, #05050a); z-index: -1; }
+        .stars { position: fixed; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.2; z-index: -1; }
 
-        /* Animation Controller */
-        section { height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px; }
-        .active { display: flex; animation: smoothEntry 1.2s ease-out forwards; }
-        @keyframes smoothEntry { from { opacity: 0; transform: translateY(30px); filter: blur(10px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+        /* Full-Screen Sections */
+        section { 
+            position: absolute; 
+            inset: 0; 
+            display: none; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            padding: 25px; 
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        section.visible { display: flex; opacity: 1; }
 
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 35px; border-radius: 30px; width: 100%; max-width: 550px; }
+        /* UI Elements */
+        .glass { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(25px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 30px; 
+            border-radius: 40px 0 40px 0; 
+            width: 100%; 
+            max-width: 500px; 
+        }
 
-        h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #ff0055; text-shadow: 0 0 15px #ff0055; letter-spacing: 5px; margin-bottom: 10px; }
-        .script { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #fff; margin-bottom: 20px; }
+        h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #ff0055; text-shadow: 0 0 15px #ff0055; letter-spacing: 8px; margin-bottom: 15px; }
+        .script { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #fff; margin: 15px 0; }
         
-        .btn-luxe { padding: 16px 45px; border-radius: 50px; border: 1px solid #ff0055; background: none; color: #fff; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 4px; transition: 0.4s; margin-top: 20px; pointer-events: all; }
-        .btn-luxe:hover { background: #ff0055; box-shadow: 0 0 40px #ff0055; transform: scale(1.05); }
+        .btn-premium { 
+            padding: 18px 50px; border-radius: 100px; border: 1px solid #ff0055; background: none; color: #fff; 
+            font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 4px; transition: 0.3s; 
+            margin-top: 25px; pointer-events: all;
+        }
+        .btn-premium:hover { background: #ff0055; box-shadow: 0 0 40px #ff0055; transform: translateY(-3px); }
         
-        #timer { font-size: 5.5rem; font-family: 'Cinzel'; color: #ff0055; font-weight: 900; text-shadow: 0 0 25px #ff0055; }
+        #timer { font-size: 5.5rem; font-family: 'Cinzel'; font-weight: 900; color: #ff0055; text-shadow: 0 0 30px #ff0055; margin: 20px 0; }
+        
         .insta-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border: none; font-size: 0.8rem; }
+
+        .story-p { line-height: 1.8; font-weight: 200; font-size: 1rem; text-align: justify; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -36,93 +63,103 @@
     <div class="bg-gradient"></div>
     <div class="stars"></div>
 
-    <section id="s1" class="active">
-        <h1>WELCOME</h1>
-        <p style="letter-spacing: 8px; opacity: 0.6;">TO THE MAGIC</p>
-        <button class="btn-luxe" onclick="next(2)">Enter Her World</button>
+    <section id="s1" class="visible">
+        <h1 style="animation: pulse 2s infinite;">WELCOME</h1>
+        <p style="letter-spacing: 10px; opacity: 0.5;">PREPARING YOUR MAGIC</p>
     </section>
 
     <section id="s2">
-        <h2 style="letter-spacing: 12px; font-weight: 200;">IT'S MY WORLD</h2>
-        <p class="script">And you are the heartbeat.</p>
-        <button class="btn-luxe" onclick="next(3)">Our Story</button>
+        <h2 style="letter-spacing: 15px; font-weight: 100; opacity: 0.8;">IT'S MY WORLD</h2>
+        <p class="script">Where you are the only Queen.</p>
     </section>
 
     <section id="s3">
         <div class="glass">
-            <h2 style="font-family:'Cinzel'; color:#ff0055; margin-bottom: 20px;">FOR RIDHIMA</h2>
-            <p style="line-height: 1.8; font-weight: 300; font-size: 1rem; text-align: justify;">
-                Ranchi ki thandi hawaon mein bhi ek aisi garmi hai jo sirf tumhare hone se milti hai. 
-                Pata hai? Jab hum pehli baar online mile, mujhe laga tha bas ek aur player hai... 
-                par tumhari baaton ne bataya ki tum sabse alag ho. Tumhari saadgi, tumhara baat karne ka 
-                andaaz, aur wo pyari si "Ranchi wali" vibe—sab kuch mere dil ko chhoo gaya. 
-                Tum sirf ek dost nahi, tum mere gaming world ki sabse keemti 'Victory' ho. ❤️
+            <h2 style="font-family:'Cinzel'; color:#ff0055; margin-bottom: 20px;">MY RIDHIMA...</h2>
+            <p class="story-p">
+                Ranchi ki thand aur shehar ki ye khamoshi tab tak adhuri lagti hai jab tak tumhari baatein na sun loon. 
+                Pata hai Ridhima? Jab hum gaming platform par pehli baar mile the, mujhe nahi pata tha ki ek online 
+                game mujhe mere zindagi ki sabse badi "Victory" dila dega. 
             </p>
-            <button class="btn-luxe" onclick="next(4)">The Secret</button>
+            <p class="story-p">
+                Tumhari saadgi aur wo Ranchi wali masoomiyat mere dil ko ek pal mein chhoo gayi. 
+                Tumhari tareef mein bas itna hi kahunga ki sitare toh bohot hain aasmaan mein, 
+                par Ranchi ki in galiyon mein mere liye chandni sirf tum ho. ❤️
+            </p>
+            <button class="btn-premium" onclick="showPage(4)">What's Secret?</button>
         </div>
     </section>
 
     <section id="s4">
-        <h2 style="letter-spacing: 6px; margin-bottom: 25px;">KNOW THE CODE?</h2>
-        <input type="password" id="pass" maxlength="4" style="background:none; border:none; border-bottom:3px solid #ff0055; color:#fff; font-size:4rem; text-align:center; width:180px; outline:none; font-family:'Cinzel';" placeholder="••••">
-        <br><button class="btn-luxe" onclick="check()">Unlock</button>
+        <h2 style="letter-spacing: 5px; margin-bottom: 30px;">KNOW THE CODE?</h2>
+        <input type="password" id="passInput" maxlength="4" style="background:none; border:none; border-bottom:3px solid #ff0055; color:#fff; font-size:4.5rem; text-align:center; width:200px; outline:none; font-family:'Cinzel';" placeholder="••••">
+        <br>
+        <button class="btn-premium" onclick="checkPassword()">Unlock Destiny</button>
     </section>
 
     <section id="s5">
-        <p style="letter-spacing: 5px; margin-bottom: 15px; color: #ff0055;">PREPARING FOR ETERNITY...</p>
+        <p style="letter-spacing: 5px; color: #ff0055;">SYNCING OUR HEARTS...</p>
         <div id="timer">60:00</div>
-        <p style="opacity: 0.4; max-width: 350px; margin: 0 auto;">Har khubsurat lamhe ke liye intezaar karna padta hai. Ye 60 minute sirf ek countdown nahi, hamari nayi shuruat ki tayari hai.</p>
+        <p style="opacity: 0.4; max-width: 300px; margin: 0 auto;">Har khubsurat kahani thoda waqt leti hai. Tab tak Ranchi ki thand aur hamari yaadon ko mehsoos karo.</p>
     </section>
 
     <section id="s6">
-        <p class="script">Ridhima,</p>
-        <h1 style="font-size: 3.5rem;">Will You Be Mine?</h1>
-        <p style="margin: 25px 0; font-weight: 300; opacity: 0.9;">
-            "Game toh hum roz hi khelte hain,<br>
-            Kyun na aaj ek nayi zindagi shuru karein?"
-        </p>
-        <button class="btn-luxe" onclick="next(7)">YES! ❤️</button>
+        <p class="script">Dearest Ridhima,</p>
+        <h1 style="font-size: 3.5rem; text-transform: none;">Will You Be Mine?</h1>
+        <p style="margin: 20px 0; font-weight: 200; letter-spacing: 2px;">"Game mein toh jeet gaye hum dono,<br>Kya zindagi bhar ka sath dogi?"</p>
+        <button class="btn-premium" onclick="showPage(7)">YES! ❤️</button>
     </section>
 
     <section id="s7">
-        <h1 class="script" style="font-size: 6.5rem; color:#ff0055;">Forever.</h1>
+        <h1 class="script" style="font-size: 7rem; color:#ff0055;">Forever.</h1>
         <div class="glass" style="border:none;">
-            <p style="font-style: italic; margin-bottom: 20px; font-size: 1.1rem;">
-                "Ranchi ke sitare gawah hain,<br>
-                Tumhare bina har jeet adhuri hai."
+            <p style="font-style: italic; font-size: 1.1rem; margin-bottom: 15px;">
+                "Ranchi ke mausam ki tarah,<br>Tumhara sath bhi suhana hai."
             </p>
             <p style="font-weight: 900; letter-spacing: 12px; font-size: 1.2rem;">ARJUN ❤️ RIDHIMA</p>
-            <button class="btn-luxe insta-btn" onclick="window.open('https://instagram.com/your__ri0', '_blank')">FOLLOW ME @your__ri0</button>
+            <button class="btn-premium insta-btn" onclick="window.open('https://instagram.com/your__ri0', '_blank')">Follow My World @your__ri0</button>
         </div>
     </section>
 
     <script>
-        // Smooth Navigation
-        function next(n) {
-            const current = document.querySelector('section.active');
-            if (current) current.classList.remove('active');
-            
+        // Page Navigation Controller
+        function showPage(n) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(s => {
+                s.classList.remove('visible');
+                setTimeout(() => { s.style.display = 'none'; }, 500);
+            });
+
+            // Show target section
             const target = document.getElementById('s' + n);
-            target.style.display = 'flex'; // Ensure display is flex before adding active
-            setTimeout(() => target.classList.add('active'), 50);
+            setTimeout(() => {
+                target.style.display = 'flex';
+                setTimeout(() => target.classList.add('visible'), 50);
+            }, 600);
         }
 
-        // Password Logic
-        function check() {
-            const val = document.getElementById('pass').value;
-            if(val === "143") {
-                next(5);
-                startTimer();
+        // Automatic Intro Sequence
+        window.onload = () => {
+            setTimeout(() => showPage(2), 3500); // Welcome for 3.5s
+            setTimeout(() => showPage(3), 7000); // My World for 3.5s
+        };
+
+        // Password System
+        function checkPassword() {
+            const pw = document.getElementById('passInput').value;
+            if(pw === "143") {
+                showPage(5);
+                startGlobalTimer();
             } else {
-                alert("Galat Code! Sochiye wo kaunsa number hai jo pyaar jatata hai?");
+                alert("Galat Password! (Hint: Ye wo ehsas hai jo hum dil se jatate hain)");
             }
         }
 
-        // 60 Minutes Timer (Real Time)
-        function startTimer() {
-            let time = 60 * 60; // 3600 seconds
+        // Real-Time 60 Minutes Countdown
+        function startGlobalTimer() {
+            let time = 60 * 60; // 3600 Seconds
             const display = document.getElementById('timer');
-            
+
             const countdown = setInterval(() => {
                 let mins = Math.floor(time / 60);
                 let secs = time % 60;
@@ -131,16 +168,16 @@
                 
                 if (time <= 0) {
                     clearInterval(countdown);
-                    next(6);
+                    showPage(6);
                 }
                 time--;
-            }, 1000);
+            }, 1000); // 1 Real Second
         }
 
-        // Fix for first load visibility
-        window.onload = () => {
-            document.getElementById('s1').classList.add('active');
-        };
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
     </script>
 </body>
 </html>
