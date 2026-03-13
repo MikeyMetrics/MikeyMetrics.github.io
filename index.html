@@ -7,147 +7,175 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;900&family=Great+Vibes&display=swap');
 
+        /* Full Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: #05050a; color: #fff; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; width: 100vw; }
 
-        .bg { position: fixed; inset: 0; background: radial-gradient(circle at center, #1a0033 0%, #05050a 100%); z-index: -1; }
-        .stars { position: fixed; inset: 0; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.3; z-index: -1; }
+        /* Solid BG */
+        .bg-fixed { position: fixed; inset: 0; background: radial-gradient(circle at center, #1a0033 0%, #05050a 100%); z-index: -1; }
+        .stars-overlay { position: fixed; inset: 0; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.3; z-index: -1; }
 
+        /* Page Layering */
         .page { 
-            display: none; position: absolute; inset: 0; 
-            flex-direction: column; align-items: center; justify-content: center; 
-            text-align: center; padding: 25px; background: rgba(5, 5, 10, 0.9);
+            display: none; 
+            position: absolute; 
+            inset: 0; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            padding: 30px; 
+            background: rgba(5, 5, 10, 0.95);
         }
-        .active { display: flex !important; animation: fadeIn 0.8s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        .active { display: flex !important; animation: fadeInPage 0.6s ease-in-out; }
+        @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
 
-        .glass { 
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px; 
-            border-radius: 30px; width: 100%; max-width: 500px; 
+        /* Glass Container */
+        .glass-box { 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 35px; 
+            border-radius: 25px; 
+            width: 100%; 
+            max-width: 450px; 
         }
 
-        h1 { font-family: 'Cinzel', serif; font-size: 2rem; color: #ff0055; text-shadow: 0 0 15px #ff0055; letter-spacing: 5px; }
-        .script { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #fff; margin: 15px 0; }
+        h1 { font-family: 'Cinzel', serif; font-size: 1.8rem; color: #ff0055; text-shadow: 0 0 10px #ff0055; letter-spacing: 4px; }
+        .script-font { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #fff; margin: 10px 0; }
         
-        .btn { 
-            padding: 16px 40px; border-radius: 50px; border: none; background: #ff0055; color: #fff; 
-            font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; margin-top: 20px;
+        .btn-action { 
+            padding: 18px 45px; border-radius: 50px; border: none; background: #ff0055; color: #fff; 
+            font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; margin-top: 25px;
+            box-shadow: 0 5px 20px rgba(255, 0, 85, 0.4);
         }
         
         input { 
-            background: none; border: none; border-bottom: 3px solid #ff0055; color: #fff; 
-            font-size: 4rem; text-align: center; width: 200px; outline: none; font-family: 'Cinzel'; margin: 20px 0;
+            background: none; border: none; border-bottom: 2px solid #ff0055; color: #fff; 
+            font-size: 3.5rem; text-align: center; width: 160px; outline: none; font-family: 'Cinzel'; margin: 25px 0;
         }
 
-        #timer { font-size: 5.5rem; font-family: 'Cinzel'; font-weight: 900; color: #ff0055; text-shadow: 0 0 25px #ff0055; }
-        #shayari-box { font-style: italic; color: #ff0055; min-height: 60px; margin-top: 20px; font-size: 1.1rem; opacity: 0.8; transition: 0.5s; }
-        .insta { background: linear-gradient(45deg, #f09433, #bc1888); border: none; }
+        #timer-text { font-size: 5rem; font-family: 'Cinzel'; font-weight: 900; color: #ff0055; text-shadow: 0 0 20px #ff0055; }
+        #shayari-display { font-style: italic; color: #ff0055; min-height: 50px; margin-top: 15px; font-size: 1rem; transition: 0.5s; padding: 0 10px; }
+        .insta-luxe { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); border: none; }
     </style>
 </head>
 <body>
 
-    <div class="bg"></div>
-    <div class="stars"></div>
+    <div class="bg-fixed"></div>
+    <div class="stars-overlay"></div>
 
     <div id="p1" class="page active">
         <h1>WELCOME</h1>
-        <p style="letter-spacing: 5px; opacity: 0.5;">PREPARING YOUR WORLD...</p>
+        <p style="letter-spacing: 8px; opacity: 0.5; font-size: 0.7rem; margin-top: 10px;">PREPARING YOUR MAGIC...</p>
     </div>
 
     <div id="p2" class="page">
-        <h2 style="letter-spacing: 10px; font-weight: 100;">IT'S MY WORLD</h2>
-        <p class="script">Where Ridhima is the Star.</p>
+        <h2 style="letter-spacing: 12px; font-weight: 100; opacity: 0.7;">IT'S MY WORLD</h2>
+        <p class="script-font">Where you're the Queen.</p>
     </div>
 
     <div id="p3" class="page">
-        <div class="glass">
-            <h1>DEAR RIDHIMA...</h1>
-            <p style="line-height: 1.6; font-size: 0.95rem; text-align: justify; margin: 15px 0; font-weight: 300;">
-                Ranchi ki is thand mein har koi sukoon dhoondta hai, aur mera sukoon tumhari baaton mein hai. 
-                Pata hai? Hamara online milna koi ittefaq nahi tha, wo destiny thi. Gaming ki chat se lekar 
-                ek dusre ko itna samajhne tak ka safar bahut pyaara hai. Tumhari tareef mein bas itna kahunga... 
-                ki Ranchi ki har subah aur har shaam tumhare bina adhuri si lagti hai. ❤️
+        <div class="glass-box">
+            <h1 style="font-size: 1.4rem;">TO MY RIDHIMA...</h1>
+            <p style="line-height: 1.7; font-size: 0.9rem; text-align: justify; margin: 15px 0; font-weight: 300;">
+                Ranchi ki thand mein sukoon dhoondna mushkil hai, par tumse baat karke wo bhi mil jata hai. 
+                Hum online gaming par mile, par wo dosti kab mere liye itni special ban gayi, pata hi nahi chala. 
+                Tumhari saadgi aur wo Ranchi wali masoomiyat... sab kuch ek dum perfect hai. 
+                Meri zindagi ki sabse badi 'Victory' bas tum hi ho. ❤️
             </p>
-            <button class="btn" onclick="go(4)">Continue</button>
+            <button class="btn-action" onclick="navigateTo(4)">Read More</button>
         </div>
     </div>
 
     <div id="p4" class="page">
         <h2>UNLOCK THE SECRET</h2>
-        <input type="password" id="pw" maxlength="4" placeholder="••••">
-        <br><button class="btn" onclick="check()">Enter</button>
+        <input type="password" id="secretCode" maxlength="4" placeholder="••••">
+        <br><button class="btn-action" onclick="validate()">Enter</button>
     </div>
 
     <div id="p5" class="page">
-        <p style="letter-spacing: 5px; color: #ff0055;">SYNCING OUR HEARTS...</p>
-        <div id="timer">60:00</div>
-        <div id="shayari-box">Ranchi ki thand aur tera sath...</div>
-        <p style="opacity: 0.4; font-size: 0.7rem; margin-top: 20px;">Keep this screen open...</p>
+        <p style="letter-spacing: 5px; color: #ff0055; font-size: 0.8rem;">SYNCING OUR HEARTS...</p>
+        <div id="timer-text">05:00</div>
+        <div id="shayari-display">Wait for the magic...</div>
     </div>
 
     <div id="p6" class="page">
-        <p class="script">Ridhima,</p>
-        <h1 style="font-size: 3.5rem;">Will You Be Mine?</h1>
-        <button class="btn" onclick="go(7)">YES! ❤️</button>
+        <p class="script-font">Ridhima,</p>
+        <h1 style="font-size: 3rem;">Will You Be Mine?</h1>
+        <p style="margin: 15px 0; font-weight: 300; opacity: 0.8;">"Game mein toh jeet hi gaye hum,<br>zindagi bhar ka sath dogi?"</p>
+        <button class="btn-action" onclick="navigateTo(7)">YES! ❤️</button>
     </div>
 
     <div id="p7" class="page">
-        <h1 class="script" style="font-size: 6rem;">Forever.</h1>
-        <p style="letter-spacing: 10px; font-weight: 900;">ARJUN ❤️ RIDHIMA</p>
-        <button class="btn insta" onclick="window.open('https://instagram.com/your__ri0', '_blank')">Follow Me @your__ri0</button>
+        <h1 class="script-font" style="font-size: 5.5rem; color:#ff0055;">Forever.</h1>
+        <p style="letter-spacing: 10px; font-weight: 900; font-size: 1rem;">ARJUN ❤️ RIDHIMA</p>
+        <button class="btn-action insta-luxe" onclick="window.open('https://instagram.com/your__ri0', '_blank')">Connect @your__ri0</button>
     </div>
 
     <script>
-        function go(n) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        // Solid Navigation Logic
+        function navigateTo(n) {
+            const allPages = document.querySelectorAll('.page');
+            allPages.forEach(p => p.classList.remove('active'));
             document.getElementById('p' + n).classList.add('active');
         }
 
+        // Auto Sequence for Intro
         window.onload = () => {
-            setTimeout(() => go(2), 3000);
-            setTimeout(() => go(3), 6000);
+            setTimeout(() => navigateTo(2), 2500);
+            setTimeout(() => navigateTo(3), 5000);
         };
 
-        function check() {
-            if(document.getElementById('pw').value === "143") {
-                go(5);
-                startTimer();
-                startShayari();
-            } else { alert("Try 143! ❤️"); }
+        // Password Validation
+        function validate() {
+            const code = document.getElementById('secretCode').value;
+            if(code === "143") {
+                navigateTo(5);
+                runCountdown();
+                runShayari();
+            } else { 
+                alert("Galat Password! (Hint: 1.. 4.. 3..)"); 
+            }
         }
 
-        function startTimer() {
-            let s = 3600;
-            const t = document.getElementById('timer');
-            setInterval(() => {
-                let m = Math.floor(s / 60);
-                let sc = s % 60;
-                t.innerText = `${m}:${sc < 10 ? '0' : ''}${sc}`;
-                if (s-- <= 0) go(6);
+        // 5 Minutes Real Countdown
+        function runCountdown() {
+            let timeLeft = 5 * 60; // 300 seconds
+            const el = document.getElementById('timer-text');
+            const clock = setInterval(() => {
+                let m = Math.floor(timeLeft / 60);
+                let s = timeLeft % 60;
+                el.innerText = `0${m}:${s < 10 ? '0' : ''}${s}`;
+                if (timeLeft <= 0) {
+                    clearInterval(clock);
+                    navigateTo(6);
+                }
+                timeLeft--;
             }, 1000);
         }
 
-        function startShayari() {
+        // Rotating Shayari Logic
+        function runShayari() {
             const lines = [
-                "Ranchi ki thand aur tera sath, bas yahi hai meri khwahish.",
-                "Game toh sirf bahana hai, mujhe tera dil jitna hai.",
+                "Ranchi ki thand aur tera sath... ek sukoon hai.",
+                "Game toh bahana tha, tera sath hi pana tha.",
                 "Tagore Hill se sundar tumhari muskurahat hai.",
                 "Har jeet adhuri hai, agar tum sath nahi ho.",
                 "WePlay par mile the hum, ab dil mein bas gaye ho.",
-                "Ridhima, tum meri zindagi ki sabse badi Victory ho.",
-                "Suna hai Ranchi ke log pyaare hote hain, tumne sabit kar diya."
+                "Ridhima, tum meri sabse keemti 'Victory' ho.",
+                "Suna hai Ranchi ke log pyaare hote hain, tumne sabit kiya."
             ];
-            let i = 0;
+            let idx = 0;
             setInterval(() => {
-                const box = document.getElementById('shayari-box');
+                const box = document.getElementById('shayari-display');
                 box.style.opacity = 0;
                 setTimeout(() => {
-                    box.innerText = lines[i];
-                    box.style.opacity = 0.8;
-                    i = (i + 1) % lines.length;
+                    box.innerText = lines[idx];
+                    box.style.opacity = 1;
+                    idx = (idx + 1) % lines.length;
                 }, 500);
-            }, 8000);
+            }, 6000); // Changes every 6 seconds
         }
     </script>
 </body>
