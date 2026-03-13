@@ -5,178 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Infinity | Ridhima ✨</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@200;400;900&family=Great+Vibes&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;900&family=Great+Vibes&display=swap');
 
-        /* Reset & Base */
-        * { margin: 0; padding: 0; box-sizing: border-box; touch-action: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: #05050a; color: #fff; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; width: 100vw; }
 
-        /* Cinematic Background */
-        .bg-gradient { position: fixed; inset: 0; background: radial-gradient(circle at 50% 50%, #1a0033, #05050a); z-index: -1; }
-        .stars { position: fixed; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.2; z-index: -1; }
+        .bg { position: fixed; inset: 0; background: radial-gradient(circle at center, #1a0033 0%, #05050a 100%); z-index: -1; }
+        .stars { position: fixed; inset: 0; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.3; z-index: -1; }
 
-        /* Full-Screen Sections */
-        section { 
-            position: absolute; 
-            inset: 0; 
-            display: none; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
-            padding: 25px; 
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
+        .page { 
+            display: none; position: absolute; inset: 0; 
+            flex-direction: column; align-items: center; justify-content: center; 
+            text-align: center; padding: 25px; background: rgba(5, 5, 10, 0.9);
         }
-        section.visible { display: flex; opacity: 1; }
+        .active { display: flex !important; animation: fadeIn 0.8s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
 
-        /* UI Elements */
         .glass { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(25px); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            padding: 30px; 
-            border-radius: 40px 0 40px 0; 
-            width: 100%; 
-            max-width: 500px; 
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px; 
+            border-radius: 30px; width: 100%; max-width: 500px; 
         }
 
-        h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #ff0055; text-shadow: 0 0 15px #ff0055; letter-spacing: 8px; margin-bottom: 15px; }
+        h1 { font-family: 'Cinzel', serif; font-size: 2rem; color: #ff0055; text-shadow: 0 0 15px #ff0055; letter-spacing: 5px; }
         .script { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #fff; margin: 15px 0; }
         
-        .btn-premium { 
-            padding: 18px 50px; border-radius: 100px; border: 1px solid #ff0055; background: none; color: #fff; 
-            font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 4px; transition: 0.3s; 
-            margin-top: 25px; pointer-events: all;
+        .btn { 
+            padding: 16px 40px; border-radius: 50px; border: none; background: #ff0055; color: #fff; 
+            font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; margin-top: 20px;
         }
-        .btn-premium:hover { background: #ff0055; box-shadow: 0 0 40px #ff0055; transform: translateY(-3px); }
         
-        #timer { font-size: 5.5rem; font-family: 'Cinzel'; font-weight: 900; color: #ff0055; text-shadow: 0 0 30px #ff0055; margin: 20px 0; }
-        
-        .insta-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border: none; font-size: 0.8rem; }
+        input { 
+            background: none; border: none; border-bottom: 3px solid #ff0055; color: #fff; 
+            font-size: 4rem; text-align: center; width: 200px; outline: none; font-family: 'Cinzel'; margin: 20px 0;
+        }
 
-        .story-p { line-height: 1.8; font-weight: 200; font-size: 1rem; text-align: justify; margin-bottom: 10px; }
+        #timer { font-size: 5.5rem; font-family: 'Cinzel'; font-weight: 900; color: #ff0055; text-shadow: 0 0 25px #ff0055; }
+        #shayari-box { font-style: italic; color: #ff0055; min-height: 60px; margin-top: 20px; font-size: 1.1rem; opacity: 0.8; transition: 0.5s; }
+        .insta { background: linear-gradient(45deg, #f09433, #bc1888); border: none; }
     </style>
 </head>
 <body>
 
-    <div class="bg-gradient"></div>
+    <div class="bg"></div>
     <div class="stars"></div>
 
-    <section id="s1" class="visible">
-        <h1 style="animation: pulse 2s infinite;">WELCOME</h1>
-        <p style="letter-spacing: 10px; opacity: 0.5;">PREPARING YOUR MAGIC</p>
-    </section>
+    <div id="p1" class="page active">
+        <h1>WELCOME</h1>
+        <p style="letter-spacing: 5px; opacity: 0.5;">PREPARING YOUR WORLD...</p>
+    </div>
 
-    <section id="s2">
-        <h2 style="letter-spacing: 15px; font-weight: 100; opacity: 0.8;">IT'S MY WORLD</h2>
-        <p class="script">Where you are the only Queen.</p>
-    </section>
+    <div id="p2" class="page">
+        <h2 style="letter-spacing: 10px; font-weight: 100;">IT'S MY WORLD</h2>
+        <p class="script">Where Ridhima is the Star.</p>
+    </div>
 
-    <section id="s3">
+    <div id="p3" class="page">
         <div class="glass">
-            <h2 style="font-family:'Cinzel'; color:#ff0055; margin-bottom: 20px;">MY RIDHIMA...</h2>
-            <p class="story-p">
-                Ranchi ki thand aur shehar ki ye khamoshi tab tak adhuri lagti hai jab tak tumhari baatein na sun loon. 
-                Pata hai Ridhima? Jab hum gaming platform par pehli baar mile the, mujhe nahi pata tha ki ek online 
-                game mujhe mere zindagi ki sabse badi "Victory" dila dega. 
+            <h1>DEAR RIDHIMA...</h1>
+            <p style="line-height: 1.6; font-size: 0.95rem; text-align: justify; margin: 15px 0; font-weight: 300;">
+                Ranchi ki is thand mein har koi sukoon dhoondta hai, aur mera sukoon tumhari baaton mein hai. 
+                Pata hai? Hamara online milna koi ittefaq nahi tha, wo destiny thi. Gaming ki chat se lekar 
+                ek dusre ko itna samajhne tak ka safar bahut pyaara hai. Tumhari tareef mein bas itna kahunga... 
+                ki Ranchi ki har subah aur har shaam tumhare bina adhuri si lagti hai. ❤️
             </p>
-            <p class="story-p">
-                Tumhari saadgi aur wo Ranchi wali masoomiyat mere dil ko ek pal mein chhoo gayi. 
-                Tumhari tareef mein bas itna hi kahunga ki sitare toh bohot hain aasmaan mein, 
-                par Ranchi ki in galiyon mein mere liye chandni sirf tum ho. ❤️
-            </p>
-            <button class="btn-premium" onclick="showPage(4)">What's Secret?</button>
+            <button class="btn" onclick="go(4)">Continue</button>
         </div>
-    </section>
+    </div>
 
-    <section id="s4">
-        <h2 style="letter-spacing: 5px; margin-bottom: 30px;">KNOW THE CODE?</h2>
-        <input type="password" id="passInput" maxlength="4" style="background:none; border:none; border-bottom:3px solid #ff0055; color:#fff; font-size:4.5rem; text-align:center; width:200px; outline:none; font-family:'Cinzel';" placeholder="••••">
-        <br>
-        <button class="btn-premium" onclick="checkPassword()">Unlock Destiny</button>
-    </section>
+    <div id="p4" class="page">
+        <h2>UNLOCK THE SECRET</h2>
+        <input type="password" id="pw" maxlength="4" placeholder="••••">
+        <br><button class="btn" onclick="check()">Enter</button>
+    </div>
 
-    <section id="s5">
+    <div id="p5" class="page">
         <p style="letter-spacing: 5px; color: #ff0055;">SYNCING OUR HEARTS...</p>
         <div id="timer">60:00</div>
-        <p style="opacity: 0.4; max-width: 300px; margin: 0 auto;">Har khubsurat kahani thoda waqt leti hai. Tab tak Ranchi ki thand aur hamari yaadon ko mehsoos karo.</p>
-    </section>
+        <div id="shayari-box">Ranchi ki thand aur tera sath...</div>
+        <p style="opacity: 0.4; font-size: 0.7rem; margin-top: 20px;">Keep this screen open...</p>
+    </div>
 
-    <section id="s6">
-        <p class="script">Dearest Ridhima,</p>
-        <h1 style="font-size: 3.5rem; text-transform: none;">Will You Be Mine?</h1>
-        <p style="margin: 20px 0; font-weight: 200; letter-spacing: 2px;">"Game mein toh jeet gaye hum dono,<br>Kya zindagi bhar ka sath dogi?"</p>
-        <button class="btn-premium" onclick="showPage(7)">YES! ❤️</button>
-    </section>
+    <div id="p6" class="page">
+        <p class="script">Ridhima,</p>
+        <h1 style="font-size: 3.5rem;">Will You Be Mine?</h1>
+        <button class="btn" onclick="go(7)">YES! ❤️</button>
+    </div>
 
-    <section id="s7">
-        <h1 class="script" style="font-size: 7rem; color:#ff0055;">Forever.</h1>
-        <div class="glass" style="border:none;">
-            <p style="font-style: italic; font-size: 1.1rem; margin-bottom: 15px;">
-                "Ranchi ke mausam ki tarah,<br>Tumhara sath bhi suhana hai."
-            </p>
-            <p style="font-weight: 900; letter-spacing: 12px; font-size: 1.2rem;">ARJUN ❤️ RIDHIMA</p>
-            <button class="btn-premium insta-btn" onclick="window.open('https://instagram.com/your__ri0', '_blank')">Follow My World @your__ri0</button>
-        </div>
-    </section>
+    <div id="p7" class="page">
+        <h1 class="script" style="font-size: 6rem;">Forever.</h1>
+        <p style="letter-spacing: 10px; font-weight: 900;">ARJUN ❤️ RIDHIMA</p>
+        <button class="btn insta" onclick="window.open('https://instagram.com/your__ri0', '_blank')">Follow Me @your__ri0</button>
+    </div>
 
     <script>
-        // Page Navigation Controller
-        function showPage(n) {
-            // Hide all sections
-            document.querySelectorAll('section').forEach(s => {
-                s.classList.remove('visible');
-                setTimeout(() => { s.style.display = 'none'; }, 500);
-            });
-
-            // Show target section
-            const target = document.getElementById('s' + n);
-            setTimeout(() => {
-                target.style.display = 'flex';
-                setTimeout(() => target.classList.add('visible'), 50);
-            }, 600);
+        function go(n) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('p' + n).classList.add('active');
         }
 
-        // Automatic Intro Sequence
         window.onload = () => {
-            setTimeout(() => showPage(2), 3500); // Welcome for 3.5s
-            setTimeout(() => showPage(3), 7000); // My World for 3.5s
+            setTimeout(() => go(2), 3000);
+            setTimeout(() => go(3), 6000);
         };
 
-        // Password System
-        function checkPassword() {
-            const pw = document.getElementById('passInput').value;
-            if(pw === "143") {
-                showPage(5);
-                startGlobalTimer();
-            } else {
-                alert("Galat Password! (Hint: Ye wo ehsas hai jo hum dil se jatate hain)");
-            }
+        function check() {
+            if(document.getElementById('pw').value === "143") {
+                go(5);
+                startTimer();
+                startShayari();
+            } else { alert("Try 143! ❤️"); }
         }
 
-        // Real-Time 60 Minutes Countdown
-        function startGlobalTimer() {
-            let time = 60 * 60; // 3600 Seconds
-            const display = document.getElementById('timer');
-
-            const countdown = setInterval(() => {
-                let mins = Math.floor(time / 60);
-                let secs = time % 60;
-                
-                display.innerHTML = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-                
-                if (time <= 0) {
-                    clearInterval(countdown);
-                    showPage(6);
-                }
-                time--;
-            }, 1000); // 1 Real Second
+        function startTimer() {
+            let s = 3600;
+            const t = document.getElementById('timer');
+            setInterval(() => {
+                let m = Math.floor(s / 60);
+                let sc = s % 60;
+                t.innerText = `${m}:${sc < 10 ? '0' : ''}${sc}`;
+                if (s-- <= 0) go(6);
+            }, 1000);
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
+        function startShayari() {
+            const lines = [
+                "Ranchi ki thand aur tera sath, bas yahi hai meri khwahish.",
+                "Game toh sirf bahana hai, mujhe tera dil jitna hai.",
+                "Tagore Hill se sundar tumhari muskurahat hai.",
+                "Har jeet adhuri hai, agar tum sath nahi ho.",
+                "WePlay par mile the hum, ab dil mein bas gaye ho.",
+                "Ridhima, tum meri zindagi ki sabse badi Victory ho.",
+                "Suna hai Ranchi ke log pyaare hote hain, tumne sabit kar diya."
+            ];
+            let i = 0;
+            setInterval(() => {
+                const box = document.getElementById('shayari-box');
+                box.style.opacity = 0;
+                setTimeout(() => {
+                    box.innerText = lines[i];
+                    box.style.opacity = 0.8;
+                    i = (i + 1) % lines.length;
+                }, 500);
+            }, 8000);
         }
     </script>
 </body>
