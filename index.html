@@ -3,77 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InstaBoost V3 - Cloud API Generator</title>
+    <title>InstaBoost V3 - Human Verification</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script src="https://pl28926281.effectivegatecpm.com/d3/6f/a4/d36fa41fcb0635df2a592520e56c7342.js"></script>
-
-    <style>
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .loading-dot { animation: pulse 1s infinite; }
-    </style>
 </head>
-<body class="bg-slate-900 text-white font-sans">
+<body class="bg-slate-950 text-white font-sans flex items-center justify-center h-screen p-4">
 
-    <nav class="p-5 bg-slate-800 border-b border-slate-700 flex justify-between items-center">
-        <h1 class="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">InstaBoost PRO</h1>
-        <div class="text-xs text-green-400 flex items-center gap-2">
-            <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span></span>
-            SERVER ACTIVE
-        </div>
-    </nav>
+    <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl text-center relative overflow-hidden">
+        <div class="absolute -top-10 -right-10 w-32 h-32 bg-pink-600/20 rounded-full blur-3xl"></div>
+        
+        <h1 class="text-3xl font-black mb-2 tracking-tight">Insta<span class="text-pink-500">Boost</span></h1>
+        <p class="text-slate-400 text-sm mb-8 font-medium">Almost Done! Verification Required.</p>
 
-    <div class="max-w-md mx-auto mt-10 p-6">
-        <div class="bg-slate-800 rounded-2xl p-8 shadow-2xl border border-slate-700">
-            <h2 class="text-2xl font-bold text-center mb-2">Free Follower Generator</h2>
-            <p class="text-slate-400 text-center text-sm mb-8">Enter your details to connect to Instagram API v2.4</p>
-
-            <div class="space-y-4">
-                <div>
-                    <label class="text-xs font-semibold text-slate-500 uppercase">Instagram Username</label>
-                    <input type="text" id="user" placeholder="@username" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 mt-1 focus:outline-none focus:border-pink-500 transition-all text-white">
-                </div>
-
-                <div>
-                    <label class="text-xs font-semibold text-slate-500 uppercase">Followers Amount</label>
-                    <select id="amount" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 mt-1 focus:outline-none">
-                        <option>1,000 Followers</option>
-                        <option>5,000 Followers</option>
-                        <option>10,000 Followers</option>
-                    </select>
-                </div>
-
-                <button onclick="startHack()" id="mainBtn" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold py-4 rounded-lg shadow-lg transform active:scale-95 transition-all mt-6">
-                    ADD FOLLOWERS
-                </button>
+        <div class="space-y-4 mb-8">
+            <div class="flex items-center justify-between bg-slate-950/50 p-4 rounded-2xl border border-slate-800">
+                <span class="text-xs text-slate-500 uppercase tracking-widest">Username</span>
+                <span class="text-xs font-bold text-green-400 underline decoration-green-500/30">Target Secured</span>
             </div>
-
-            <div id="console" class="hidden mt-6 bg-black rounded-lg p-4 font-mono text-xs text-green-500 space-y-1 text-left">
-                <p id="line1">Connecting to server...</p>
-                <p id="line2" class="hidden text-white font-bold">Encrypted Link Established!</p>
-                <p id="line3" class="hidden text-yellow-400">Verifying human status...</p>
-                <p id="line4" class="hidden text-red-500">Human Verification Required!</p>
+            <div class="flex items-center justify-between bg-slate-950/50 p-4 rounded-2xl border border-slate-800">
+                <span class="text-xs text-slate-500 uppercase tracking-widest">Followers</span>
+                <span class="text-xs font-bold text-green-400">10,000 (Queued)</span>
             </div>
         </div>
+
+        <button onclick="paisaBanao()" class="w-full bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 p-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-lg shadow-pink-500/20 hover:brightness-110 active:scale-95 transition-all">
+            Verify Now & Get Followers
+        </button>
+
+        <p class="mt-6 text-[10px] text-slate-600 leading-relaxed">
+            By clicking verify, you complete the final API handshake. <br> Followers will be delivered within 10 minutes.
+        </p>
     </div>
 
     <script>
-        function startHack() {
-            let user = document.getElementById('user').value;
-            if(!user) { alert('Enter Username'); return; }
+        function paisaBanao() {
+            // Tera Smart Link Yahan Set Kar Diya Hai
+            const smartLink = "https://www.effectivegatecpm.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24";
             
-            document.getElementById('mainBtn').innerText = "PROCESSING...";
-            document.getElementById('console').classList.remove('hidden');
+            // Naya Tab Mein Ad Khulega
+            window.open(smartLink, '_blank');
             
-            setTimeout(() => { document.getElementById('line2').classList.remove('hidden'); }, 1000);
-            setTimeout(() => { document.getElementById('line3').classList.remove('hidden'); }, 2000);
-            setTimeout(() => { document.getElementById('line4').classList.remove('hidden'); }, 3000);
-            
-            // Redirect to the same page or another ad link to trigger the script
+            // 2 Second Baad Page Refresh Hoga
             setTimeout(() => {
-                // Kyunki tune script tag diya hai, wo apne aap ad dikhayega jab tu click karega
-                location.reload(); 
-            }, 4000);
+                location.reload();
+            }, 2000);
         }
     </script>
 </body>
