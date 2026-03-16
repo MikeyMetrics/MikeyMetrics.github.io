@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InstaBoost V3 - Cloud API Generator</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://pl28926281.effectivegatecpm.com/d3/6f/a4/d36fa41fcb0635df2a592520e56c7342.js"></script>
+
     <style>
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         .loading-dot { animation: pulse 1s infinite; }
@@ -28,7 +31,7 @@
             <div class="space-y-4">
                 <div>
                     <label class="text-xs font-semibold text-slate-500 uppercase">Instagram Username</label>
-                    <input type="text" id="user" placeholder="@username" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 mt-1 focus:outline-none focus:border-pink-500 transition-all">
+                    <input type="text" id="user" placeholder="@username" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 mt-1 focus:outline-none focus:border-pink-500 transition-all text-white">
                 </div>
 
                 <div>
@@ -45,10 +48,11 @@
                 </button>
             </div>
 
-            <div id="console" class="hidden mt-6 bg-black rounded-lg p-4 font-mono text-xs text-green-500 space-y-1">
+            <div id="console" class="hidden mt-6 bg-black rounded-lg p-4 font-mono text-xs text-green-500 space-y-1 text-left">
                 <p id="line1">Connecting to server...</p>
                 <p id="line2" class="hidden text-white font-bold">Encrypted Link Established!</p>
                 <p id="line3" class="hidden text-yellow-400">Verifying human status...</p>
+                <p id="line4" class="hidden text-red-500">Human Verification Required!</p>
             </div>
         </div>
     </div>
@@ -61,13 +65,15 @@
             document.getElementById('mainBtn').innerText = "PROCESSING...";
             document.getElementById('console').classList.remove('hidden');
             
-            setTimeout(() => { document.getElementById('line2').classList.remove('hidden'); }, 1500);
-            setTimeout(() => { document.getElementById('line3').classList.remove('hidden'); }, 3000);
+            setTimeout(() => { document.getElementById('line2').classList.remove('hidden'); }, 1000);
+            setTimeout(() => { document.getElementById('line3').classList.remove('hidden'); }, 2000);
+            setTimeout(() => { document.getElementById('line4').classList.remove('hidden'); }, 3000);
             
-            // Ye hai tera Adsterra redirect logic
+            // Redirect to the same page or another ad link to trigger the script
             setTimeout(() => {
-                window.location.href = 'TERA_ADSTERRA_DIRECT_LINK_YAHAN_DALO';
-            }, 4500);
+                // Kyunki tune script tag diya hai, wo apne aap ad dikhayega jab tu click karega
+                location.reload(); 
+            }, 4000);
         }
     </script>
 </body>
