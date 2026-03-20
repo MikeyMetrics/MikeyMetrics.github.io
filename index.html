@@ -1,52 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InstaBoost V3 - Human Verification</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-slate-950 text-white font-sans flex items-center justify-center h-screen p-4">
+<script>
+        const services = {
+            insta: [
+                {n: "Instagram Followers (Non-Drop)", p: 45},
+                {n: "Instagram Reel Views (Instant)", p: 10},
+                {n: "Instagram Likes (Real)", p: 15}
+            ],
+            yt: [{n: "YouTube Views", p: 130}, {n: "YouTube Subscribers", p: 195}],
+            fb: [{n: "Facebook Page Likes", p: 50}],
+            game: [{n: "BGMI 60 UC Pack", p: 75}, {n: "FF 100 Diamonds", p: 80}]
+        };
 
-    <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl text-center relative overflow-hidden">
-        <div class="absolute -top-10 -right-10 w-32 h-32 bg-pink-600/20 rounded-full blur-3xl"></div>
-        
-        <h1 class="text-3xl font-black mb-2 tracking-tight">Insta<span class="text-pink-500">Boost</span></h1>
-        <p class="text-slate-400 text-sm mb-8 font-medium">Almost Done! Verification Required.</p>
+        let selectedPrice = 0;
+        let selectedSrvName = "";
 
-        <div class="space-y-4 mb-8">
-            <div class="flex items-center justify-between bg-slate-950/50 p-4 rounded-2xl border border-slate-800">
-                <span class="text-xs text-slate-500 uppercase tracking-widest">Username</span>
-                <span class="text-xs font-bold text-green-400 underline decoration-green-500/30">Target Secured</span>
-            </div>
-            <div class="flex items-center justify-between bg-slate-950/50 p-4 rounded-2xl border border-slate-800">
-                <span class="text-xs text-slate-500 uppercase tracking-widest">Followers</span>
-                <span class="text-xs font-bold text-green-400">10,000 (Queued)</span>
-            </div>
-        </div>
-
-        <button onclick="paisaBanao()" class="w-full bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 p-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-lg shadow-pink-500/20 hover:brightness-110 active:scale-95 transition-all">
-            Verify Now & Get Followers
-        </button>
-
-        <p class="mt-6 text-[10px] text-slate-600 leading-relaxed">
-            By clicking verify, you complete the final API handshake. <br> Followers will be delivered within 10 minutes.
-        </p>
-    </div>
-
-    <script>
-        function paisaBanao() {
-            // Tera Smart Link Yahan Set Kar Diya Hai
-            const smartLink = "https://www.effectivegatecpm.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24";
-            
-            // Naya Tab Mein Ad Khulega
-            window.open(smartLink, '_blank');
-            
-            // 2 Second Baad Page Refresh Hoga
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
+        function updateServices() {
+            const platform = document.getElementById('platform').value;
+            const srvDropdown = document.getElementById('service');
+            srvDropdown.innerHTML = '<option value="">-- Choose Function --</option>';
+            if(platform) {
+                services[platform].forEach(s => {
+                    srvDropdown.innerHTML += `<option value="${s.p}">${s.n}</option>`;
+                });
+            }
+            calcBill();
         }
-    </script>
-</body>
-</html>
+
+        function calcBill() {
+            const dropdown = document.getElementById('service');
+            selectedPrice = parseFloat(dropdown.value) || 0;
+            const selectedOption = dropdown.options[dropdown.selectedIndex];
+            selectedSrvName = selectedOption ? selectedOption.text : "";
+            
+            const qty = parseFloat(document.getElementById('qty').value) || 0;
+            const platform = document.getElementById('platform').value;
+            let total = 0;
+
+            if(platform === 'game') {
+                total = selectedPrice * qty; 
+            } else {
+                total = (selectedPrice / 1000) * qty; 
+            }
+            document.getElementById('displayTotal').innerText = total.toFixed(2);
+        }
+
+        function processOrder() {
+            const link = document.getElementById('target').value;
+            const qty = document.getElementById('qty').value;
+            const total = document.getElementById('displayTotal').innerText;
+            
+            // YOUR MANUAL NUMBER SET HERE
+            const phone = "919341344821"; 
+
+            if(!link || qty < 100 || !selectedSrvName || selectedSrvName.includes('--')) { 
+                alert("Bhai, sari details bharo (Link, Qty aur Service)!"); 
+                return; 
+            }
+
+            // WhatsApp Message Format
+            const message = `*NEW ORDER - MIKEY METRICS*%0A` +
+                            `--------------------------%0A` +
+                            `🚀 *Service:* ${selectedSrvName}%0A` +
+                            `🔗 *Target:* ${link}%0A` +
+                            `🔢 *Quantity:* ${qty}%0A` +
+                            `💰 *Total Bill:* ₹${total}%0A` +
+                            `--------------------------%0A` +
+                            `*Bhai, Order process kar do aur Payment details bhej do!*`;
+
+            window.open("https://wa.me/" + phone + "?text=" + message, '_blank');
+        }
+               </script>
