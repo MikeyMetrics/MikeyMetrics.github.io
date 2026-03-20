@@ -1,71 +1,148 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mikey Metrics | Elite SMM Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --neon-purp: #bc13fe; --neon-cyan: #00d2ff; --bg-dark: #05050a; --glass: rgba(255, 255, 255, 0.05); }
+        body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: var(--bg-dark); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-x: hidden; }
+        
+        /* Animated Background */
+        .bg-animate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a103d, #05050a); z-index: -1; }
+
+        .container { width: 90%; max-width: 450px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+
+        .logo { font-family: 'Orbitron'; font-size: 2.5rem; text-align: center; color: #fff; text-shadow: 0 0 15px var(--neon-purp); margin-bottom: 5px; letter-spacing: 5px; }
+        .tagline { text-align: center; font-size: 0.7rem; color: var(--neon-cyan); letter-spacing: 2px; margin-bottom: 30px; text-transform: uppercase; }
+
+        /* Sections Toggle */
+        #order-section { display: none; }
+
+        label { display: block; margin: 15px 0 8px; font-size: 0.75rem; color: #aaa; font-weight: 600; text-transform: uppercase; }
+        input, select { width: 100%; padding: 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; color: white; outline: none; box-sizing: border-box; font-size: 1rem; transition: 0.3s; }
+        input:focus, select:focus { border-color: var(--neon-purp); box-shadow: 0 0 15px rgba(188, 19, 254, 0.2); }
+
+        .btn-mikey { background: linear-gradient(90deg, var(--neon-purp), #7a00ff); border: none; color: white; padding: 18px; width: 100%; border-radius: 50px; font-family: 'Orbitron'; font-weight: 700; cursor: pointer; margin-top: 20px; transition: 0.4s; letter-spacing: 2px; box-shadow: 0 10px 20px rgba(188, 19, 254, 0.3); }
+        .btn-mikey:hover { transform: translateY(-3px); box-shadow: 0 15px 30px var(--neon-purp); }
+
+        .bill-card { background: rgba(0, 255, 136, 0.05); border: 1px solid #00ff88; padding: 15px; border-radius: 20px; text-align: center; margin-top: 20px; }
+        .bill-amt { font-size: 2rem; font-family: 'Orbitron'; color: #00ff88; }
+
+        #otp-input-div { display: none; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="bg-animate"></div>
+
+<div class="container">
+    <div class="logo">MIKEY</div>
+    <div class="tagline">Digital Metrics Agency</div>
+
+    <!-- LOGIN SECTION -->
+    <div id="login-section">
+        <label><i class="fa-solid fa-phone"></i> Mobile Number</label>
+        <input type="tel" id="phone" placeholder="+91 93413-XXXXX">
+        
+        <div id="otp-input-div">
+            <label><i class="fa-solid fa-key"></i> Enter OTP</label>
+            <input type="number" id="otp-val" placeholder="0 0 0 0 0 0">
+        </div>
+
+        <button class="btn-mikey" id="auth-btn" onclick="handleAuth()">SEND OTP</button>
+        <p style="text-align:center; font-size:0.7rem; color:#666; margin-top:15px;">Secure Login with Firebase v9</p>
+    </div>
+
+    <!-- ORDER SECTION -->
+    <div id="order-section">
+        <label>Select Platform</label>
+        <select id="platform" onchange="updateServices()">
+            <option value="insta">Instagram Services</option>
+            <option value="yt">YouTube Services</option>
+            <option value="fb">Facebook Services</option>
+        </select>
+
+        <label>Choose Service</label>
+        <select id="service" onchange="calc()"></select>
+
+        <label>Target Link</label>
+        <input type="text" id="link" placeholder="https://instagram.com/...">
+
+        <label>Quantity</label>
+        <input type="number" id="qty" value="1000" oninput="calc()">
+
+        <div class="bill-card">
+            <span style="font-size:0.7rem; color:#00ff88;">TOTAL PAYABLE</span><br>
+            <span class="bill-amt">₹<span id="total">0.00</span></span>
+        </div>
+
+        <button class="btn-mikey" onclick="placeOrder()">ORDER ON WHATSAPP ✅</button>
+    </div>
+</div>
+
 <script>
-        const services = {
-            insta: [
-                {n: "Instagram Followers (Non-Drop)", p: 45},
-                {n: "Instagram Reel Views (Instant)", p: 10},
-                {n: "Instagram Likes (Real)", p: 15}
-            ],
-            yt: [{n: "YouTube Views", p: 130}, {n: "YouTube Subscribers", p: 195}],
-            fb: [{n: "Facebook Page Likes", p: 50}],
-            game: [{n: "BGMI 60 UC Pack", p: 75}, {n: "FF 100 Diamonds", p: 80}]
-        };
+    // --- AUTH LOGIC ---
+    let otpSent = false;
+    function handleAuth() {
+        const phone = document.getElementById('phone').value;
+        if(phone.length < 10) return alert("Sahi number dalo bhai!");
 
-        let selectedPrice = 0;
-        let selectedSrvName = "";
-
-        function updateServices() {
-            const platform = document.getElementById('platform').value;
-            const srvDropdown = document.getElementById('service');
-            srvDropdown.innerHTML = '<option value="">-- Choose Function --</option>';
-            if(platform) {
-                services[platform].forEach(s => {
-                    srvDropdown.innerHTML += `<option value="${s.p}">${s.n}</option>`;
-                });
-            }
-            calcBill();
-        }
-
-        function calcBill() {
-            const dropdown = document.getElementById('service');
-            selectedPrice = parseFloat(dropdown.value) || 0;
-            const selectedOption = dropdown.options[dropdown.selectedIndex];
-            selectedSrvName = selectedOption ? selectedOption.text : "";
-            
-            const qty = parseFloat(document.getElementById('qty').value) || 0;
-            const platform = document.getElementById('platform').value;
-            let total = 0;
-
-            if(platform === 'game') {
-                total = selectedPrice * qty; 
+        if(!otpSent) {
+            document.getElementById('otp-input-div').style.display = 'block';
+            document.getElementById('auth-btn').innerText = "VERIFY OTP";
+            otpSent = true;
+            alert("Demo OTP: 123456");
+        } else {
+            const code = document.getElementById('otp-val').value;
+            if(code === "123456") {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('order-section').style.display = 'block';
+                updateServices();
             } else {
-                total = (selectedPrice / 1000) * qty; 
+                alert("Galat OTP!");
             }
-            document.getElementById('displayTotal').innerText = total.toFixed(2);
         }
+    }
 
-        function processOrder() {
-            const link = document.getElementById('target').value;
-            const qty = document.getElementById('qty').value;
-            const total = document.getElementById('displayTotal').innerText;
-            
-            // YOUR MANUAL NUMBER SET HERE
-            const phone = "919341344821"; 
+    // --- ORDER LOGIC ---
+    const data = {
+        insta: [{n: "Real Followers", p: 85}, {n: "Reel Views", p: 15}, {n: "Likes", p: 20}],
+        yt: [{n: "Subscribers", p: 290}, {n: "WatchTime Views", p: 180}],
+        fb: [{n: "Page Followers", p: 90}]
+    };
 
-            if(!link || qty < 100 || !selectedSrvName || selectedSrvName.includes('--')) { 
-                alert("Bhai, sari details bharo (Link, Qty aur Service)!"); 
-                return; 
-            }
+    function updateServices() {
+        const p = document.getElementById('platform').value;
+        const s = document.getElementById('service');
+        s.innerHTML = "";
+        data[p].forEach(item => {
+            s.innerHTML += `<option value="${item.p}">${item.n}</option>`;
+        });
+        calc();
+    }
 
-            // WhatsApp Message Format
-            const message = `*NEW ORDER - MIKEY METRICS*%0A` +
-                            `--------------------------%0A` +
-                            `🚀 *Service:* ${selectedSrvName}%0A` +
-                            `🔗 *Target:* ${link}%0A` +
-                            `🔢 *Quantity:* ${qty}%0A` +
-                            `💰 *Total Bill:* ₹${total}%0A` +
-                            `--------------------------%0A` +
-                            `*Bhai, Order process kar do aur Payment details bhej do!*`;
+    function calc() {
+        const rate = document.getElementById('service').value;
+        const qty = document.getElementById('qty').value || 0;
+        const total = (rate / 1000) * qty;
+        document.getElementById('total').innerText = total.toFixed(2);
+    }
 
-            window.open("https://wa.me/" + phone + "?text=" + message, '_blank');
-        }
-               </script>
+    function placeOrder() {
+        const srv = document.getElementById('service').options[document.getElementById('service').selectedIndex].text;
+        const link = document.getElementById('link').value;
+        const total = document.getElementById('total').innerText;
+        const phone = "919341344821"; // YOUR NUMBER
+
+        if(!link) return alert("Link dalo bhai!");
+        
+        const msg = `*NEW ORDER - MIKEY METRICS*%0A*Service:* ${srv}%0A*Link:* ${link}%0A*Total:* ₹${total}`;
+        window.open(`https://wa.me/${phone}?text=${msg}`);
+    }
+</script>
+
+</body>
+</html>
