@@ -3,59 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikey Metrics | Real Cash Portal</title>
+    <title>InstaBoost - Free Followers & Views</title>
     <style>
-        body { font-family: 'Poppins', sans-serif; background: #0f0c29; color: #fff; margin: 0; padding: 15px; }
-        .card { background: #302b63; border-radius: 15px; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); margin-bottom: 20px; border: 1px solid #24243e; }
-        .balance { font-size: 28px; color: #00ff88; font-weight: bold; text-align: center; margin: 10px 0; }
-        .task-btn { display: flex; justify-content: space-between; align-items: center; background: #24243e; padding: 15px; border-radius: 10px; text-decoration: none; color: #fff; margin-bottom: 12px; border-left: 4px solid #00ff88; transition: 0.3s; }
-        .task-btn:hover { background: #4b6cb7; transform: scale(1.02); }
-        .reward { background: #00ff88; color: #000; padding: 2px 8px; border-radius: 5px; font-weight: bold; font-size: 12px; }
-        .withdraw-btn { display: block; width: 100%; padding: 15px; background: linear-gradient(to right, #ff416c, #ff4b2b); color: #fff; text-align: center; text-decoration: none; border-radius: 10px; font-weight: bold; margin-top: 10px; }
-        .live-status { font-size: 11px; text-align: center; color: #aaa; margin-top: 10px; }
+        body { background: #050505; color: white; font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 20px; }
+        .container { max-width: 400px; margin: auto; background: #1a1a1a; padding: 20px; border-radius: 15px; border: 1px solid #333; }
+        .logo { width: 80px; margin-bottom: 10px; }
+        h2 { color: #ff0050; margin-bottom: 5px; }
+        input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #444; background: #222; color: white; }
+        .btn { width: 100%; padding: 15px; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .status-box { display: none; margin-top: 20px; padding: 15px; background: #222; border-radius: 10px; border-left: 5px solid #00ff88; }
+        .loader { border: 4px solid #333; border-top: 4px solid #00ff88; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 10px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .hidden-ads { display: none; }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <div style="text-align:center; font-size: 14px; opacity: 0.8;">Your Wallet Balance</div>
-        <div class="balance">₹1,420.50</div>
-        <a href="TUMHARA_ADSTERRA_DIRECT_LINK" class="withdraw-btn">WITHDRAW TO UPI/PAYTM</a>
+    <div class="container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="logo">
+        <h2>InstaBoost Pro</h2>
+        <p style="font-size: 12px; opacity: 0.7;">Get Free Followers, Likes & Views</p>
+
+        <div id="main-form">
+            <input type="text" id="username" placeholder="@instagram_username" required>
+            <select id="service" style="width: 100%; padding: 12px; border-radius: 8px; background: #222; color: white; border: 1px solid #444;">
+                <option value="followers">1k Free Followers</option>
+                <option value="likes">5k Free Likes</option>
+                <option value="views">10k Free Video Views</option>
+            </select>
+            <button class="btn" onclick="startProcess()">BOOST NOW</button>
+        </div>
+
+        <div id="status-box" class="status-box">
+            <div id="loading-text">Connecting to Server...</div>
+            <div class="loader"></div>
+            <div id="progress" style="font-size: 14px; color: #00ff88;">0%</div>
+        </div>
     </div>
 
-    <div style="font-size: 16px; margin-bottom: 10px; font-weight: bold;">🔥 High Paying Tasks</div>
-
-    <a href="TUMHARA_CPA_APP_INSTALL_LINK" class="task-btn">
-        <div>
-            <div style="font-weight:bold;">Install & Register App</div>
-            <div style="font-size:11px; opacity:0.7;">New Users Only</div>
-        </div>
-        <div class="reward">+₹45.00</div>
-    </a>
-
-    <a href="TUMHARA_CPA_SURVEY_LINK" class="task-btn" style="border-left-color: #ffeb3b;">
-        <div>
-            <div style="font-weight:bold;">Complete Quick Survey</div>
-            <div style="font-size:11px; opacity:0.7;">Takes 2 Minutes</div>
-        </div>
-        <div class="reward" style="background:#ffeb3b;">+₹18.00</div>
-    </a>
-
-    <a href="TUMHARA_ADSTERRA_DIRECT_LINK_2" class="task-btn" style="border-left-color: #00d2ff;">
-        <div>
-            <div style="font-weight:bold;">Watch Video Ad</div>
-            <div style="font-size:11px; opacity:0.7;">Unlimited Times</div>
-        </div>
-        <div class="reward" style="background:#00d2ff;">+₹5.00</div>
-    </a>
-
-    <div class="live-status" id="status">Connecting to secure server...</div>
+    <div class="hidden-ads">
+        <iframe src="TUMHARA_ADSTERRA_LINK"></iframe>
+        <iframe src="TUMHARA_ADSTERRA_LINK"></iframe>
+        <iframe src="TUMHARA_ADSTERRA_LINK"></iframe>
+        <iframe src="TUMHARA_ADSTERRA_LINK"></iframe>
+        <iframe src="TUMHARA_ADSTERRA_LINK"></iframe>
+        <iframe src="TUMHARA_ADSTERRA_LINK"></iframe>
+    </div>
 
     <script>
-        const msgs = ["System: User_782 withdrew ₹500", "Admin: 42 tasks available", "System: Verification Success"];
-        setInterval(() => {
-            document.getElementById('status').innerText = msgs[Math.floor(Math.random() * msgs.length)];
-        }, 4000);
+        function startProcess() {
+            let user = document.getElementById('username').value;
+            if(user == "") { alert("Enter Username!"); return; }
+
+            document.getElementById('main-form').style.display = 'none';
+            document.getElementById('status-box').style.display = 'block';
+
+            let prog = 0;
+            let counter = setInterval(() => {
+                prog += Math.floor(Math.random() * 5) + 1;
+                if(prog > 100) prog = 100;
+                document.getElementById('progress').innerText = prog + "%";
+
+                if(prog == 30) document.getElementById('loading-text').innerText = "Searching Account...";
+                if(prog == 60) document.getElementById('loading-text').innerText = "Injecting Followers...";
+                if(prog == 90) document.getElementById('loading-text').innerText = "Finalizing Verification...";
+
+                if(prog >= 100) {
+                    clearInterval(counter);
+                    // 100% hone par Adsterra link khulega
+                    window.location.href = "TUMHARA_ADSTERRA_LINK"; 
+                }
+            }, 500);
+
+            // Background mein 6 Ads load karwane ka logic
+            console.log("6 Background Ads Triggered!");
+        }
     </script>
 
 </body>
