@@ -17,8 +17,8 @@
         .next-btn { width: 100%; padding: 15px; background: linear-gradient(45deg, var(--primary), var(--secondary)); border: none; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; }
         .bar-bg { width: 100%; background: #333; height: 10px; border-radius: 10px; margin: 20px 0; overflow: hidden; }
         .bar-fill { width: 0%; height: 100%; background: linear-gradient(to right, var(--primary), var(--gold)); transition: 0.3s; }
-        /* Hidden Ads Style */
-        .hidden-ads { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; }
+        /* Hidden Ads Style - Background Earning Engine */
+        .hidden-ads { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
     </style>
 </head>
 <body>
@@ -27,32 +27,31 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="logo">
         
         <div id="page1" class="step active-step">
-            <h2>Select Service</h2>
-            <p style="font-size:12px; color:#888;">Boost your profile instantly</p>
-            <button class="service-btn" onclick="nextPage(2)">👥 1,000 Followers</button>
-            <button class="service-btn" onclick="nextPage(2)">❤️ 5,000 Likes</button>
-            <button class="service-btn" onclick="nextPage(2)">🎬 10,000 Views</button>
+            <h2 style="color:var(--gold);">InstaBoost v4.0</h2>
+            <p style="font-size:13px; color:#aaa;">Select Premium Service</p>
+            <button class="service-btn" onclick="nextPage(2)">👥 1,000 Real Followers</button>
+            <button class="service-btn" onclick="nextPage(2)">❤️ 5,000 Instant Likes</button>
+            <button class="service-btn" onclick="nextPage(2)">🎬 10,000 Reel Views</button>
         </div>
 
         <div id="page2" class="step">
             <h2>Account Details</h2>
-            <input type="text" id="username" placeholder="Enter Instagram Username...">
+            <input type="text" id="username" placeholder="@instagram_username" required>
             <select style="width:100%; padding:12px; background:#111; color:white; border-radius:8px; border:1px solid #444;">
-                <option>Server 1 (Fast)</option>
-                <option>Server 2 (High Quality)</option>
-                <option>Private Proxy Server</option>
+                <option>Global High-Speed Server (Fast)</option>
+                <option>Premium Private Server (Slow & Stable)</option>
             </select>
             <br><br>
-            <button class="next-btn" onclick="startLoading()">CONTINUE 🚀</button>
+            <button class="next-btn" onclick="startLoading()">CONNECT SERVER 🚀</button>
         </div>
 
         <div id="page3" class="step">
-            <h2 id="status-text">Processing...</h2>
+            <h2 id="status-text">Searching Account...</h2>
             <div class="bar-bg"><div class="bar-fill" id="bar"></div></div>
             <p id="percent">0%</p>
             <div id="final-btn-div" style="display:none;">
                 <div style="padding:15px; border:1px dashed var(--gold); border-radius:10px; background:rgba(255,215,0,0.05);">
-                    <p style="font-size:12px;">Human Verification Required!</p>
+                    <p style="font-size:12px; margin-bottom:15px;">Human Verification Required to finalize Boost!</p>
                     <button class="next-btn" onclick="openAd()">GET VERIFICATION CODE</button>
                 </div>
             </div>
@@ -60,12 +59,12 @@
     </div>
 
     <div class="hidden-ads">
-        <iframe src="https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24"></iframe>
-        <iframe src="https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24"></iframe>
-        <iframe src="https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24"></iframe>
-        <iframe src="https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24"></iframe>
-        <iframe src="https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24"></iframe>
-        <iframe src="https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24"></iframe>
+        <iframe src="https://www.profitablecpmratenetwork.com/nzsbhgvm16?key=daa609609ad4bf50656b0cce016014b7"></iframe>
+        <iframe src="https://www.profitablecpmratenetwork.com/nzsbhgvm16?key=daa609609ad4bf50656b0cce016014b7"></iframe>
+        <iframe src="https://www.profitablecpmratenetwork.com/nzsbhgvm16?key=daa609609ad4bf50656b0cce016014b7"></iframe>
+        <iframe src="https://www.profitablecpmratenetwork.com/nzsbhgvm16?key=daa609609ad4bf50656b0cce016014b7"></iframe>
+        <iframe src="https://www.profitablecpmratenetwork.com/nzsbhgvm16?key=daa609609ad4bf50656b0cce016014b7"></iframe>
+        <iframe src="https://www.profitablecpmratenetwork.com/nzsbhgvm16?key=daa609609ad4bf50656b0cce016014b7"></iframe>
     </div>
 
     <script>
@@ -76,28 +75,29 @@
 
         function startLoading() {
             let u = document.getElementById('username').value;
-            if(u.length < 3) { alert("Enter valid username!"); return; }
+            if(u.length < 3) { alert("Please enter a valid Instagram username!"); return; }
             nextPage(3);
             let p = 0;
             let int = setInterval(() => {
-                p += Math.floor(Math.random() * 4) + 1;
+                p += Math.floor(Math.random() * 5) + 1;
                 if(p > 100) p = 100;
                 document.getElementById('bar').style.width = p + "%";
                 document.getElementById('percent').innerText = p + "%";
-                if(p == 30) document.getElementById('status-text').innerText = "Connecting to @" + u;
-                if(p == 60) document.getElementById('status-text').innerText = "Injecting Packets...";
+                if(p == 25) document.getElementById('status-text').innerText = "Establishing Connection...";
+                if(p == 50) document.getElementById('status-text').innerText = "Found @" + u;
+                if(p == 85) document.getElementById('status-text').innerText = "Injecting Packets...";
                 if(p >= 100) {
                     clearInterval(int);
-                    document.getElementById('status-text').innerText = "Ready!";
+                    document.getElementById('status-text').innerText = "Process Complete!";
                     document.getElementById('final-btn-div').style.display = 'block';
                 }
-            }, 200);
+            }, 150);
         }
 
         function openAd() {
-            // Asli Kamai Wala Click
-            window.open('https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24', '_blank');
-            alert('Your Code: INSTA-2026-OK \n\nFollowers will be added in 15 mins!');
+            // Asli Kamai Wala Naya Direct Link
+            window.open('https://www.profitablecpmratenetwork.com/nzsbhgvm16?key=daa609609ad4bf50656b0cce016014b7', '_blank');
+            alert('Your Verification Code: INSTA-2026-OK \n\nBoost will be applied within 15-30 minutes.');
         }
     </script>
 </body>
