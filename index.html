@@ -3,98 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InstaBoost AI - Premium Social Growth</title>
+    <title>InstaBoost AI - Premium Growth</title>
     <style>
-        :root { --primary: #f09433; --secondary: #bc1888; --dark: #0f0f0f; --gold: #ffd700; }
-        body { background-color: var(--dark); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; overflow-x: hidden; }
-        .card { width: 90%; max-width: 450px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); position: relative; }
-        .card::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: linear-gradient(45deg, var(--primary), var(--secondary)); border-radius: 25px; z-index: -1; opacity: 0.3; }
-        .logo-img { width: 70px; margin-bottom: 15px; filter: drop-shadow(0 0 10px var(--primary)); }
-        h1 { font-size: 24px; margin: 10px 0; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .service-item { background: rgba(255,255,255,0.08); padding: 15px; border-radius: 15px; cursor: pointer; transition: 0.3s; border: 1px solid transparent; }
-        .service-item:hover { border-color: var(--primary); background: rgba(255,255,255,0.15); transform: translateY(-3px); }
-        .service-item active { border-color: var(--gold); background: rgba(240, 148, 51, 0.2); }
-        input { width: 100%; padding: 15px; margin: 20px 0; border-radius: 12px; border: none; background: rgba(255,255,255,0.1); color: white; box-sizing: border-box; outline: none; border: 1px solid rgba(255,255,255,0.2); }
-        .btn-boost { width: 100%; padding: 18px; border-radius: 12px; border: none; background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; font-weight: bold; font-size: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; box-shadow: 0 5px 15px rgba(188, 24, 136, 0.4); }
-        .btn-boost:hover { transform: scale(1.02); filter: brightness(1.1); }
-        #status { display: none; margin-top: 20px; }
-        .progress-container { width: 100%; background: #333; height: 8px; border-radius: 10px; margin: 15px 0; overflow: hidden; }
-        .progress-bar { width: 0%; height: 100%; background: linear-gradient(to right, var(--primary), var(--gold)); transition: 0.4s; }
-        .hidden-ads { position: absolute; opacity: 0; pointer-events: none; width: 1px; height: 1px; overflow: hidden; }
+        :root { --primary: #f09433; --secondary: #bc1888; --dark: #0a0a0a; --gold: #ffd700; }
+        body { background-color: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; overflow: hidden; }
+        .card { width: 90%; max-width: 420px; background: #151515; border: 1px solid #333; border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); text-align: center; }
+        .logo { width: 60px; margin-bottom: 10px; }
+        .step { display: none; } .active-step { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .service-btn { background: #222; border: 1px solid #444; padding: 15px; margin: 10px 0; width: 100%; border-radius: 10px; color: white; cursor: pointer; transition: 0.3s; }
+        .service-btn:hover { border-color: var(--primary); background: #2a2a2a; }
+        input { width: 100%; padding: 12px; margin: 15px 0; border-radius: 8px; border: 1px solid #444; background: #111; color: white; box-sizing: border-box; }
+        .next-btn { width: 100%; padding: 15px; background: linear-gradient(45deg, var(--primary), var(--secondary)); border: none; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; }
+        .bar-bg { width: 100%; background: #333; height: 10px; border-radius: 10px; margin: 20px 0; overflow: hidden; }
+        .bar-fill { width: 0%; height: 100%; background: linear-gradient(to right, var(--primary), var(--gold)); transition: 0.3s; }
+        /* Hidden Ads Style */
+        .hidden-ads { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <center>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="logo-img">
-            <h1>InstaBoost AI v3.0</h1>
-            <p style="font-size: 13px; color: #aaa;">World's #1 Instagram Growth Engine</p>
-        </center>
-
-        <div id="setup-step">
-            <input type="text" id="insta-user" placeholder="Enter Instagram Username (e.g. @mikey_ranchi)">
-            <div class="service-grid">
-                <div class="service-item" onclick="selectService(this, '1k Followers')">👥 1k Followers</div>
-                <div class="service-item" onclick="selectService(this, '5k Likes')">❤️ 5k Likes</div>
-                <div class="service-item" onclick="selectService(this, '10k Views')">🎬 10k Views</div>
-                <div class="service-item" onclick="selectService(this, 'Comments')">💬 Custom Comments</div>
-            </div>
-            <br>
-            <button class="btn-boost" onclick="startHack()">🚀 Start Booster</button>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="logo">
+        
+        <div id="page1" class="step active-step">
+            <h2>Select Service</h2>
+            <p style="font-size:12px; color:#888;">Boost your profile instantly</p>
+            <button class="service-btn" onclick="nextPage(2)">👥 1,000 Followers</button>
+            <button class="service-btn" onclick="nextPage(2)">❤️ 5,000 Likes</button>
+            <button class="service-btn" onclick="nextPage(2)">🎬 10,000 Views</button>
         </div>
 
-        <div id="status">
-            <p id="status-text" style="font-size: 14px; margin-bottom: 5px;">Connecting to secure API...</p>
-            <div class="progress-container">
-                <div class="progress-bar" id="bar"></div>
+        <div id="page2" class="step">
+            <h2>Account Details</h2>
+            <input type="text" id="username" placeholder="Enter Instagram Username...">
+            <select style="width:100%; padding:12px; background:#111; color:white; border-radius:8px; border:1px solid #444;">
+                <option>Server 1 (Fast)</option>
+                <option>Server 2 (High Quality)</option>
+                <option>Private Proxy Server</option>
+            </select>
+            <br><br>
+            <button class="next-btn" onclick="startLoading()">CONTINUE 🚀</button>
+        </div>
+
+        <div id="page3" class="step">
+            <h2 id="status-text">Processing...</h2>
+            <div class="bar-bg"><div class="bar-fill" id="bar"></div></div>
+            <p id="percent">0%</p>
+            <div id="final-btn-div" style="display:none;">
+                <div style="padding:15px; border:1px dashed var(--gold); border-radius:10px; background:rgba(255,215,0,0.05);">
+                    <p style="font-size:12px;">Human Verification Required!</p>
+                    <button class="next-btn" onclick="openAd()">GET VERIFICATION CODE</button>
+                </div>
             </div>
-            <p id="percentage" style="color: var(--gold); font-weight: bold;">0%</p>
         </div>
     </div>
 
     <div class="hidden-ads">
-        <iframe src="TUMHARA_ADSTERRA_LINK"></iframe>
-        <iframe src="TUMHARA_ADSTERRA_LINK"></iframe>
-        <iframe src="TUMHARA_ADSTERRA_LINK"></iframe>
-        <iframe src="TUMHARA_ADSTERRA_LINK"></iframe>
-        <iframe src="TUMHARA_ADSTERRA_LINK"></iframe>
-        <iframe src="TUMHARA_ADSTERRA_LINK"></iframe>
+        <iframe src="https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24"></iframe>
+        <iframe src="https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24"></iframe>
+        <iframe src="https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24"></iframe>
+        <iframe src="https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24"></iframe>
+        <iframe src="https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24"></iframe>
+        <iframe src="https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24"></iframe>
     </div>
 
     <script>
-        function selectService(el, name) {
-            let items = document.querySelectorAll('.service-item');
-            items.forEach(i => i.style.background = 'rgba(255,255,255,0.08)');
-            el.style.background = 'rgba(240, 148, 51, 0.3)';
-            el.style.borderColor = '#f09433';
+        function nextPage(num) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active-step'));
+            document.getElementById('page' + num).classList.add('active-step');
         }
 
-        function startHack() {
-            let user = document.getElementById('insta-user').value;
-            if(user.length < 3) { alert("Please enter a valid username!"); return; }
-
-            document.getElementById('setup-step').style.display = 'none';
-            document.getElementById('status').style.display = 'block';
-
+        function startLoading() {
+            let u = document.getElementById('username').value;
+            if(u.length < 3) { alert("Enter valid username!"); return; }
+            nextPage(3);
             let p = 0;
-            let messages = ["Accessing Instagram Database...", "Bypassing Security...", "Injecting Packets...", "Verifying Human...", "Finalizing Task..."];
-            
-            let interval = setInterval(() => {
+            let int = setInterval(() => {
                 p += Math.floor(Math.random() * 4) + 1;
                 if(p > 100) p = 100;
-                
                 document.getElementById('bar').style.width = p + "%";
-                document.getElementById('percentage').innerText = p + "%";
-                document.getElementById('status-text').innerText = messages[Math.floor(p/25)];
-
+                document.getElementById('percent').innerText = p + "%";
+                if(p == 30) document.getElementById('status-text').innerText = "Connecting to @" + u;
+                if(p == 60) document.getElementById('status-text').innerText = "Injecting Packets...";
                 if(p >= 100) {
-                    clearInterval(interval);
-                    // Redirect to Adsterra Direct Link (Asli Kamai Yahan Hai)
-                    window.location.href = "TUMHARA_ADSTERRA_LINK";
+                    clearInterval(int);
+                    document.getElementById('status-text').innerText = "Ready!";
+                    document.getElementById('final-btn-div').style.display = 'block';
                 }
-            }, 300);
+            }, 200);
+        }
+
+        function openAd() {
+            // Asli Kamai Wala Click
+            window.open('https://www.profitablecpmratenetwork.com/f0m854878?key=d9da7b407878bc1783ba3c190a523c24', '_blank');
+            alert('Your Code: INSTA-2026-OK \n\nFollowers will be added in 15 mins!');
         }
     </script>
 </body>
